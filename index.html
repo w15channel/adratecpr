@@ -1,191 +1,204 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jornada do Conhecimento | 90 Dias</title>
+    <title>Curso Teen 90 Dias 🚀</title>
     <style>
-        :root {
-            --primary: #4F46E5;
-            --bg: #F3F4F6;
-            --text: #1F2937;
-            --card: #FFFFFF;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        header {
-            background-color: var(--primary);
-            color: white;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .container {
-            display: flex;
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 20px;
-            gap: 20px;
-        }
-        .content-area, .sidebar {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .content-area {
-            flex: 3;
-        }
-        .sidebar {
-            flex: 1;
-        }
-        .btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .btn:hover { background-color: #4338CA; }
-        .ranking-list { list-style: none; padding: 0; }
-        .ranking-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #E5E7EB;
-        }
-        .ranking-list li:first-child { font-weight: bold; color: #D97706; }
-        .quiz-section { display: none; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #E5E7EB; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; display: flex; flex-direction: column; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; overflow: hidden; }
+        #nameOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        #nameForm { background: white; padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-width: 400px; width: 90%; }
+        #nameInput { width: 100%; padding: 1rem; font-size: 1.2rem; border: 2px solid #4a90e2; border-radius: 10px; margin-bottom: 1rem; }
+        #nameForm button { width: 100%; padding: 1rem; font-size: 1.2rem; background: #4a90e2; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem; display: flex; align-items: center; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #logo { font-size: 1.8rem; font-weight: bold; background: linear-gradient(45deg, #4a90e2, #50c878); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        #progressContainer { flex: 1; margin: 0 1rem; }
+        #progress { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
+        #bar { height: 100%; background: linear-gradient(90deg, #50c878, #90EE90); transition: width 0.5s ease; border-radius: 4px; box-shadow: 0 0 10px #50c878; }
+        #currentInfo { font-size: 1.1rem; font-weight: 500; margin-left: 1rem; }
+        nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 0.75rem; overflow-x: auto; white-space: nowrap; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .mod-btn { margin-right: 0.5rem; padding: 0.5rem 1rem; border: 2px solid #4a90e2; background: transparent; color: #4a90e2; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s; white-space: nowrap; }
+        .mod-btn:hover { background: #4a90e2; color: white; transform: scale(1.05); }
+        .mod-btn.active { background: #4a90e2; color: white; box-shadow: 0 4px 15px rgba(74,144,226,0.4); }
+        main { flex: 1; overflow: auto; padding: 1.5rem; scroll-behavior: smooth; }
+        .lesson-container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-radius: 20px; padding: 2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        h1 { color: #4a90e2; margin-bottom: 1rem; text-align: center; font-size: 2rem; }
+        .content, .example { background: #f8f9ff; padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem; border-left: 5px solid #50c878; line-height: 1.6; }
+        .example { border-left-color: #4a90e2; background: #f0f8ff; }
+        .exercise { background: #fff8e1; padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem; border-left: 5px solid #ff9800; }
+        .mcq { margin-bottom: 1rem; }
+        .mcq label { display: block; padding: 0.75rem; margin: 0.5rem 0; background: white; border-radius: 10px; cursor: pointer; transition: background 0.3s; border: 2px solid transparent; }
+        .mcq label:hover { background: #e3f2fd; border-color: #4a90e2; }
+        .mcq input:checked + label { background: #50c878; color: white; border-color: #50c878; }
+        .text-ex { }
+        #exTextarea { width: 100%; min-height: 100px; padding: 1rem; border: 2px solid #ff9800; border-radius: 10px; font-family: inherit; resize: vertical; }
+        .buttons { display: flex; gap: 1rem; justify-content: center; }
+        button { padding: 1rem 2rem; font-size: 1.1rem; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 500; min-width: 140px; }
+        #prevBtn { background: #757575; color: white; }
+        #prevBtn:hover:not(:disabled) { background: #616161; transform: translateX(-5px); }
+        #nextBtn, #submitExBtn, #submitQuizBtn { background: linear-gradient(45deg, #4a90e2, #50c878); color: white; }
+        #nextBtn:hover:not(:disabled), #submitExBtn:hover:not(:disabled), #submitQuizBtn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .feedback { padding: 1rem; margin: 1rem 0; border-radius: 10px; text-align: center; font-weight: bold; }
+        .correct { background: #d4edda; color: #155724; border: 2px solid #50c878; }
+        .wrong { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+        .quiz-score { font-size: 1.5rem; text-align: center; margin: 1rem 0; }
+        footer { background: rgba(0,0,0,0.9); color: white; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+        #userRank { font-size: 1.2rem; font-weight: bold; }
+        #leaderboard { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; font-size: 0.9rem; }
+        .lb-entry { background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; }
+        .congrats { text-align: center; font-size: 2rem; color: #50c878; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @media (max-width: 768px) { header { flex-direction: column; gap: 0.5rem; text-align: center; } #currentInfo { margin: 0; } main { padding: 1rem; } .lesson-container { padding: 1.5rem; margin: 0; border-radius: 0; height: 100%; } h1 { font-size: 1.5rem; } nav { padding: 0.5rem; } .mod-btn { font-size: 0.9rem; padding: 0.4rem 0.8rem; } .buttons { flex-direction: column; } }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>🚀 Jornada 90 Dias: Tech, Grana & Pessoas</h1>
-    <p>Domine Programação, Finanças, Marketing e RH!</p>
-</header>
-
-<div class="container">
-    <main class="content-area">
-        <h2 id="lesson-title">Módulo 1: Lógica de Programação</h2>
-        <div id="lesson-content">
-            <p><strong>Bem-vindo ao Dia 1!</strong> Hoje vamos entender como os computadores pensam.</p>
-            <p>Um computador não é inteligente, ele é apenas muito rápido e obediente. Para fazer ele trabalhar, precisamos dar instruções passo a passo, como uma receita de bolo. A isso damos o nome de <strong>Algoritmo</strong>.</p>
-            <p><em>Exemplo Prático:</em> Imagine ensinar um robô a fritar um ovo. Você não pode dizer "frite o ovo". Você precisa dizer: 1. Pegue a frigideira. 2. Coloque no fogão. 3. Ligue o fogo. 4. Quebre o ovo...</p>
+    <div id="nameOverlay">
+        <div id="nameForm">
+            <h2>🎉 Bem-vindo ao Curso Teen 90 Dias!</h2>
+            <p>Aprenda RH, Financeiro, Marketing e Programação de forma divertida! 👥💰📈💻</p>
+            <input id="nameInput" placeholder="Digite seu nome (ex: João)" required>
+            <button onclick="startCourse()">Começar o Curso! 🚀</button>
         </div>
-        
-        <button class="btn" onclick="showQuiz()">Fazer a Prova do Módulo</button>
-
-        <div class="quiz-section" id="quiz-area">
-            <h3>Prova Rápida 🧠</h3>
-            <p>O que é um Algoritmo?</p>
-            <input type="radio" name="q1" value="wrong"> A) Um robô super inteligente.<br>
-            <input type="radio" name="q1" value="correct"> B) Uma sequência passo a passo de instruções.<br>
-            <input type="radio" name="q1" value="wrong"> C) Uma peça do computador.<br>
-            <button class="btn" onclick="submitQuiz()">Enviar e Ganhar Pontos!</button>
+    </div>
+    <header>
+        <div id="logo">TeenCurso 90D</div>
+        <div id="progressContainer">
+            <div id="progress"><div id="bar" style="width:0%"></div></div>
         </div>
+        <div id="currentInfo">Módulo: <span id="currentMod"></span> | Dia: <span id="currentDay"></span></div>
+    </header>
+    <nav id="nav"></nav>
+    <main>
+        <div class="lesson-container" id="lessonContainer"></div>
     </main>
+    <footer>
+        <div id="userRank">Carregando...</div>
+        <div id="leaderboard"></div>
+    </footer>
+    <script>
+        // Cookie functions (allowed in sandbox)
+        function setCookie(name, value, days = 365) {
+            const expires = new Date(Date.now() + days * 86400000).toUTCString();
+            document.cookie = `${name}=${JSON.stringify(value)}; expires=${expires}; path=/; SameSite=Lax`;
+        }
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+            if (match) try { return JSON.parse(decodeURIComponent(match[2])); } catch { return null; }
+            return null;
+        }
 
-    <aside class="sidebar">
-        <h3>🏆 Ranking Global</h3>
-        <p>Seus Pontos XP: <strong id="user-xp">0</strong></p>
-        <ul class="ranking-list" id="ranking-board">
-            </ul>
-        
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-        
-        <h3>🤖 IA Assistente</h3>
-        <button class="btn" onclick="gerarDicaIA()" style="width: 100%; font-size: 0.9em;">Gerar Dica Extra com IA</button>
-        <p id="ia-response" style="font-size: 0.9em; margin-top: 10px; color: #4B5563; font-style: italic;"></p>
-    </aside>
-</div>
-
-<script>
-    // 1. Sistema de Ranking com LocalStorage
-    let userXP = parseInt(localStorage.getItem('alunoXP')) || 0;
-    document.getElementById('user-xp').innerText = userXP;
-
-    function updateRanking() {
-        // Bots simulados para gerar competição até você colocar um banco de dados real
-        const ranking = [
-            { nome: 'Pedro_Gamer', xp: 150 },
-            { nome: 'Ana_Dev', xp: 120 },
-            { nome: 'Você (Aluno)', xp: userXP },
-            { nome: 'Carlos_Financas', xp: 80 }
+        // Course data
+        const modules = [
+            { id: 'rh', name: 'RH 👥', start: 1, end: 22, emoji: '👥' },
+            { id: 'financeiro', name: 'Financeiro 💰', start: 23, end: 45, emoji: '💰' },
+            { id: 'marketing', name: 'Marketing 📈', start: 46, end: 68, emoji: '📈' },
+            { id: 'programacao', name: 'Programação 💻', start: 69, end: 90, emoji: '💻' }
         ];
-        
-        // Ordena do maior para o menor
-        ranking.sort((a, b) => b.xp - a.xp);
+        const templates = {
+            rh: {
+                titles: ['O que é RH?', 'Funções do RH', 'Recrutamento', 'Seleção de candidatos', 'Onboarding', 'Treinamento', 'Avaliação de desempenho', 'Benefícios', 'Gestão de carreira', 'Cultura organizacional', 'Liderança', 'Motivação', 'Trabalho em equipe', 'Resolução de conflitos', 'Direitos trabalhistas', 'Currículo perfeito', 'Preparação para entrevista', 'Habilidades soft', 'Networking', 'Diversidade e inclusão', 'Bem-estar', 'RH do futuro'],
+                contents: ['Recursos Humanos gerencia pessoas na empresa: contratar, treinar, motivar. 👥', 'Funções: recrutamento, treinamento, folha, benefícios. 📋', 'Recrutamento: atrair talentos com anúncios. 🔍', 'Seleção: entrevistas e testes. Entrevistador 👨‍💼', 'Onboarding: bem-vindo novo funcionário. 🎉', 'Treinamento: cursos para melhorar skills. 📚', 'Avaliações: feedback 360°. ⭐', 'Benefícios: salário, férias, plano saúde. 💼', 'Carreira: promoções e planos. 📈', 'Cultura: valores da empresa. ❤️', 'Liderança: guiar times. 👑', 'Motivação: prêmios e reconhecimento. 🏆', 'Equipe: colaboração. 🤝', 'Conflitos: mediação. ⚖️', 'Direitos: CLT básica. ⚖️', 'Currículo: resumo skills. 📄', 'Entrevista: pratique respostas. 🗣️', 'Soft skills: comunicação, empatia. 💬', 'Networking: conexões LinkedIn. 🌐', 'Diversidade: todos bem-vindos. 🌍', 'Bem-estar: equilíbrio vida-trabalho. 😊', 'RH com IA e apps. 🤖'],
+                quizChapters: [
+                    [{q:'O que é RH?',opts:['Gerencia pessoas','Gerencia vendas'],correct:0},{q:'Função inicial?',opts:['Recrutamento','Vendas'],correct:0},{q:'Exemplo RH?',opts:['Contratar','Limpar'],correct:0}],
+                    [{q:'O que é recrutamento?',opts:['Atrair candidatos','Treinar'],correct:0},{q:'Seleção inclui?',opts:['Entrevistas','Compras'],correct:0},{q:'Onboarding é?',opts:['Boas-vindas novo','Demissão'],correct:0}],
+                    [{q:'Treinamento para?',opts:['Melhorar skills','Gastar tempo'],correct:0},{q:'Avaliação mede?',opts:['Desempenho','Idade'],correct:0},{q:'Benefícios são?',opts:['Vantagens extras','Salário só'],correct:0}],
+                    [{q:'Cultura organizacional?',opts:['Valores empresa','Regras trânsito'],correct:0},{q:'Liderança faz?',opts:['Guiar time','Seguir só'],correct:0},{q:'Networking é?',opts:['Conexões profissionais','Jogos'],correct:0}]
+                ]
+            },
+            financeiro: {
+                titles: ['O que é dinheiro?', 'Fontes de renda', 'Gastos fixos', 'Orçamento mensal', 'Poupança básica', 'Juros compostos', 'Investimentos intro', 'Ações simples', 'Renda fixa', 'Impostos teen', 'Dívidas ruins', 'Crédito consciente', 'Cartão crédito', 'Compras espertas', 'Empreender jovem', 'Preços e lucro', 'Custos negócio', 'Balanço patrimonial', 'Finanças família', 'Planejamento longo', 'Dinheiro felicidade?', 'Apps finanças', 'Cripto básico'],
+                contents: ['Dinheiro: meio de troca. Ganhe, gaste, poupe. 💵', 'Renda: mesada, jobs teen, vendas. 💼', 'Fixos: comida, moradia. 📊', 'Orçamento: planeje 50/30/20. 📈', 'Poupe 20% renda. 🐷', 'Juros: dinheiro faz mais dinheiro. 📈', 'Investir: Tesouro Direto. 💎', 'Ações: pedaços empresa. 📊', 'Renda fixa: poupança segura. 🔒', 'Impostos: IR básico. ⚖️', 'Dívidas: evite desnecessárias. ❌', 'Crédito: pague em dia. 💳', 'Cartão: limite gastos. 🛑', 'Compras: compare preços. 🛒', 'Empreenda: venda doces. 🍬', 'Preço: custo + lucro. 💰', 'Custos: fixo/variável. 📋', 'Balanço: ativos x passivos. ⚖️', 'Família: ajude orçamento. 👨‍👩‍👧', 'Plano: meta 1 ano. 🎯', 'Dinheiro compra tempo. 😌', 'Apps: Mobills, Guiabolso. 📱'],
+                quizChapters: [
+                    [{q:'Dinheiro serve para?',opts:['Troca bens','Comer só'],correct:0},{q:'Renda teen?',opts:['Mesada jobs','Pedir só'],correct:0},{q:'Orçamento regra?',opts:['50/30/20','100% gasto'],correct:0}],
+                    [{q:'Poupança %?',opts:['20%','100%'],correct:0},{q:'Juros compostos?',opts:['Cresce sozinho','Perde'],correct:0},{q:'Investir risco?',opts:['Sim moderado','Zero'],correct:0}],
+                    [{q:'Ações são?',opts:['Partes empresa','Dinheiro papel'],correct:0},{q:'Dívida boa?',opts:['Casa estudo','TV plasma'],correct:0},{q:'Cartão regra?',opts:['Pague total','Parcelado'],correct:0}],
+                    [{q:'Lucro é?',opts:['Receita - custo','Custo só'],correct:0},{q:'Balanço mede?',opts:['Patrimônio','Tempo'],correct:0},{q:'App finanças?',opts:['Organiza gastos','Jogos'],correct:0}]
+                ]
+            },
+            marketing: {
+                titles: ['O que é marketing?', '4Ps marketing', 'Produto bom', 'Preço certo', 'Distribuição', 'Promoção', 'Público-alvo', 'Pesquisa mercado', 'Marca forte', 'Redes sociais', 'Conteúdo viral', 'Anúncios online', 'SEO simples', 'Email marketing', 'Parcerias influencers', 'Storytelling', 'Design atraente', 'Vendas online', 'Feedback cliente', 'Análise concorrentes', 'Estratégia campanha', 'Marketing digital', 'Futuro trends'],
+                contents: ['Marketing: vender ideias/produtos. Atrair clientes. 📣', '4Ps: Produto, Preço, Praça, Promoção. 🧩', 'Produto: resolve problema. 💡', 'Preço: valor percebido. 💲', 'Distribuição: onde vender. 🏪', 'Promoção: divulgue. 📢', 'Alvo: quem compra. 🎯', 'Pesquisa: pergunte clientes. 📊', 'Marca: identidade única. 🏷️', 'Redes: Instagram TikTok. 📱', 'Conteúdo: posts engajadores. 🔥', 'Anúncios: Facebook Ads. 💸', 'SEO: Google top. 🔍', 'Email: newsletters. ✉️', 'Influencers: colabore. 🌟', 'Story: conte história. 📖', 'Design: bonito vende. 🎨', 'Online: loja virtual. 🛒', 'Feedback: melhore. 👍', 'Concorrentes: estude. 🕵️', 'Campanha: planeje lançamento. 🚀', 'Digital: tudo online. 🌐'],
+                quizChapters: [
+                    [{q:'Marketing faz?',opts:['Vender atrair','Produzir só'],correct:0},{q:'4Ps incluem?',opts:['Produto preço','Cor só'],correct:0},{q:'Público-alvo?',opts:['Cliente ideal','Qualquer um'],correct:0}],
+                    [{q:'Produto resolve?',opts:['Problema cliente','Problema seu'],correct:0},{q:'Promoção é?',opts:['Divulgação','Preço baixo só'],correct:0},{q:'Pesquisa para?',opts:['Conhecer mercado','Gastar tempo'],correct:0}],
+                    [{q:'Marca é?',opts:['Identidade','Nome só'],correct:0},{q:'Redes sociais?',opts:['Divulgar grátis','Pagar só'],correct:0},{q:'SEO otimiza?',opts:['Buscas Google','Email'],correct:0}],
+                    [{q:'Storytelling usa?',opts:['Histórias','Números só'],correct:0},{q:'Feedback melhora?',opts:['Produto serviço','Nada'],correct:0},{q:'Estratégia é?',opts:['Plano ação','Ação aleatória'],correct:0}]
+                ]
+            },
+            programacao: {
+                titles: ['O que é programação?', 'Primeiro código', 'HTML básico', 'Tags HTML', 'Estrutura página', 'Títulos parágrafos', 'Listas links', 'Imagens emojis', 'Tabelas HTML', 'Formulários', 'CSS intro', 'Cores fontes', 'Estilos seletor', 'Layout flexbox', 'JS variáveis', 'Funções JS', 'Condicionais if', 'Loops for', 'Arrays objetos', 'Eventos click', 'DOM manipular', 'Projeto jogo'],
+                contents: ['Programação: dar ordens computador. Linguagens como JS. 💻', 'Olá Mundo! console.log. 🖥️', 'HTML: estrutura web. <html> <body>', 'Tags: <h1> <p> <div>. <>', 'DOCTYPE head body. 📄', 'h1 grande, p texto. 🔤', 'ul li, a href. 📝🔗', 'img src (use emoji). 🖼️😀', 'table tr td. 📊', 'form input button. 📝', 'CSS: estilo. style="color:red"', 'color:red; font-size:20px;', 'seletor {prop:val}', 'display:flex; justify-content:center;', 'var x=5; let y="hi";', 'function soma(a,b){return a+b}', 'if(x>0){...} else{}', 'for(let i=0;i<5;i++){}', 'array=[1,2]; obj={name:"João"}', 'onclick="alert()"', 'document.getElementById("id").innerHTML="hi"', 'Faça um jogo simples com if. 🎮'],
+                quizChapters: [
+                    [{q:'Programação é?',opts:['Ordens ao PC','Desenhar'],correct:0},{q:'HTML faz?',opts:['Estrutura','Estilo'],correct:0},{q:'Tag exemplo?',opts:['<p>','*p*'],correct:0}],
+                    [{q:'Estrutura HTML?',opts:['head body','body head'],correct:0},{q:'Link tag?',opts:['<a>','<link>'],correct:0},{q:'Lista é?',opts:['<ul>','<ol>'],correct:0}],
+                    [{q:'CSS aplica?',opts:['Estilos','Conteúdo'],correct:0},{q:'Variável JS?',opts:['let x=1','x=let1'],correct:0},{q:'If executa?',opts:['Condição true','Sempre'],correct:0}],
+                    [{q:'DOM é?',opts:['Manipular HTML JS','CSS só'],correct:0},{q:'Evento exemplo?',opts:['onclick','oncss'],correct:0},{q:'Projeto usa?',opts:['Tudo junto','Só HTML'],correct:0}]
+                ]
+            }
+        };
 
-        const board = document.getElementById('ranking-board');
-        board.innerHTML = '';
-        ranking.forEach((player, index) => {
-            board.innerHTML += `<li><span>#${index + 1} ${player.nome}</span> <span>${player.xp} XP</span></li>`;
-        });
-    }
+        // App data
+        let data = getCookie('courseData') || { userName: '', currentDay: 1, totalPoints: 0, quizScores: {}, leaderboard: [] };
 
-    // 2. Sistema de Provas
-    function showQuiz() {
-        document.getElementById('quiz-area').style.display = 'block';
-    }
-
-    function submitQuiz() {
-        const options = document.getElementsByName('q1');
-        let answered = false;
-        
-        for (let option of options) {
-            if (option.checked) {
-                answered = true;
-                if (option.value === 'correct') {
-                    alert('🎉 Resposta Certa! Você ganhou +50 XP!');
-                    userXP += 50;
-                    localStorage.setItem('alunoXP', userXP);
-                    document.getElementById('user-xp').innerText = userXP;
-                    updateRanking();
-                    document.getElementById('quiz-area').innerHTML = '<p style="color: green; font-weight: bold;">Módulo concluído com sucesso! Aguarde a próxima aula.</p>';
-                } else {
-                    alert('Poxa, resposta incorreta. Leia o texto novamente e tente mais uma vez!');
-                }
+        // Start course
+        function startCourse() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name) {
+                data.userName = name;
+                saveData();
+                document.getElementById('nameOverlay').style.display = 'none';
+                initNav();
+                updateUI();
             }
         }
-        if (!answered) alert('Selecione uma opção antes de enviar!');
-    }
 
-    // 3. Integração com API Aberta (Exemplo usando uma API pública genérica)
-    async function gerarDicaIA() {
-        const iaText = document.getElementById('ia-response');
-        iaText.innerText = "Pensando...";
-        
-        try {
-            // Aqui você colocaria a URL da sua API de IA preferida. 
-            // Como exemplo didático, estou usando uma API pública de conselhos (Advice Slip).
-            const response = await fetch('https://api.adviceslip.com/advice');
-            const data = await response.json();
-            
-            // Em um cenário real de IA, você enviaria o prompt: "Me dê uma dica sobre programação para um adolescente de 12 anos".
-            iaText.innerText = `Dica do Mestre: "${data.slip.advice}" (Esta mensagem veio de uma API pública!)`;
-        } catch (error) {
-            iaText.innerText = "Erro ao conectar com a IA no momento.";
+        function findModule(day) {
+            for (let mod of modules) if (day >= mod.start && day <= mod.end) return mod;
+            return modules[3];
         }
-    }
 
-    // Inicializa o ranking ao carregar a página
-    updateRanking();
-</script>
+        function getRelativeDay(day) {
+            let mod = findModule(day);
+            return day - mod.start + 1;
+        }
 
-</body>
-</html>
+        function getChapter(relDay) {
+            return Math.ceil(relDay / 6);
+        }
+
+        function isQuizDay(relDay) {
+            return relDay % 6 === 0;
+        }
+
+        function getLesson(day) {
+            let mod = findModule(day);
+            let rel = getRelativeDay(day);
+            let tpls = templates[mod.id];
+            let chap = getChapter(rel);
+            if (isQuizDay(rel) && tpls.quizChapters[chap - 1]) {
+                return {
+                    type: 'quiz',
+                    title: `Prova Capítulo ${chap} - ${mod.name}`,
+                    questions: tpls.quizChapters[chap - 1],
+                    modId: mod.id,
+                    chap: chap
+                };
+            } else {
+                let idx = Math.floor((rel - 1) / 6) * 5 + ((rel - 1) % 6) + 1;
+                let title = tpls.titles[(idx - 1) % tpls.titles.length];
+                let content = tpls.contents[(idx - 1) % tpls.contents.length];
+                let exQ = `O que é/ faz ${title.split(' ')[0].toLowerCase()}?`;
+                let exOpts = ['Aprendi e entendo! ✅', 'Ainda confuso ❌', 'Quase lá 🤔'];
+                return {
+                    type: 'lesson',
+                    title: `Dia ${day}: ${title}`,
+                    content,
+                    example: `Exemplo prático: Imagine você no RH/Financeiro/etc ${title.toLowerCase()}. Use isso na vida real! 🎯`,
+                    exercise: { type: 'mcq', q: exQ, opts: exOpts, correct: 0 }
+                };
+            }
+        }
+
+     
