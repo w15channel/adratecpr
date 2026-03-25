@@ -1,1 +1,191 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Conhecimento | 90 Dias</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --bg: #F3F4F6;
+            --text: #1F2937;
+            --card: #FFFFFF;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .content-area, .sidebar {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .content-area {
+            flex: 3;
+        }
+        .sidebar {
+            flex: 1;
+        }
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn:hover { background-color: #4338CA; }
+        .ranking-list { list-style: none; padding: 0; }
+        .ranking-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .ranking-list li:first-child { font-weight: bold; color: #D97706; }
+        .quiz-section { display: none; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #E5E7EB; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🚀 Jornada 90 Dias: Tech, Grana & Pessoas</h1>
+    <p>Domine Programação, Finanças, Marketing e RH!</p>
+</header>
+
+<div class="container">
+    <main class="content-area">
+        <h2 id="lesson-title">Módulo 1: Lógica de Programação</h2>
+        <div id="lesson-content">
+            <p><strong>Bem-vindo ao Dia 1!</strong> Hoje vamos entender como os computadores pensam.</p>
+            <p>Um computador não é inteligente, ele é apenas muito rápido e obediente. Para fazer ele trabalhar, precisamos dar instruções passo a passo, como uma receita de bolo. A isso damos o nome de <strong>Algoritmo</strong>.</p>
+            <p><em>Exemplo Prático:</em> Imagine ensinar um robô a fritar um ovo. Você não pode dizer "frite o ovo". Você precisa dizer: 1. Pegue a frigideira. 2. Coloque no fogão. 3. Ligue o fogo. 4. Quebre o ovo...</p>
+        </div>
+        
+        <button class="btn" onclick="showQuiz()">Fazer a Prova do Módulo</button>
+
+        <div class="quiz-section" id="quiz-area">
+            <h3>Prova Rápida 🧠</h3>
+            <p>O que é um Algoritmo?</p>
+            <input type="radio" name="q1" value="wrong"> A) Um robô super inteligente.<br>
+            <input type="radio" name="q1" value="correct"> B) Uma sequência passo a passo de instruções.<br>
+            <input type="radio" name="q1" value="wrong"> C) Uma peça do computador.<br>
+            <button class="btn" onclick="submitQuiz()">Enviar e Ganhar Pontos!</button>
+        </div>
+    </main>
+
+    <aside class="sidebar">
+        <h3>🏆 Ranking Global</h3>
+        <p>Seus Pontos XP: <strong id="user-xp">0</strong></p>
+        <ul class="ranking-list" id="ranking-board">
+            </ul>
+        
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <h3>🤖 IA Assistente</h3>
+        <button class="btn" onclick="gerarDicaIA()" style="width: 100%; font-size: 0.9em;">Gerar Dica Extra com IA</button>
+        <p id="ia-response" style="font-size: 0.9em; margin-top: 10px; color: #4B5563; font-style: italic;"></p>
+    </aside>
+</div>
+
+<script>
+    // 1. Sistema de Ranking com LocalStorage
+    let userXP = parseInt(localStorage.getItem('alunoXP')) || 0;
+    document.getElementById('user-xp').innerText = userXP;
+
+    function updateRanking() {
+        // Bots simulados para gerar competição até você colocar um banco de dados real
+        const ranking = [
+            { nome: 'Pedro_Gamer', xp: 150 },
+            { nome: 'Ana_Dev', xp: 120 },
+            { nome: 'Você (Aluno)', xp: userXP },
+            { nome: 'Carlos_Financas', xp: 80 }
+        ];
+        
+        // Ordena do maior para o menor
+        ranking.sort((a, b) => b.xp - a.xp);
+
+        const board = document.getElementById('ranking-board');
+        board.innerHTML = '';
+        ranking.forEach((player, index) => {
+            board.innerHTML += `<li><span>#${index + 1} ${player.nome}</span> <span>${player.xp} XP</span></li>`;
+        });
+    }
+
+    // 2. Sistema de Provas
+    function showQuiz() {
+        document.getElementById('quiz-area').style.display = 'block';
+    }
+
+    function submitQuiz() {
+        const options = document.getElementsByName('q1');
+        let answered = false;
+        
+        for (let option of options) {
+            if (option.checked) {
+                answered = true;
+                if (option.value === 'correct') {
+                    alert('🎉 Resposta Certa! Você ganhou +50 XP!');
+                    userXP += 50;
+                    localStorage.setItem('alunoXP', userXP);
+                    document.getElementById('user-xp').innerText = userXP;
+                    updateRanking();
+                    document.getElementById('quiz-area').innerHTML = '<p style="color: green; font-weight: bold;">Módulo concluído com sucesso! Aguarde a próxima aula.</p>';
+                } else {
+                    alert('Poxa, resposta incorreta. Leia o texto novamente e tente mais uma vez!');
+                }
+            }
+        }
+        if (!answered) alert('Selecione uma opção antes de enviar!');
+    }
+
+    // 3. Integração com API Aberta (Exemplo usando uma API pública genérica)
+    async function gerarDicaIA() {
+        const iaText = document.getElementById('ia-response');
+        iaText.innerText = "Pensando...";
+        
+        try {
+            // Aqui você colocaria a URL da sua API de IA preferida. 
+            // Como exemplo didático, estou usando uma API pública de conselhos (Advice Slip).
+            const response = await fetch('https://api.adviceslip.com/advice');
+            const data = await response.json();
+            
+            // Em um cenário real de IA, você enviaria o prompt: "Me dê uma dica sobre programação para um adolescente de 12 anos".
+            iaText.innerText = `Dica do Mestre: "${data.slip.advice}" (Esta mensagem veio de uma API pública!)`;
+        } catch (error) {
+            iaText.innerText = "Erro ao conectar com a IA no momento.";
+        }
+    }
+
+    // Inicializa o ranking ao carregar a página
+    updateRanking();
+</script>
+
+</body>
+</html>
