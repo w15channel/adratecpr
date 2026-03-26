@@ -1,0 +1,30 @@
+{
+  "name": "adratecpr",
+  "version": "1.0.0",
+  "description": "Portal de Educação Profissional - 90 Dias de Formação em RH, Finanças, Marketing e Programação",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=index.html",
+    "build": "echo 'Build completed - Static files ready'",
+    "deploy": "echo 'Deploy ready for static hosting'"
+  },
+  "keywords": [
+    "education",
+    "professional",
+    "rh",
+    "finanças",
+    "marketing",
+    "programação",
+    "curso",
+    "formação"
+  ],
+  "author": "WR-TECNOLOGIA",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
