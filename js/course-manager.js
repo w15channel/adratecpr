@@ -139,9 +139,36 @@ class CourseManager {
         if (!this.currentChapter) return;
 
         try {
-            // Carrega o JSON do capítulo
-            const response = await fetch(`content/${this.currentChapter.module}/${this.currentChapter.id}.json`);
-            const chapter = await response.json();
+            // Tenta diferentes caminhos para compatibilidade
+            const possiblePaths = [
+                `content/${this.currentChapter.module}/${this.currentChapter.id}.json`,
+                `./content/${this.currentChapter.module}/${this.currentChapter.id}.json`,
+                `/content/${this.currentChapter.module}/${this.currentChapter.id}.json`
+            ];
+
+            let response = null;
+            let chapter = null;
+
+            // Tenta cada caminho até encontrar um que funcione
+            for (const path of possiblePaths) {
+                try {
+                    response = await fetch(path);
+                    if (response.ok) {
+                        chapter = await response.json();
+                        console.log('Capítulo carregado com sucesso:', path);
+                        break;
+                    }
+                } catch (e) {
+                    console.log('Tentando próximo caminho:', path, e);
+                    continue;
+                }
+            }
+
+            // Se não conseguiu carregar o JSON, usa o conteúdo embutido
+            if (!chapter) {
+                console.log('Usando conteúdo embutido para:', this.currentChapter.id);
+                chapter = this.getFallbackChapter(this.currentChapter.id);
+            }
             
             this.currentCourse = chapter;
             this.renderChapterContent(chapter);
@@ -153,6 +180,106 @@ class CourseManager {
             console.error('Erro ao carregar capítulo:', error);
             this.showErrorMessage('Não foi possível carregar o capítulo. Tente novamente.');
         }
+    }
+
+    // Conteúdo fallback para garantir funcionamento
+    getFallbackChapter(chapterId) {
+        const fallbackContent = {
+            'capitulo-1': {
+                id: 'admin-01',
+                title: 'Capítulo 1: Administração - Você já administrou alguma coisa hoje?',
+                module: 'administrativo',
+                order: 1,
+                xp_reward: 100,
+                badge_earned: 'primeiros-passos',
+                estimated_time: 15,
+                difficulty: 'iniciante',
+                content: {
+                    introduction: {
+                        title: 'E aí! Já pensou que você talvez já seja um administrador?',
+                        text: 'Sério! Se você já organizou uma festa, coordenou um trabalho escolar ou administrou seu tempo, você já praticou administração! Administração está em todo lugar - é a arte de fazer as coisas acontecerem através das pessoas!',
+                        engaging_question: 'Qual foi a última coisa que você organizou?'
+                    },
+                    main_content: [
+                        {
+                            type: 'explanation',
+                            title: 'O que é Administração?',
+                            text: 'Administração é como ser o maestro de uma orquestra - você não toca todos os instrumentos, mas faz todos tocarem em harmonia para criar uma música incrível!',
+                            key_points: [
+                                '🎯 **Objetivos claros**: Saber o que quer alcançar',
+                                '👥 **Trabalho com pessoas**: Fazer as coisas através dos outros',
+                                '⚡ **Eficiência**: Fazer da melhor forma possível',
+                                '🎯 **Eficácia**: Alcançar os resultados desejados'
+                            ]
+                        }
+                    ],
+                    special_box: {
+                        type: 'fala_serio',
+                        title: 'Fala Sério!',
+                        content: 'Você sabia que a administração é considerada uma das áreas mais importantes do mundo? Sem ela, empresas, países e até sua vida pessoal seriam um caos total!',
+                        icon: '🧠'
+                    },
+                    activity: {
+                        type: 'mao_na_massa',
+                        title: 'Atividade Mão na Massa - Seu Diagnóstico Administrativo!',
+                        instructions: [
+                            'Pense em algo que você organizou recentemente:',
+                            '1️⃣ Qual era o objetivo?',
+                            '2️⃣ Quem participou?',
+                            '3️⃣ Como você dividiu as tarefas?',
+                            '4️⃣ O que deu certo e o que poderia melhorar?',
+                            '5️⃣ Você usou algum dos 4 elementos da administração?'
+                        ],
+                        reward: '50 XP',
+                        completion_message: 'Parabéns! Você já pensa como um administrador! 🎉'
+                    },
+                    quiz: {
+                        title: 'Quiz Inicial - Teste seus instintos administrativos!',
+                        questions: [
+                            {
+                                id: 1,
+                                question: 'O que significa administrar?',
+                                options: [
+                                    'a) Fazer tudo sozinho',
+                                    'b) Obter resultados através de outras pessoas',
+                                    'c) Apenas dar ordens'
+                                ],
+                                correct: 1,
+                                explanation: 'Administrar é fazer as coisas através de pessoas com eficiência!'
+                            },
+                            {
+                                id: 2,
+                                question: 'Qual é mais importante na administração?',
+                                options: [
+                                    'a) Apenas ter objetivos',
+                                    'b) Apenas ter pessoas',
+                                    'c) Alcançar resultados de forma eficiente'
+                                ],
+                                correct: 2,
+                                explanation: 'O objetivo final é alcançar resultados da melhor forma possível!'
+                            }
+                        ],
+                        passing_score: 70,
+                        reward: '25 XP'
+                    },
+                    next_steps: {
+                        title: 'Próximos Passos',
+                        message: 'Excelente começo! Agora que você já entende o básico, vamos descobrir a fórmula mágica que todos os administradores usam - o PODC!',
+                        teaser: '🔮 Próximo capítulo: PODC - A Fórmula Mágica da Administração!'
+                    }
+                }
+            }
+        };
+
+        return fallbackContent[chapterId] || {
+            title: 'Capítulo em desenvolvimento',
+            content: {
+                introduction: {
+                    title: 'Contúdo sendo preparado!',
+                    text: 'Este capítulo está sendo finalizado. Em breve estará disponível com todo o conteúdo interativo!'
+                }
+            }
+        };
     }
 
     // Renderiza conteúdo do capítulo na tela
