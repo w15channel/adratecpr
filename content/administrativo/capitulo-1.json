@@ -1,0 +1,151 @@
+{
+  "id": "admin-01",
+  "title": "Capítulo 1: Administração - Você já administrou alguma coisa hoje?",
+  "module": "administrativo",
+  "order": 1,
+  "xp_reward": 100,
+  "badge_earned": "primeiro-passo-admin",
+  "estimated_time": 15,
+  "difficulty": "iniciante",
+  "content": {
+    "introduction": {
+      "title": "E aí! Tudo bem?",
+      "text": "Antes de começar, me responde uma coisa: você já organizou uma festa surpresa? Já montou um time pra um campeonato de Free Fire? Ou precisou dividir as tarefas da casa com seus irmãos? Parabéns, você já deu seus primeiros passos na administração! Pois é, administrar não é só coisa de gente de terno em prédio grande. Neste capítulo, vamos descobrir como essa habilidade superpoderosa está em TODO lugar e como você pode usá-la a seu favor.",
+      "engaging_question": "Quantas coisas você já administrou hoje sem perceber?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "Administração no Dia a Dia",
+        "text": "Administração, no fim das contas, é conseguir fazer as coisas acontecerem, muitas vezes com a ajuda de outras pessoas. É como ser o 'cérebro' de um projeto. Seu objetivo? Fazer tudo de forma **eficiente** (gastando pouco tempo e esforço) e **eficaz** (atingindo o resultado que você queria).",
+        "key_concepts": [
+          {
+            "term": "Eficiente",
+            "definition": "Fazer algo usando o mínimo de recursos possíveis (tempo, dinheiro, energia)"
+          },
+          {
+            "term": "Eficaz", 
+            "definition": "Conseguir o resultado que você queria, atingir o objetivo"
+          }
+        ]
+      },
+      {
+        "type": "example",
+        "title": "Traduzindo para o seu dia a dia:",
+        "scenario": "Pense na sua escola. A diretora administra a escola. Ela não dá todas as aulas sozinha, né? Ela:",
+        "examples": [
+          "**Planeja** o ano letivo (planejamento)",
+          "**Contrata** os professores certos (organização)",
+          "**Motiva** a equipe (direção)",
+          "**Vê** se as notas estão boas (controle)"
+        ],
+        "conclusion": "Ela faz as coisas através dos professores e funcionários. Isso é administração na prática!"
+      },
+      {
+        "type": "vocabulary",
+        "title": "As Palavras-Chave que você precisa saber",
+        "terms": [
+          {
+            "word": "Gestão",
+            "meaning": "É um sinônimo chic de administração. Tanto faz!",
+            "example": "Gestão de tempo = Administração do tempo"
+          },
+          {
+            "word": "Processo Administrativo",
+            "meaning": "É o 'passo a passo' da administração.",
+            "example": "A gente vai destrinchar isso no próximo capítulo com o PODC (fica ligado!)"
+          },
+          {
+            "word": "Recursos",
+            "meaning": "Tudo que você usa para chegar no seu objetivo: tempo, dinheiro, pessoas, materiais.",
+            "example": "Para um trabalho escolar: internet, livros, colegas, canetas"
+          }
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "A palavra 'administração' vem do latim e tem a ver com 'servir' ou 'cuidar'. Ou seja, um bom administrador é aquele que serve e cuida da equipe e dos recursos para chegar ao objetivo. Que foda, né?",
+      "icon": "💡"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa",
+      "instructions": [
+        "Pega um lápis e um papel (ou abre o bloco de notas do celular).",
+        "Pense em um projeto que você já fez (um trabalho em grupo, um evento).",
+        "Anote: Qual era o objetivo? (ex: tirar nota 10)",
+        "Quais recursos você usou? (ex: colegas, internet, caneta)",
+        "Quem te ajudou? (ex: seus amigos do grupo)"
+      ],
+      "reward": "50 XP",
+      "completion_message": "Pronto! Você acabou de identificar os elementos básicos de uma administração. Guarda esse papel!"
+    },
+    "quiz": {
+      "title": "Quiz de Verificação - Teste seu conhecimento!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Administração é, basicamente:",
+          "options": [
+            "a) Só dar ordens para os outros.",
+            "b) Fazer as coisas acontecerem, usando recursos e pessoas.",
+            "c) Trabalhar sozinho para não ter problemas."
+          ],
+          "correct": 1,
+          "explanation": "Administração é sobre fazer acontecer usando o que você tem disponível!"
+        },
+        {
+          "id": 2,
+          "question": "Ser 'eficiente' significa:",
+          "options": [
+            "a) Acertar o objetivo final.",
+            "b) Usar poucos recursos (tempo, esforço) para fazer algo.",
+            "c) Fazer tudo muito rápido."
+          ],
+          "correct": 1,
+          "explanation": "Eficiência é sobre otimização - fazer mais com menos!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: A diretora da escola é um exemplo de administradora porque coordena professores e funcionários.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! Ela administra toda a operação escolar através da equipe."
+        }
+      ],
+      "passing_score": 70,
+      "reward": "30 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Você viu que administração está em todo lugar. Agora, que tal aprender o passo a passo oficial para administrar qualquer coisa? No próximo capítulo, vamos conhecer o PODC, a fórmula secreta da administração! Te vejo lá!",
+      "teaser": "🔥 Próximo capítulo: PODC - A fórmula mágica da administração!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "primeiro-passo-admin",
+      "name": "Primeiro Passo Administrativo",
+      "description": "Completou o primeiro capítulo do módulo administrativo",
+      "icon": "🎯",
+      "rarity": "comum"
+    }
+  ],
+  "interactive_elements": {
+    "poll": {
+      "question": "Qual situação você mais se identifica como administrador?",
+      "options": [
+        "Organizando eventos com amigos",
+        "Liderando trabalhos escolares", 
+        "Gerenciando tempo de estudos",
+        "Planejando jogos online"
+      ]
+    },
+    "reflection": {
+      "prompt": "Agora que você já entendeu o básico, qual área da sua vida você acha que mais precisa de administração?",
+      "save_to_profile": true
+    }
+  }
+}

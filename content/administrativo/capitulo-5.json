@@ -1,0 +1,369 @@
+{
+  "id": "admin-05",
+  "title": "Capítulo 5: Programa 5S - A Mágica da Organização Japonesa!",
+  "module": "administrativo",
+  "order": 5,
+  "xp_reward": 140,
+  "badge_earned": "mestre-5s",
+  "estimated_time": 20,
+  "difficulty": "pratico",
+  "prerequisites": ["admin-04"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Preparado para aprender a mágica japonesa da organização?",
+      "text": "Imagine transformar seu quarto bagunçado em um espaço super organizado em apenas 5 passos! Ou organizar um trabalho escolar de forma tão eficiente que seus professores vão ficar impressionados! Isso é o que o 5S faz - é uma técnica japonesa que vai revolucionar como você organiza TUDO na sua vida!",
+      "engaging_question": "Qual área da sua vida mais precisa de organização agora?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "O que é esse tal de 5S?",
+        "text": "5S é um programa criado no Japão para organizar empresas, mas funciona para QUALQUER COISA! É como se fosse um 'power-up' de organização que você pode usar no quarto, na escola, nos estudos, em qualquer lugar!",
+        "origin": {
+          "country": "🇯🇵 Japão",
+          "created": "Anos 1960",
+          "purpose": "Base para a qualidade total nas empresas",
+          "meaning": "5 'S' = 5 palavras japonesas que começam com S"
+        },
+        "why_works": "Porque organiza o ambiente, a mente e os processos tudo ao mesmo tempo!"
+      },
+      {
+        "type": "five_s_detailed",
+        "title": "🎯 Os 5 Superpoderes do 5S",
+        "subtitle": "Cada 'S' é um passo que transforma o caos em ordem:",
+        "steps": [
+          {
+            "number": 1,
+            "japanese": "SEIRI",
+            "portuguese": "SENSO DE UTILIZAÇÃO",
+            "emoji": "🗑️",
+            "simple_meaning": "Jogue fora o desnecessário!",
+            "detailed_explanation": "Fique só com o que você REALMENTE usa e precisa. Se não usou nos últimos 6 meses, provavelmente não precisa mais.",
+            "practical_examples": {
+              "quarto": [
+                "Roupas que não serve mais? Doe!",
+                "Papéis velhos? Recicle!",
+                "Brinquedos quebrados? Descarte!",
+                "Livros que não lê mais? Empreste ou doe!"
+              ],
+              "estudos": [
+                "Anotações antigas? Arquive ou descarte",
+                "Materiais quebrados? Troque!",
+                "Apps que não usa? Delete!",
+                "Links salvos desnecessários? Limpe!"
+              ],
+              "digital": [
+                "Arquivos duplicados? Delete!",
+                "Fotos borradas? Descarte!",
+                "Apps inúteis? Desinstale!",
+                "Emails antigos? Limpe a caixa de entrada!"
+              ]
+            },
+            "teen_challenge": "Desafio do dia: Escolha uma gaveta ou pasta e aplique Seiri. Quantas coisas você conseguiu eliminar?",
+            "golden_rule": "Na dúvida, jogue fora! Se for importante, você vai lembrar onde guardou."
+          },
+          {
+            "number": 2,
+            "japanese": "SEITON",
+            "portuguese": "SENSO DE ORGANIZAÇÃO",
+            "emoji": "📚",
+            "simple_meaning": "Um lugar para cada coisa, cada coisa em seu lugar!",
+            "detailed_explanation": "Depois de eliminar o desnecessário, organize o que ficou de forma que seja FÁCIL encontrar e usar.",
+            "practical_examples": {
+              "quarto": [
+                "Roupas: por cor ou tipo",
+                "Livros: por gênero ou autor",
+                "Materiais: em caixas etiquetadas",
+                "Eletrônicos: em suportes específicos"
+              ],
+              "estudos": [
+                "Cadernos: por matéria",
+                "Canetas: em porta-lápis",
+                "Apostilas: em pastas coloridas",
+                "Fichas: em fichário alfabético"
+              ],
+              "digital": [
+                "Arquivos: em pastas com nomes claros",
+                "Fotos: por data ou evento",
+                "Apps: em pastas na tela inicial",
+                "Links: em categorias"
+              ]
+            },
+            "teen_challenge": "Crie um sistema de organização para sua mesa de estudos. Funciona? Melhore até ficar perfeito!",
+            "golden_rule": "Se usar todo dia, deixe à vista. Se usar poucas vezes, guarde em local específico."
+          },
+          {
+            "number": 3,
+            "japanese": "SEISO",
+            "portuguese": "SENSO DE LIMPEZA",
+            "emoji": "🧹",
+            "simple_meaning": "Mantenha tudo limpo!",
+            "detailed_explanation": "Um lugar limpo é um lugar produtivo. Limpeza não é só estética, é funcional!",
+            "cleaning_habits": [
+              "🧹 Limpe 5 minutos todo dia",
+              "🧽 Limpe o que usar logo após usar",
+              "📋 Crie uma rotina de limpeza semanal",
+              "🧴 Tenha materiais de limpeza à mão"
+            ],
+            "practical_examples": {
+              "quarto": [
+                "Tirar pó toda semana",
+                "Arrumar a cama todo dia",
+                "Limpar a mesa antes de estudar",
+                "Organizar roupas sujas no cesto"
+              ],
+              "digital": [
+                "Limpar cache do navegador",
+                "Organizar arquivos duplicados",
+                "Deletar arquivos temporários",
+                "Atualizar programas"
+              ]
+            },
+            "teen_challenge": "Faça uma 'limpeza relâmpago' de 10 minutos no seu quarto. Surpreenda-se com o resultado!",
+            "golden_rule": "Lugar limpo é lugar saudável e produtivo!"
+          },
+          {
+            "number": 4,
+            "japanese": "SEIKETSU",
+            "portuguese": "SENSO DE PADRONIZAÇÃO",
+            "emoji": "📋",
+            "simple_meaning": "Crie padrões e siga-os!",
+            "detailed_explanation": "Padronização é fazer as coisas sempre da mesma forma correta. É criar um 'modo de fazer' que funciona!",
+            "standardization_examples": {
+              "estudos": [
+                "📅 Horário fixo para estudar cada matéria",
+                "📝 Método para anotações",
+                "🔄 Rotina de revisão semanal",
+                "📊 Sistema para controlar progresso"
+              ],
+              "quarto": [
+                "🧹 Dia da semana para cada tarefa de limpeza",
+                "👕 Método para organizar roupas lavadas",
+                "📚 Sistema para arrumar livros",
+                "🔌 Organização de cabos e carregadores"
+              ],
+              "digital": [
+                "📁 Nomenclatura padrão para arquivos",
+                "🔐 Método para senhas",
+                "📱 Layout padrão para apps",
+                "📧 Sistema para organizar emails"
+              ]
+            },
+            "teen_challenge": "Crie 3 padrões para sua rotina de estudos. Siga-os por uma semana e ajuste o que não funcionou!",
+            "golden_rule": "Padrão bom é padrão que você consegue manter!"
+          },
+          {
+            "number": 5,
+            "japanese": "SHITSUKE",
+            "portuguese": "SENSO DE AUTODISCIPLINA",
+            "emoji": "💪",
+            "simple_meaning": "Mantenha a disciplina!",
+            "detailed_explanation": "Este é o mais difícil e o mais importante! É ter força de vontade para manter os outros 4S sempre em prática.",
+            "discipline_strategies": [
+              "🎯 Lembre-se dos benefícios",
+              "📊 Monitore seu progresso",
+              "👥 Peça ajuda para manter",
+              "🎉 Celebre pequenas vitórias"
+            ],
+            "building_habits": {
+              "start_small": "Comece com 5 minutos por dia",
+              "be_consistent": "Faça todo dia, mesmo que pouco",
+              "track_progress": "Marque no calendário quando conseguiu",
+              "reward_yourself": "Comemore uma semana de disciplina!"
+            },
+            "teen_challenge": "Aplique os 5S por 7 dias seguidos. Anote o que mudou na sua produtividade e humor!",
+            "golden_rule": "Disciplina é como músculo: quanto mais treina, mais forte fica!"
+          }
+        ]
+      },
+      {
+        "type": "implementation_guide",
+        "title": "🚀 Guia Prático - Implementando 5S na Sua Vida",
+        "subtitle": "Como aplicar 5S em diferentes áreas:",
+        "implementation_areas": [
+          {
+            "area": "📚 Área de Estudos",
+            "steps": [
+              "🗑️ **Seiri**: Elimine papéis velhos, canetas secas, materiais quebrados",
+              "📚 **Seiton**: Organize por matéria, crie estações de trabalho",
+              "🧹 **Seiso**: Limpe a mesa antes e depois de estudar",
+              "📋 **Seiketsu**: Crie rotina de estudos, método de anotações",
+              "💪 **Shitsuke**: Mantenha a disciplina todos os dias"
+            ],
+            "expected_results": [
+              "⚡ Mais produtividade",
+              "🎯 Menos distrações",
+              "📈 Melhores notas",
+              "😴 Menos estresse"
+            ]
+          },
+          {
+            "area": "🎮 Gaming e Tecnologia",
+            "steps": [
+              "🗑️ **Seiri**: Delete jogos que não joga, apps inúteis",
+              "📚 **Seiton**: Organize jogos por gênero, apps em pastas",
+              "🧹 **Seiso**: Limpe cache, organize arquivos",
+              "📋 **Seiketsu**: Crie horários para gaming, backup semanal",
+              "💪 **Shitsuke**: Mantenha o equilíbrio gaming x estudos"
+            ],
+            "expected_results": [
+              "📱 Celular mais rápido",
+              "🎮 Melhor desempenho",
+              "⏰ Mais tempo para outras coisas",
+              "🎯 Foco melhorado"
+            ]
+          },
+          {
+            "area": "👥 Trabalhos em Grupo",
+            "steps": [
+              "🗑️ **Seiri**: Elimine tarefas desnecessárias, foco no essencial",
+              "📚 **Seiton**: Divida claramente quem faz o quê",
+              "🧹 **Seiso**: Mantenha a comunicação limpa, sem ruídos",
+              "📋 **Seiketsu**: Crie padrões de comunicação e prazos",
+              "💪 **Shitsuke**: Mantenha o compromisso com o grupo"
+            ],
+            "expected_results": [
+              "🤝 Melhor trabalho em equipe",
+              "📊 Menos conflitos",
+              "🎯 Resultados melhores",
+              "⏰ Entregas no prazo"
+            ]
+          }
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Você sabia que a Toyota revolucionou a indústria automobilística mundial usando o 5S? Eles descobriram que lugar organizado = gente mais produtiva = produtos melhores = mais lucro! Se funciona para uma mega empresa, imagina para sua vida!",
+      "icon": "🏆"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Desafio 5S Semanal - Transforme seu Espaço!",
+      "instructions": [
+        "Escolha uma área (quarto, mesa de estudos, armário, digital)",
+        "Dia 1-2: Aplique SEIRI (elimine o desnecessário)",
+        "Dia 3-4: Aplique SEITON (organize o que ficou)",
+        "Dia 5-6: Aplique SEISO (limpe tudo)",
+        "Dia 7: Crie SEIKETSU (padrões) e comece SHITSUKE (disciplina)",
+        "Tire foto antes e depois para ver a transformação!",
+        "Anote como você se sentiu durante o processo"
+      ],
+      "reward": "80 XP",
+      "completion_message": "Parabéns! Você aplicou os 5S completos! Agora mantenha essa disciplina! 🎉"
+    },
+    "quiz": {
+      "title": "Quiz 5S - Teste seu conhecimento organizacional!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que significa SEIRI no 5S?",
+          "options": [
+            "a) Limpar tudo",
+            "b) Eliminar o desnecessário",
+            "c) Organizar as coisas"
+          ],
+          "correct": 1,
+          "explanation": "Seiri é sobre descartar o que não precisamos!"
+        },
+        {
+          "id": 2,
+          "question": "Qual passo do 5S envolve criar padrões?",
+          "options": [
+            "a) Seiton",
+            "b) Seiso",
+            "c) Seiketsu"
+          ],
+          "correct": 2,
+          "explanation": "Seiketsu é o senso de padronização - criar métodos que funcionam!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: O 5S foi criado no Japão.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! 5S é uma técnica japonesa de gestão da qualidade!"
+        },
+        {
+          "id": 4,
+          "question": "Qual 'S' é o mais difícil de manter?",
+          "options": [
+            "a) Seiri (eliminar)",
+            "b) Shitsuke (disciplina)",
+            "c) Seiton (organizar)"
+          ],
+          "correct": 1,
+          "explanation": "Shitsuke (autodisciplina) é o mais desafiador porque exige constância!"
+        },
+        {
+          "id": 5,
+          "question": "Para aplicar 5S nos estudos, você deve:",
+          "options": [
+            "a) Jogar todos os materiais fora",
+            "b) Eliminar desnecessário, organizar, limpar, padronizar e manter disciplina",
+            "c) Apenas arrumar a mesa"
+          ],
+          "correct": 1,
+          "explanation": "5S nos estudos envolve todos os passos: eliminar, organizar, limpar, padronizar e manter!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "45 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você tem o superpoder da organização japonesa! No próximo capítulo, vamos descobrir o que é Cultura Organizacional - a 'personalidade' das empresas e como ela afeta tudo!",
+      "teaser": "🎭 Próximo capítulo: Cultura Organizacional - A Alma das Empresas!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "mestre-5s",
+      "name": "Mestre do 5S",
+      "description": "Dominou a técnica japonesa de organização",
+      "icon": "🧹",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "5s_challenge": {
+      "title": "Desafio 5S Rápido",
+      "scenario": "Sua mesa de estudos está uma bagunça!",
+      "steps": [
+        {
+          "phase": "Seiri",
+          "task": "O que você elimina?",
+          "options": [
+            "Canetas que não escrevem",
+            "Papéis velhos",
+            "Lixeira cheia",
+            "Todos os itens acima"
+          ]
+        },
+        {
+          "phase": "Seiton",
+          "task": "Como organizar?",
+          "options": [
+            "Tudo jogado na gaveta",
+            "Por matéria e uso frequente",
+            "Deixar tudo espalhado"
+          ]
+        },
+        {
+          "phase": "Seiso",
+          "task": "O que limpar primeiro?",
+          "options": [
+            "Tirar pó da mesa",
+            "Limpar o computador",
+            "Organizar os cabos"
+          ]
+        }
+      ]
+    },
+    "reflection": {
+      "prompt": "Qual dos 5S você acha que mais precisa melhorar na sua vida? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}

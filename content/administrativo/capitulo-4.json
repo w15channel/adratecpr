@@ -1,0 +1,330 @@
+{
+  "id": "admin-04",
+  "title": "Capítulo 4: Estrutura Organizacional - O Esqueleto das Empresas!",
+  "module": "administrativo",
+  "order": 4,
+  "xp_reward": 130,
+  "badge_earned": "arquiteto-organizacional",
+  "estimated_time": 22,
+  "difficulty": "intermediario",
+  "prerequisites": ["admin-03"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Curioso para saber como as empresas funcionam por dentro?",
+      "text": "Imagina seu corpo: você tem esqueleto que segura tudo, músculos que fazem as coisas acontecerem, e cérebro que comanda tudo. As empresas são iguais! Têm uma 'espinha dorsal' (estrutura), 'músculos' (departamentos) e 'cérebro' (liderança). Vamos desvendar essa anatomia corporativa?",
+      "engaging_question": "Se sua escola fosse uma empresa, como você acha que ela estaria organizada?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "O que é Estrutura Organizacional?",
+        "text": "Estrutura organizacional é como o 'organograma' da empresa - aquele desenho que mostra quem manda em quem e quem faz o quê. É como um mapa que diz: 'Para chegar ao resultado final, siga este caminho!'",
+        "key_concept": {
+          "definition": "É o conjunto de relações estabelecidas entre as pessoas e as diversas áreas que compõem uma empresa.",
+          "simple_translation": "É como montar um quebra-cabeça: cada peça (pessoa/setor) tem seu lugar específico"
+        },
+        "benefits": [
+          "🎯 **Clareza**: Todo mundo sabe o que fazer",
+          "🚀 **Eficiência**: Sem duplicação de trabalho",
+          "📊 **Responsabilidade**: Fica claro quem é responsável pelo quê",
+          "🏆 **Resultados**: As coisas acontecem no tempo certo"
+        ]
+      },
+      {
+        "type": "structure_types",
+        "title": "🏗️ Os Dois Lados da Força Organizacional",
+        "subtitle": "Toda empresa tem duas estruturas que convivem juntas:",
+        "structures": [
+          {
+            "name": "Organização Formal",
+            "emoji": "📋",
+            "what_it_is": "A estrutura OFICIAL, no papel",
+            "characteristics": [
+              "📝 **Regras claras**: Tudo documentado",
+              "🏢 **Hierarquia definida**: Quem reporta para quem",
+              "📊 **Organograma**: Desenho oficial da estrutura",
+              "📖 **Manuais**: Procedimentos e políticas escritas"
+            ],
+            "school_example": {
+              "title": "Sua escola formalmente:",
+              "hierarchy": [
+                "👑 Diretor(a)",
+                "📚 Coordenadores",
+                "👩‍🏫 Professores",
+                "👨‍💼 Funcionários",
+                "👨‍🎓 Alunos"
+              ]
+            },
+            "pros": [
+              "✅ Ordem e disciplina",
+              "✅ Previsibilidade",
+              "✅ Controle fácil"
+            ],
+            "cons": [
+              "❌ Pode ser burocrática",
+              "❌ Menos flexível",
+              "❌ Comunicação mais lenta"
+            ]
+          },
+          {
+            "name": "Organização Informal",
+            "emoji": "🤝",
+            "what_it_is": "A estrutura que surge NATURALMENTE",
+            "characteristics": [
+              "🗣️ **Relações espontâneas**: Amizades e afinidades",
+              "🌐 **Redes de comunicação**: 'Rádio-corredor'",
+              "💡 **Grupos informais**: Pessoas que se juntam por gostos parecidos",
+              "🎭 **Líderes naturais**: Pessoas que influenciam mesmo sem cargo"
+            ],
+            "school_example": {
+              "title": "Sua escola informalmente:",
+              "groups": [
+                "👥 'Turma do fundão' - sempre juntos",
+                "🎮 Gamers - se reúnem para jogar",
+                "📱 Influenciadores - sabem tudo antes de todo mundo",
+                "🏃‍♂️ Esportistas - time de futebol informal"
+              ]
+            },
+            "pros": [
+              "✅ Mais flexível e rápida",
+              "✅ Melhor comunicação",
+              "✅ Inovação e criatividade"
+            ],
+            "cons": [
+              "❌ Pode gerar conflitos",
+              "❌ Difícil de controlar",
+              "❌ Nem sempre alinhada com objetivos"
+            ]
+          }
+        ],
+        "balance_message": "🎯 **O segredo**: Empresas de sucesso equilibram as duas! Usam a formal para dar ordem e a informal para agilizar!"
+      },
+      {
+        "type": "organizational_chart",
+        "title": "📊 Lendo um Organograma - O Mapa do Poder",
+        "text": "Organograma é como um mapa do jogo que mostra onde está cada 'personagem' e como eles se conectam.",
+        "how_to_read": [
+          "📦 **Caixas** = Cargos ou departamentos",
+          "📏 **Linhas** = Relações de autoridade",
+          "⬆️ **Para cima** = Quem manda",
+          "⬇️ **Para baixo** = Quem obedece",
+          "↔️ **Na mesma linha** = Mesmo nível hierárquico"
+        ],
+        "example_company": {
+          "name": "Empresa GamesJr (fictícia)",
+          "chart": {
+            "level_1": {
+              "position": "CEO Fundador",
+              "responsibility": "Comanda tudo",
+              "reports_to": "Ninguém (é o chefe!)"
+            },
+            "level_2": {
+              "positions": [
+                {
+                  "role": "Diretor de Produtos",
+                  "area": "Criação dos games"
+                },
+                {
+                  "role": "Diretor de Marketing",
+                  "area": "Divulgação e vendas"
+                },
+                {
+                  "role": "Diretor Financeiro",
+                  "area": "Contas e dinheiro"
+                }
+              ],
+              "reports_to": "CEO"
+            },
+            "level_3": {
+              "positions": [
+                {
+                  "role": "Desenvolvedores",
+                  "area": "Programação dos games",
+                  "reports_to": "Diretor de Produtos"
+                },
+                {
+                  "role": "Designers",
+                  "area": "Arte e interface",
+                  "reports_to": "Diretor de Produtos"
+                },
+                {
+                  "role": "Social Media",
+                  "area": "Redes sociais",
+                  "reports_to": "Diretor de Marketing"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "type": "structure_models",
+        "title": "🏢 Modelos de Estrutura - Qual o melhor?",
+        "subtitle": "Existem diferentes 'formatos' de organização. Veja qual se encaixa melhor em cada situação:",
+        "models": [
+          {
+            "name": "Estrutura Linear",
+            "emoji": "📏",
+            "how_it_works": "Comando em linha reta - um chefe, vários subordinados",
+            "best_for": [
+              "Pequenas empresas",
+              "Times pequenos",
+              "Decisões rápidas"
+            ],
+            "example": "Lanchonete familiar: Dono → 2 funcionários",
+            "pros": ["⚡ Rápida", "🎯 Clara", "💰 Barata"],
+            "cons": ["👤 Sobrecarrega o chefe", "📈 Não escala bem"]
+          },
+          {
+            "name": "Estrutura Funcional",
+            "emoji": "🔧",
+            "how_it_works": "Divisão por especialidades - cada especialista comanda sua área",
+            "best_for": [
+              "Empresas médias",
+              "Especialização necessária",
+              "Qualidade técnica"
+            ],
+            "example": "Escola: Diretor → Coordenadores (por área) → Professores",
+            "pros": ["🎓 Especialização", "🏆 Qualidade", "📚 Desenvolvimento"],
+            "cons": ["🐌 Lenta", "🤝 Conflitos entre áreas", "💸 Custo maior"]
+          },
+          {
+            "name": "Estrutura Divisional",
+            "emoji": "🏪",
+            "how_it_works": "Divisão por produtos ou regiões - cada 'mini-empresa' funciona quase autônoma",
+            "best_for": [
+              "Grandes empresas",
+              "Diversos produtos",
+              "Mercados diferentes"
+            ],
+            "example": "Nike: Divisão Calçados, Divisão Roupas, Divisão Acessórios",
+            "pros": ["🚀 Flexível", "🎯 Focada", "📈 Cresce bem"],
+            "cons": ["💸 Custo alto", "🤝 Duplicação de esforços", "🏗️ Complexa"]
+          },
+          {
+            "name": "Estrutura Matricial",
+            "emoji": "🕸️",
+            "how_it_works": "Dupla reportagem - cada pessoa tem 2 chefes (um por projeto, um por função)",
+            "best_for": [
+              "Projetos complexos",
+              "Inovação",
+              "Tecnologia"
+            ],
+            "example": "NASA: Engenheiro reporta para Chefe de Engenharia E para Gerente do Projeto",
+            "pros": ["💡 Criativa", "🤝 Colaborativa", "🔄 Flexível"],
+            "cons": ["😕 Confusa", "⚔️ Conflitos", "📊 Difícil gestão"]
+          }
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Você sabia que a Google usa uma estrutura super inovadora chamada 'holacrática'? Eles não têm chefes tradicionais! As pessoas se organizam em 'círculos' e projetos. Isso mostra que não existe 'a melhor' estrutura - existe a melhor estrutura PARA CADA SITUAÇÃO!",
+      "icon": "🧠"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Desenhe sua Organização!",
+      "instructions": [
+        "Pense em um grupo que você participa (time de esportes, trabalho escolar, grupo de amigos)",
+        "Desenhe o organograma formal desse grupo",
+        "Agora desenhe as redes informais (quem realmente se conecta com quem)",
+        "Compare: As duas estruturas são parecidas? Diferentes? Por quê?",
+        "Reflexão: Qual estrutura funciona melhor para esse grupo?"
+      ],
+      "reward": "65 XP",
+      "completion_message": "Incrível! Você virou um arquiteto organizacional! 🏗️"
+    },
+    "quiz": {
+      "title": "Quiz Estrutural - Teste seu conhecimento arquitetônico!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que é estrutura organizacional?",
+          "options": [
+            "a) O prédio onde a empresa funciona",
+            "b) O conjunto de relações e hierarquia da empresa",
+            "c) O salário dos funcionários"
+          ],
+          "correct": 1,
+          "explanation": "Estrutura é sobre como as pessoas e áreas se organizam e se relacionam!"
+        },
+        {
+          "id": 2,
+          "question": "Qual estrutura é baseada em regras e hierarquia oficial?",
+          "options": [
+            "a) Organização Informal",
+            "b) Organização Formal",
+            "c) Organização Amigos"
+          ],
+          "correct": 1,
+          "explanation": "Organização formal é a estrutura oficial, documentada e hierárquica!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: Na organização informal, as pessoas se agrupam por afinidade natural.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! Organização informal surge espontaneamente das relações pessoais!"
+        },
+        {
+          "id": 4,
+          "question": "Qual modelo de estrutura tem apenas um chefe no topo?",
+          "options": [
+            "a) Estrutura Funcional",
+            "b) Estrutura Linear",
+            "c) Estrutura Matricial"
+          ],
+          "correct": 1,
+          "explanation": "Estrutura linear é uma linha direta de comando - um chefe, vários subordinados!"
+        },
+        {
+          "id": 5,
+          "question": "No organograma, linhas horizontais geralmente indicam:",
+          "options": [
+            "a) Quem manda em quem",
+            "b) Pessoas no mesmo nível hierárquico",
+            "c) Comunicação informal"
+          ],
+          "correct": 1,
+          "explanation": "Linhas horizontais mostram pessoas ou departamentos no mesmo nível!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "40 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você entende a 'espinha dorsal' das empresas! No próximo capítulo, vamos conhecer o programa 5S - uma técnica japonesa que vai revolucionar como você organiza TUDO na sua vida, desde seu quarto até seus projetos!",
+      "teaser": "🧹 Próximo capítulo: Programa 5S - A Mágica da Organização Japonesa!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "arquiteto-organizacional",
+      "name": "Arquiteto Organizacional",
+      "description": "Compreendeu a estrutura interna das empresas",
+      "icon": "🏗️",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "orgchart_builder": {
+      "title": "Monte seu Organograma",
+      "instructions": "Arraste os cargos para criar a estrutura ideal para uma startup de games",
+      "positions": [
+        "CEO Fundador",
+        "Programador", 
+        "Designer",
+        "Marketing",
+        "Financeiro",
+        "Atendimento"
+      ]
+    },
+    "reflection": {
+      "prompt": "Depois de conhecer as estruturas, qual modelo você acha que funcionaria melhor para um grupo de amigos criando um projeto juntos?",
+      "save_to_profile": true
+    }
+  }
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADRA-TEC - Cursos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/course.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <div>
+                    <h1>ADRA-TEC</h1>
+                    <p>Portal de Educação Profissional</p>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Início
+                </a>
+                <a href="course-view.html" class="nav-link active">
+                    <i class="fas fa-book"></i>
+                    Cursos
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    Progresso
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    Comunidade
+                </a>
+            </nav>
+
+            <div class="user-actions">
+                <button class="btn btn-secondary" onclick="IATutor.open()">
+                    <i class="fas fa-robot"></i>
+                    IA Tutor
+                </button>
+                
+                <div class="user-info" onclick="this.classList.toggle('active')">
+                    <div class="user-avatar" id="header-avatar">🎯</div>
+                    <div class="user-details">
+                        <span class="user-name" id="header-name">Carregando...</span>
+                        <span class="user-points" id="header-points">0 pts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="course-view">
+            <!-- Seletor de Módulos -->
+            <section class="modules-selector">
+                <h1>Escolha seu Módulo</h1>
+                <div class="modules-grid">
+                    <div class="module-card available" onclick="courseManager.selectModule('administrativo')">
+                        <div class="module-icon" style="background: #3b82f6">
+                            👥
+                        </div>
+                        <h3>Administrativo</h3>
+                        <p>Organização, gestão e liderança empresarial</p>
+                        <div class="module-stats">
+                            <span>12 capítulos</span>
+                            <span>🏆 1.200 XP</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="admin-progress" style="width: 0%"></div>
+                        </div>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-play"></i>
+                            Começar
+                        </button>
+                    </div>
+
+                    <div class="module-card locked">
+                        <div class="module-icon" style="background: #6b7280">
+                            📊
+                        </div>
+                        <h3>Financeiro</h3>
+                        <p>Gestão financeira e investimentos</p>
+                        <div class="module-stats">
+                            <span>Em breve</span>
+                            <span>🔒 Bloqueado</span>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                            <p>Complete o módulo Administrativo primeiro</p>
+                        </div>
+                    </div>
+
+                    <div class="module-card locked">
+                        <div class="module-icon" style="background: #6b7280">
+                            📱
+                        </div>
+                        <h3>Marketing</h3>
+                        <p>Estratégias digitais e branding</p>
+                        <div class="module-stats">
+                            <span>Em breve</span>
+                            <span>🔒 Bloqueado</span>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                            <p>Complete os módulos anteriores</p>
+                        </div>
+                    </div>
+
+                    <div class="module-card locked">
+                        <div class="module-icon" style="background: #6b7280">
+                            💻
+                        </div>
+                        <h3>Programação</h3>
+                        <p>Desenvolvimento de software e tecnologia</p>
+                        <div class="module-stats">
+                            <span>Em breve</span>
+                            <span>🔒 Bloqueado</span>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                            <p>Complete os módulos anteriores</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conteúdo do Curso -->
+            <section class="course-content" id="course-content" style="display: none;">
+                <!-- O conteúdo será renderizado aqui pelo CourseManager -->
+            </section>
+
+            <!-- Lista de Capítulos -->
+            <section class="chapters-list" id="chapters-list" style="display: none;">
+                <div class="chapters-header">
+                    <button class="btn btn-secondary" onclick="courseManager.backToModules()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar aos Módulos
+                    </button>
+                    <h2>Capítulos do Módulo</h2>
+                </div>
+                <div class="chapters-grid" id="chapters-grid">
+                    <!-- Capítulos serão renderizados aqui -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/course-manager.js"></script>
+</body>
+</html>

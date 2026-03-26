@@ -1,0 +1,285 @@
+{
+  "id": "admin-02",
+  "title": "Capítulo 2: PODC - A Fórmula Mágica da Administração!",
+  "module": "administrativo",
+  "order": 2,
+  "xp_reward": 150,
+  "badge_earned": "mestre-podc",
+  "estimated_time": 20,
+  "difficulty": "iniciante",
+  "prerequisites": ["admin-01"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Preparado para desvendar o segredo?",
+      "text": "Imagina se você tivesse uma fórmula mágica que funcionasse para organizar QUALQUER COISA na sua vida? Um evento, um trabalho escolar, até mesmo seu tempo de estudos! Pois é, essa fórmula existe e se chama PODC! Não, não é feitiço, é a base da administração que vai transformar você em um organizador ninja!",
+      "engaging_question": "Se você pudesse organizar perfeitamente uma coisa agora, o que seria?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "O que é esse tal de PODC?",
+        "text": "PODC é como se fosse o 'modo de usar' da administração. São quatro passos que, seguidos na ordem certa, garantem que qualquer projeto dê certo. Pense nisso como um tutorial de game que te ensina a vencer!",
+        "acronym_breakdown": [
+          {
+            "letter": "P",
+            "word": "Planejamento",
+            "emoji": "📋",
+            "simple_definition": "O que vamos fazer?"
+          },
+          {
+            "letter": "O", 
+            "word": "Organização",
+            "emoji": "🗂️",
+            "simple_definition": "Como vamos fazer?"
+          },
+          {
+            "letter": "D",
+            "word": "Direção",
+            "emoji": "🎯",
+            "simple_definition": "Vamos nessa!"
+          },
+          {
+            "letter": "C",
+            "word": "Controle",
+            "emoji": "📊",
+            "simple_definition": "Conseguimos?"
+          }
+        ]
+      },
+      {
+        "type": "detailed_section",
+        "title": "📋 P de PLANEJAMENTO - O Mapa do Tesouro",
+        "text": "Planejar é como desenhar o mapa antes de sair em uma aventura. Sem mapa, você se perde! É aqui que você decide:",
+        "key_points": [
+          "**O quê** você quer alcançar (objetivo)",
+          "**Como** vai fazer (estratégia)",
+          "**Quando** vai fazer (prazos)",
+          "**Com o quê** vai fazer (recursos)"
+        ],
+        "gaming_example": {
+          "scenario": "Montar um time de Free Fire para campeonato",
+          "planning_steps": [
+            "Objetivo: Chegar na final do campeonato escolar",
+            "Estratégia: Treinar 2h por dia, estudar táticas",
+            "Prazos: 30 dias até o campeonato",
+            "Recursos: 5 jogadores, celular, internet, espaço para treinar"
+          ]
+        },
+        "pro_tip": "Dica de mestre: Planejamento bom é aquele que cabe em uma folha de papel. Se complicou demais, simplifica!"
+      },
+      {
+        "type": "detailed_section",
+        "title": "🗂️ O de ORGANIZAÇÃO - Arrumando a Casa",
+        "text": "Depois de planejar, hora de organizar! É como arrumar seu quarto antes de estudar - tudo no lugar certo para não perder tempo procurando.",
+        "organization_principles": [
+          {
+            "name": "Divisão do trabalho",
+            "simple": "Cada um faz uma parte",
+            "example": "No trabalho escolar: um pesquisa, outro escreve, outro faz os slides"
+          },
+          {
+            "name": "Definição de responsabilidades",
+            "simple": "Quem faz o quê?",
+            "example": "Maria: pesquisa internet | João: escreve texto | Pedro: design"
+          },
+          {
+            "name": "Hierarquia clara",
+            "simple": "Quem manda em quem?",
+            "example": "Líder do grupo coordena, mas todos opinam"
+          }
+        ],
+        "school_example": {
+          "title": "Organizando uma festa na escola:",
+          "organization_chart": [
+            "👑 Líder Geral: Coordena tudo",
+            "🎨 Decoração: 2 pessoas",
+            "🍕 Comida: 3 pessoas", 
+            "🎵 Música: 2 pessoas",
+            "📢 Divulgação: 2 pessoas"
+          ]
+        }
+      },
+      {
+        "type": "detailed_section",
+        "title": "🎯 D de DIREÇÃO - Hora da Ação!",
+        "text": "Agora que tudo está planejado e organizado, hora de colocar a mão na massa! Direção é como ser o capitão do time durante o jogo.",
+        "leadership_skills": [
+          {
+            "skill": "Comunicação",
+            "what_it_is": "Falar de forma clara e ouvir os outros",
+            "teen_example": "No grupo de WhatsApp: 'Pessoal, lembrem que hoje tem treino às 18h!'"
+          },
+          {
+            "skill": "Motivação",
+            "what_it_is": "Manter o time animado",
+            "teen_example": "'Vamos que conseguimos! Só mais um esforço!'"
+          },
+          {
+            "skill": "Liderança",
+            "what_it_is": "Influenciar positivamente o grupo",
+            "teen_example": "Mostrar exemplo: chegar primeiro, ajudar os outros"
+          }
+        ],
+        "leadership_types": {
+          "title": "Tipos de líder que você pode ser:",
+          "types": [
+            "🎮 O Líder Gamer: Estratégico, planeja cada movimento",
+            "🤝 O Líder Amigo: Unifica o grupo, valoriza todos",
+            "💡 O Líder Criativo: Traz ideias novas, inova sempre",
+            "⚡ O Líder Focado: Mantém todos no objetivo, não deixa desviar"
+          ]
+        }
+      },
+      {
+        "type": "detailed_section", 
+        "title": "📊 C de CONTROLE - O Radar do Projeto",
+        "text": "Controle não é sobre ser chato ou fiscalizar! É sobre saber se você está no caminho certo. É como o GPS que avisa: 'Você chegou ao destino' ou 'Recalculando rota...'",
+        "control_steps": [
+          "**Estabelecer metas**: O que esperamos alcançar?",
+          "**Medir resultados**: O que realmente aconteceu?",
+          "**Comparar**: Planejado vs Realizado",
+          "**Corrigir**: O que precisa mudar?"
+        ],
+        "practical_example": {
+          "scenario": "Trabalho escolar sobre meio ambiente",
+          "control_process": {
+            "planejado": "Terminar pesquisa em 1 semana, começar escrita semana 2",
+            "realizado": "Demoramos 2 semanas para pesquisa só",
+            "comparação": "Estamos atrasados 1 semana",
+            "correção": "Vamos nos reunir mais vezes e dividir melhor as tarefas"
+          }
+        },
+        "control_tools": [
+          "📅 Checklist de tarefas",
+          "📈 Gráfico de progresso", 
+          "⏰ Cronograma com prazos",
+          "🎯 Metas semanais"
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Você sabia que o PODC foi criado por um francês chamado Henri Fayol há mais de 100 anos? E ainda hoje é a base de TUDO? Isso porque ele descobriu o 'modo de usar' do sucesso! Agora você também tem esse superpoder!",
+      "icon": "🧠"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Primeiro PODC!",
+      "instructions": [
+        "Escolha um projeto pequeno (organizar sua mesa, planejar semana de estudos, criar um grupo para jogos)",
+        "Aplica o PODC passo a passo:",
+        "📋 PLANEJAMENTO: Escreva seu objetivo e como vai fazer",
+        "🗂️ ORGANIZAÇÃO: Defina quem faz o quê (se for em grupo)",
+        "🎯 DIREÇÃO: Comece a executar, mantendo o time motivado",
+        "📊 CONTROLE: Depois de 3 dias, veja se está no caminho certo"
+      ],
+      "reward": "75 XP",
+      "completion_message": "Parabéns! Você aplicou seu primeiro PODC completo! 🎉"
+    },
+    "quiz": {
+      "title": "Quiz PODC - Teste seu conhecimento ninja!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que significa o 'P' do PODC?",
+          "options": [
+            "a) Poder",
+            "b) Planejamento", 
+            "c) Participação"
+          ],
+          "correct": 1,
+          "explanation": "P de Planejamento - o mapa do seu projeto!"
+        },
+        {
+          "id": 2,
+          "question": "Qual etapa do PODC envolve 'colocar a mão na massa'?",
+          "options": [
+            "a) Organização",
+            "b) Controle",
+            "c) Direção"
+          ],
+          "correct": 2,
+          "explanation": "Direção é quando lideramos e executamos o planejado!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: Controle é sobre fiscalizar e ser chato com o grupo.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 1,
+          "explanation": "Falso! Controle é verificar se estamos no caminho certo e ajustar quando necessário."
+        },
+        {
+          "id": 4,
+          "question": "Você está organizando uma festa. Qual é a PRIMEIRA coisa a fazer no PODC?",
+          "options": [
+            "a) Já comprar as comidas",
+            "b) Planejar data, local e convidados",
+            "c) Dividir as tarefas"
+          ],
+          "correct": 1,
+          "explanation": "Sempre começamos com Planejamento - o mapa antes da jornada!"
+        },
+        {
+          "id": 5,
+          "question": "Qual habilidade NÃO faz parte da Direção?",
+          "options": [
+            "a) Comunicação clara",
+            "b) Motivar o time",
+            "c) Fazer tudo sozinho"
+          ],
+          "correct": 2,
+          "explanation": "Direção é sobre liderar e coordenar, não fazer tudo sozinho!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "45 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você tem o superpoder PODC! No próximo capítulo, vamos descobrir os diferentes tipos de empresas que existem por aí. Quem sabe você não abre a sua própria empresa um dia?",
+      "teaser": "🏢 Próximo capítulo: Tipos de Empresas - Do MEI ao Mega Corporation!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "mestre-podc",
+      "name": "Mestre do PODC",
+      "description": "Dominou a fórmula mágica da administração",
+      "icon": "🧙‍♂️",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "podc_simulator": {
+      "title": "Simulador PODC Rápido",
+      "scenario": "Organizar um campeonato de games na escola",
+      "steps": [
+        {
+          "phase": "Planejamento",
+          "task": "Defina o objetivo principal",
+          "options": ["Ganhar o campeonato", "Promover integração", "Aprender novos jogos"]
+        },
+        {
+          "phase": "Organização", 
+          "task": "Como dividir as equipes?",
+          "options": ["Sorteio", "Nível de habilidade", "Misturado"]
+        },
+        {
+          "phase": "Direção",
+          "task": "Como motivar os participantes?",
+          "options": ["Premiações", "Campeãs especiais", "Ranking semanal"]
+        },
+        {
+          "phase": "Controle",
+          "task": "Como medir o sucesso?",
+          "options": ["Número de participantes", "Feedback positivo", "Organização dos jogos"]
+        }
+      ]
+    },
+    "reflection": {
+      "prompt": "Qual parte do PODC você acha mais desafiadora para você? Planejar, Organizar, Dirigir ou Controlar?",
+      "save_to_profile": true
+    }
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "id": "admin-03",
+  "title": "Capítulo 3: Tipos de Empresas - Do MEI ao Mega Corporation!",
+  "module": "administrativo",
+  "order": 3,
+  "xp_reward": 120,
+  "badge_earned": "explorador-empresarial",
+  "estimated_time": 18,
+  "difficulty": "iniciante",
+  "prerequisites": ["admin-02"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Futuro empreendedor!",
+      "text": "Você já pensou em ter seu próprio negócio? Vender doces, criar um canal no YouTube, desenvolver um app? Sabia que existem diferentes 'níveis' de empresa, igual nos games? Do iniciante (MEI) ao nível lendário (Corporação gigante)! Neste capítulo, vamos explorar cada um desses níveis e descobrir em qual deles você se encaixa!",
+      "engaging_question": "Se você abrisse uma empresa amanhã, qual seria o primeiro passo?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "Por que existem diferentes tipos de empresa?",
+        "text": "Pensa nos tipos de empresa como os 'modos de jogo' diferentes. Cada um tem suas regras, vantagens e desafios. A escolha certa depende do seu tamanho, objetivo e quanto risco você quer correr.",
+        "gaming_analogy": {
+          "comparison": "Empresas x Games",
+          "examples": [
+            "🎮 MEI = Modo Tutorial (fácil, seguro, para aprender)",
+            "🎮 Ltda = Modo Campanha (médio, com equipe)",
+            "🎮 S.A. = Modo Multiplayer massivo (complexo, global)"
+          ]
+        }
+      },
+      {
+        "type": "company_types",
+        "title": "🏢 Os Níveis do Jogo Empresarial",
+        "companies": [
+          {
+            "level": "Nível 1: O Iniciante",
+            "name": "MEI - Microempreendedor Individual",
+            "emoji": "🌱",
+            "who_is": "Você trabalhando sozinho, mas de forma legalizada!",
+            "requirements": {
+              "faturamento": "Até R$ 81 mil por ano (cerca de R$ 6.750 por mês)",
+              "employees": "Pode ter 1 empregado",
+              "age": "A partir de 16 anos (com autorização dos pais)"
+            },
+            "advantages": [
+              "💰 Taxas super baratas (cerca de R$ 60/mês)",
+              "📄 CNPJ próprio (parece empresa de verdade!)",
+              "🏦 Conta bancária empresarial",
+              "📋 Pode emitir notas fiscais",
+              "🛡️ Direitos trabalhistas (auxílio-doença, aposentadoria)"
+            ],
+            "perfect_for": [
+              "Vender brigadeiros e doces",
+              "Fazer trabalhos freelancer (design, edição)",
+              "Vender roupas usadas",
+              "Criar conteúdo digital",
+              "Prestar serviços de delivery"
+            ],
+            "real_example": {
+              "name": "Ana, 17 anos",
+              "business": "Vende doces artesanais pelo Instagram",
+              "story": "Começou fazendo brigadeiros para os amigos, hoje fatura R$ 3.000/mês como MEI e já tem até funcionária!"
+            }
+          },
+          {
+            "level": "Nível 2: O Parceria",
+            "name": "Sociedade Limitada (Ltda.)",
+            "emoji": "🤝",
+            "who_is": "Você e um ou mais amigos unindo forças!",
+            "requirements": {
+              "partners": "Mínimo 2 sócios",
+              "responsibility": "Limitada ao capital investido",
+              "formalization": "Contrato social obrigatório"
+            },
+            "advantages": [
+              "👥 Divide os riscos e investimentos",
+              "💡 Mais ideias e habilidades diferentes",
+              "📈 Pode faturar mais que o MEI",
+              "🏢 Parece mais 'profissional' para clientes grandes"
+            ],
+            "challenges": [
+              "⚠️ Decisões em conjunto (mais discussões)",
+              "📝 Burocracia maior",
+              "💸 Impostos mais complexos"
+            ],
+            "perfect_for": [
+              "Agência de marketing digital",
+              "Loja de roupas online",
+              "Produtora de eventos",
+              "Lanchonete ou café",
+              "Empresa de tecnologia"
+            ],
+            "real_example": {
+              "name": "Grupo TechJovem",
+              "business": "Desenvolvimento de apps",
+              "story": "3 amigos de 18 anos criaram uma Ltda. Um programa, outro desenha, terceiro cuida dos negócios. Já desenvolveram 5 apps!"
+            }
+          },
+          {
+            "level": "Nível 3: O Investidor",
+            "name": "EIRELI - Empresa Individual de Responsabilidade Limitada",
+            "emoji": "💼",
+            "who_is": "Você sozinho, mas com proteção total dos seus bens!",
+            "requirements": {
+              "capital": "Mínimo 100 salários mínimos (cerca de R$ 130 mil)",
+              "owner": "Apenas uma pessoa",
+              "protection": "Bens pessoais protegidos"
+            },
+            "advantages": [
+              "🛡️ Protege seu patrimônio pessoal",
+              "👑 Controle total da empresa",
+              "📈 Pode investir mais que MEI"
+            ],
+            "challenges": [
+              "💰 Exige capital inicial alto",
+              "📋 Burocracia complexa"
+            ],
+            "perfect_for": [
+              "Profissionais liberais estabelecidos",
+              "Consultores com experiência",
+              "Quem quer separar bem as coisas"
+            ]
+          },
+          {
+            "level": "Nível 4: O Mega Corporation",
+            "name": "Sociedade Anônima (S.A.)",
+            "emoji": "🏢",
+            "who_is": "A empresa dos grandes! Com ações, investidores e operação global!",
+            "requirements": {
+              "capital": "Dividido em ações",
+              "investors": "Muitos acionistas",
+              "regulation": "Regulada pela CVM"
+            },
+            "advantages": [
+              "🌍 Pode captar muito investimento",
+              "📈 Crescimento ilimitado",
+              "💎 Prestígio e confiança no mercado"
+            ],
+            "examples": [
+              "🚗 Volkswagen, Fiat (automobilísticas)",
+              "📱 Apple, Samsung (tecnologia)",
+              "🛒 Magazine Luiza, Americanas (varejo)",
+              "🏦 Itaú, Bradesco (bancos)"
+            ],
+            "teen_connection": "Você pode comprar ações dessas empresas e se tornar 'dono' de um pedacinho!"
+          },
+          {
+            "level": "Nível Especial: O Social",
+            "name": "Organização Sem Fins Lucrativos",
+            "emoji": "❤️",
+            "who_is": "Empresa que existe para ajudar, não para lucrar!",
+            "examples": [
+              "🏥 ONGs de saúde",
+              "📚 Instituições de educação",
+              "🌱 Projetos ambientais",
+              "🏘️ Ajuda comunitária"
+            ],
+            "characteristics": [
+              "💰 Todo dinheiro volta para a causa",
+              "📋 Precisa de autorização do governo",
+              "🤍 Voluntários e doações"
+            ],
+            "teen_opportunity": "Você pode criar ONGs na escola, projetos sociais, e fazer a diferença!"
+          }
+        ]
+      },
+      {
+        "type": "decision_guide",
+        "title": "🤔 Qual tipo de empresa é para você?",
+        "decision_tree": {
+          "question": "O que você quer fazer agora?",
+          "options": [
+            {
+              "scenario": "Trabalhar sozinho e começar pequeno",
+              "answer": "MEI é perfeito! Baixo risco, fácil de começar.",
+              "next_steps": ["Faturar até R$ 6.750/mês", "Contratar no site do governo", "Começar já!"]
+            },
+            {
+              "scenario": "Unir com amigos e dividir esforços",
+              "answer": "Ltda. é o caminho! Força em equipe.",
+              "next_steps": ["Escolher bem os sócios", "Fazer contrato social", "Planejar tudo junto"]
+            },
+            {
+              "scenario": "Já tem dinheiro e quer proteger bens",
+              "answer": "EIRELI pode ser a opção.",
+              "next_steps": ["Ter capital mínimo", "Buscar assessoria jurídica", "Planejar crescimento"]
+            },
+            {
+              "scenario": "Ajudar uma causa social",
+              "answer": "ONG sem fins lucrativos!",
+              "next_steps": ["Definir a causa", "Conseguir voluntários", "Buscar doações"]
+            }
+          ]
+        }
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Sabia que Mark Zuckerberg (criador do Facebook) começou como MEI? E que o Nubank começou como uma pequena Ltda.? Toda mega empresa começou pequena! O importante é começar certo e crescer com sabedoria!",
+      "icon": "🚀"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Plano Empresarial!",
+      "instructions": [
+        "Pense em uma ideia de negócio que você gostaria de ter",
+        "Responda:",
+        "1️⃣ Qual tipo de empresa se encaixa melhor? (MEI, Ltda, ONG)",
+        "2️⃣ Por que escolheu esse tipo?",
+        "3️⃣ Qual seria o primeiro passo para começar?",
+        "4️⃣ Quanto você precisaria investir?",
+        "5️⃣ Quem poderia te ajudar?"
+      ],
+      "reward": "60 XP",
+      "completion_message": "Excelente! Você já está pensando como um verdadeiro empreendedor! 💼"
+    },
+    "quiz": {
+      "title": "Quiz Empresarial - Teste seu conhecimento!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Qual tipo de empresa é ideal para alguém começando sozinho e faturando pouco?",
+          "options": [
+            "a) S.A. (Sociedade Anônima)",
+            "b) Ltda. (Sociedade Limitada)",
+            "c) MEI (Microempreendedor Individual)"
+          ],
+          "correct": 2,
+          "explanation": "MEI é perfeito para começar sozinho com baixo faturamento!"
+        },
+        {
+          "id": 2,
+          "question": "O que significa Ltda.?",
+          "options": [
+            "a) Limitada (responsabilidade limitada)",
+            "b) Livre (sem regras)",
+            "c) Lendária (muito famosa)"
+          ],
+          "correct": 0,
+          "explanation": "Ltda. significa Limitada - os sócios têm responsabilidade limitada ao capital investido!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: MEI pode ter quantos funcionários quiser.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 1,
+          "explanation": "Falso! MEI pode ter apenas 1 funcionário contratado."
+        },
+        {
+          "id": 4,
+          "question": "Qual empresa NÃO tem fins lucrativos?",
+          "options": [
+            "a) Loja de roupas",
+            "b) ONG que ajuda animais",
+            "c) Lanchonete"
+          ],
+          "correct": 1,
+          "explanation": "ONGs não visam lucro, sim ajudar uma causa social!"
+        },
+        {
+          "id": 5,
+          "question": "Para abrir uma Ltda. você precisa:",
+          "options": [
+            "a) Trabalhar sozinho",
+            "b) Ter pelo menos 2 sócios",
+            "c) Ser milionário"
+          ],
+          "correct": 1,
+          "explanation": "Ltda. requer no mínimo 2 sócios para formar a sociedade!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "35 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você já conhece os diferentes tipos de empresas! No próximo capítulo, vamos entrar dentro das empresas e descobrir como elas são organizadas por dentro. É como explorar a anatomia de uma organização!",
+      "teaser": "🏗️ Próximo capítulo: Estrutura Organizacional - O Esqueleto das Empresas!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "explorador-empresarial",
+      "name": "Explorador Empresarial",
+      "description": "Descobriu todos os tipos de empresas existentes",
+      "icon": "🗺️",
+      "rarity": "comum"
+    }
+  ],
+  "interactive_elements": {
+    "company_selector": {
+      "title": "Qual empresa seria para você?",
+      "scenarios": [
+        {
+          "idea": "Vender doces artesanais",
+          "best_type": "MEI",
+          "reason": "Baixo investimento, fácil começar sozinho"
+        },
+        {
+          "idea": "Criar agência de marketing",
+          "best_type": "Ltda.",
+          "reason": "Precisa de diferentes habilidades (design, vendas, gestão)"
+        },
+        {
+          "idea": "Projetos ambientais na escola",
+          "best_type": "ONG",
+          "reason": "Foco social, não em lucro"
+        }
+      ]
+    },
+    "reflection": {
+      "prompt": "Depois de conhecer todos os tipos, qual deles mais te interessou? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}
