@@ -1,0 +1,437 @@
+{
+  "id": "admin-11",
+  "title": "Capítulo 11: Noções de Contabilidade - O Dinheiro Fala!",
+  "module": "administrativo",
+  "order": 11,
+  "xp_reward": 130,
+  "badge_earned": "numero-uno",
+  "estimated_time": 24,
+  "difficulty": "intermediario",
+  "prerequisites": ["admin-10"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Pronto para decifrar o idioma dos negócios?",
+      "text": "Contabilidade é como aprender a ler a mente das empresas! É a linguagem universal que revela se um negócio está saudável, crescendo ou precisando de ajuda. Dominar noções básicas de contabilidade vai te dar um superpoder: entender o que os números realmente dizem sobre qualquer negócio!",
+      "engaging_question": "Se você abrisse uma empresa, qual seria a primeira coisa que gostaria de saber sobre suas finanças?"
+    },
+    "main_content": [
+      {
+        "type": "accounting_fundamentals",
+        "title": "💰 O que é Contabilidade?",
+        "text": "Contabilidade é muito mais que números - é a ciência que conta a história financeira de uma empresa!",
+        "formal_definition": {
+          "text": "Ciência que estuda e controla o patrimônio das entidades, mediante o registro, a demonstração expositiva e a interpretação dos gastos nele ocorridos",
+          "simple_translation": "É a arte de contar a história do dinheiro da empresa"
+        },
+        "accounting_objectives": [
+          "📊 **Controlar o patrimônio**: Saber o que a empresa tem e deve",
+          "📈 **Analisar resultados**: Entender se está dando lucro ou prejuízo",
+          "🎯 **Ajudar decisões**: Dar informações para boas escolhas",
+          "🔍 **Prever o futuro**: Basear-se em dados para planejar",
+          "📋 **Cumprir obrigações**: Atender leis e impostos"
+        ],
+        "why_it_matters": {
+          "for_business": "Para empresas: saúde financeira, tomada de decisões, planejamento",
+          "for_you": "Para você: entender qualquer negócio, gerenciar seu dinheiro, carreira promissora",
+          "real_impact": "Empresas sem contabilidade = como navegar sem bússola!"
+        }
+      },
+      {
+        "type": "users_section",
+        "title": "👥 Quem Usa Contabilidade?",
+        "text": "Muita gente! Contabilidade é como um relatório que interessa a vários 'atores' do mundo dos negócios!",
+        "stakeholders": [
+          {
+            "user": "👔 Donos/Sócios",
+            "what_they_want": "Sabem se o negócio está dando lucro",
+            "why_care": "Para decidir investir mais ou mudar estratégia",
+            "example": "O dono da lanchonete quer saber se vale a pena abrir outra filial"
+          },
+          {
+            "user": "👥 Empregados",
+            "what_they_want": "Garantia que receberão salários",
+            "why_care": "Segurança do emprego e benefícios",
+            "example": "Funcionários querem saber se a empresa está estável para não correr risco de demissão"
+          },
+          {
+            "user": "👩‍💼 Administradores",
+            "what_they_want": "Dados para tomar decisões",
+            "why_care": "Para gerenciar melhor o negócio",
+            "example": "Gerente precisa saber se pode contratar mais gente"
+          },
+          {
+            "user": "🏦 Bancos e Fornecedores",
+            "what_they_want": "Segurança que receberão",
+            "why_care": "Para conceder empréstimos e vender a prazo",
+            "example": "Banco só empresta se vir que a empresa paga suas contas"
+          },
+          {
+            "user": "🏛️ Governo",
+            "what_they_want": "Recolher impostos corretos",
+            "why_care": "Para fiscalizar e arrecadar",
+            "example": "Receita Federal verifica se a empresa está pagando impostos devidamente"
+          }
+        ]
+      },
+      {
+        "type": "techniques_section",
+        "title": "🛠️ As 4 Técnicas Contábeis",
+        "text": "Contabilidade tem 4 técnicas principais que trabalham juntas como uma equipe!",
+        "techniques": [
+          {
+            "technique": "📝 Escrituração Contábil",
+            "description": "Registrar tudo que acontece",
+            "what_it_is": "A técnica de registrar os fatos contábeis",
+            "daily_example": "Anotar cada venda, cada compra, cada pagamento",
+            "importance": "É o diário da empresa - sem escrituração, não há controle",
+            "tools": ["Livro Diário", "Livro Razão", "Software contábil"]
+          },
+          {
+            "technique": "📊 Demonstrações Contábeis",
+            "description": "Organizar informações em relatórios",
+            "what_it_is": "Organizar dados em relatórios claros",
+            "main_reports": [
+              "📈 Balanço Patrimonial: O que a empresa tem e deve",
+              "💰 DRE: Se deu lucro ou prejuízo",
+              "💵 Fluxo de Caixa: Entradas e saídas de dinheiro"
+            ],
+            "why_matters": "Transforma dados brutos em informações úteis"
+          },
+          {
+            "technique": "🔍 Auditoria",
+            "description": "Verificar se tudo está certo",
+            "what_it_is": "Examinar se os relatórios refletem a realidade",
+            "purpose": "Garantir confiança nas informações",
+            "who_does": "Auditores independentes ou internos",
+            "example": "Verificar se o estoque registrado é o estoque real"
+          },
+          {
+            "technique": "📈 Análise das Demonstrações",
+            "description": "Entender o que os números dizem",
+            "what_it_is": "Interpretar os relatórios para tomar decisões",
+            "methodology": "Comparar períodos, calcular índices, identificar tendências",
+            "example": "Comparar o lucro deste ano com o do ano passado"
+          }
+        ]
+      },
+      {
+        "type": "patrimony_section",
+        "title": "🏆 O Patrimônio - O Coração da Contabilidade",
+        "text": "Patrimônio é tudo que uma empresa possui e deve! É como o 'estado civil' financeiro do negócio!",
+        "patrimony_concept": {
+          "simple": "Conjunto de bens, direitos e obrigações avaliado em dinheiro",
+          "real_examples": [
+            "Dinheiro em caixa = bem",
+            "Carros da empresa = bem", 
+            "Contas a receber = direito",
+            "Dívidas com fornecedores = obrigação",
+            "Empréstimos bancários = obrigação"
+          ],
+          "golden_rule": "Bens + Direitos = Obrigações + Patrimônio Líquido"
+        },
+        "assets_breakdown": {
+          "title": "🏦 Ativo (O que a empresa TEM)",
+          "subtitle": "Bens e direitos que podem virar dinheiro:",
+          "tangible_assets": {
+            "name": "🏗️ Bens Tangíveis",
+            "description": "Coisas físicas que você pode tocar",
+            "examples": ["Dinheiro", "Carros", "Prédios", "Máquinas", "Móveis", "Estoque"]
+          },
+          "intangible_assets": {
+            "name": "💡 Bens Intangíveis", 
+            "description": "Coisas sem existência física mas com valor",
+            "examples": ["Marcas", "Patentes", "Software", "Direitos autorais"]
+          },
+          "rights": {
+            "name": "📋 Direitos",
+            "description": "Valores a receber de terceiros",
+            "examples": ["Duplicatas", "Clientes", "Aplicações financeiras", "Aluguéis a receber"]
+          }
+        },
+        "liabilities_breakdown": {
+          "title": "📎 Passivo (O que a empresa DEVE)",
+          "subtitle": "Obrigações e dívidas:",
+          "short_term": {
+            "name": "⚡ Passivo Circulante",
+            "description": "Dívidas que vencem em até 1 ano",
+            "examples": ["Fornecedores", "Salários a pagar", "Impostos", "Empréstimos curto prazo"]
+          },
+          "long_term": {
+            "name": "📅 Passivo Não Circulante",
+            "description": "Dívidas que vencem após 1 ano",
+            "examples": ["Financiamentos", "Empréstimos longo prazo", "Obrigações futuras"]
+          }
+        }
+      },
+      {
+        "type": "balance_sheet",
+        "title": "⚖️ Balanço Patrimonial - A Fotografia Financeira",
+        "text": "Balanço Patrimonial é como uma foto da empresa em um momento específico - mostra exatamente o que ela tem e deve!",
+        "balance_equation": {
+          "formula": "ATIVO = PASSIVO + PATRIMÔNIO LÍQUIDO",
+          "meaning": "O que a empresa tem = O que deve + O que pertence aos donos",
+          "logic": "Se você vende tudo que tem (ativo), primeiro paga suas dívidas (passivo), o que sobra é dos donos (PL)"
+        },
+        "balance_structure": {
+          "left_side": {
+            "title": "🏦 ATIVO (Aplicações)",
+            "sections": [
+              "Ativo Circulante (dinheiro, contas a receber, estoques)",
+              "Ativo Não Circulante (imóveis, máquinas, investimentos)"
+            ],
+            "purpose": "Onde o dinheiro da empresa está aplicado"
+          },
+          "right_side": {
+            "title": "📎 PASSIVO + PL (Origens)",
+            "sections": [
+              "Passivo Circulante (dívidas curtas)",
+              "Passivo Não Circulante (dívidas longas)",
+              "Patrimônio Líquido (capital dos sócios, lucros)"
+            ],
+            "purpose": "De onde veio o dinheiro da empresa"
+          }
+        },
+        "practical_example": {
+          "company": "Lanchonete do João",
+          "assets": {
+            "cash": "R$ 5.000 (dinheiro em caixa)",
+            "equipment": "R$ 20.000 (máquinas, móveis)",
+            "receivables": "R$ 3.000 (contas a receber)",
+            "total_assets": "R$ 28.000"
+          },
+          "liabilities": {
+            "suppliers": "R$ 8.000 (dívidas com fornecedores)",
+            "bank_loan": "R$ 10.000 (empréstimo bancário)",
+            "total_liabilities": "R$ 18.000"
+          },
+          "equity": {
+            "owner_capital": "R$ 10.000 (investimento do João)",
+            "total_equity": "R$ 10.000"
+          },
+          "check": "R$ 28.000 (Ativo) = R$ 18.000 (Passivo) + R$ 10.000 (PL) ✅"
+        }
+      },
+      {
+        "type": "dre_section",
+        "title": "📈 DRE - Demonstração do Resultado do Exercício",
+        "text": "DRE é como um filme da empresa - mostra se ela ganhou ou perdeu dinheiro durante um período!",
+        "dre_concept": {
+          "purpose": "Mostrar o resultado (lucro ou prejuízo) em um período",
+          "period": "Geralmente mensal ou anual",
+          "logic": "Receitas - Custos = Lucro (ou Prejuízo)"
+        },
+        "dre_structure": [
+          {
+            "line": "💰 Receita Bruta",
+            "description": "Total de vendas antes de descontos",
+            "example": "Venda de 1000 lanches a R$ 15 = R$ 15.000"
+          },
+          {
+            "line": "➖ Deduções",
+            "description": "Impostos sobre vendas, devoluções",
+            "example": "Impostos R$ 2.000 = R$ 13.000"
+          },
+          {
+            "line": "📊 Receita Líquida",
+            "description": "Receita após deduções",
+            "example": "R$ 13.000"
+          },
+          {
+            "line": "➖ Custo dos Produtos Vendidos (CPV)",
+            "description": "Custo direto do que foi vendido",
+            "example": "Ingredientes para os lanches R$ 6.000 = R$ 7.000"
+          },
+          {
+            "line": "📈 Lucro Bruto",
+            "description": "Receita líquida menos custo direto",
+            "example": "R$ 7.000"
+          },
+          {
+            "line": "➖ Despesas Operacionais",
+            "description": "Aluguel, salários, marketing, etc.",
+            "example": "R$ 4.000 = R$ 3.000"
+          },
+          {
+            "line": "🎯 Lucro Operacional",
+            "description": "Resultado das operações principais",
+            "example": "R$ 3.000"
+          },
+          {
+            "line": "➖/+ Outras Receitas/Despesas",
+            "description": "Juros, multas, etc.",
+            "example": "R$ 200 (juros pagos) = R$ 2.800"
+          },
+          {
+            "line": "🏆 Lucro Líquido",
+            "description": "Resultado final do período",
+            "example": "R$ 2.800 (LUCRO!)"
+          }
+        ],
+        "interpretation": {
+          "positive_result": "Lucro significa que a empresa ganhou mais do que gastou",
+          "negative_result": "Prejuízo significa que gastou mais do que ganhou",
+          "what_to_do": "Com lucro: reinvestir, pagar dívidas, distribuir aos sócios",
+          "what_to_do_loss": "Com prejuízo: cortar custos, aumentar vendas, buscar financiamento"
+        }
+      },
+      {
+        "type": "cash_flow",
+        "title": "💵 Fluxo de Caixa - O Movimento do Dinheiro",
+        "text": "Fluxo de caixa é como monitorar o batimento cardíaco financeiro da empresa - mostra se o dinheiro está entrando ou saindo!",
+        "cash_flow_importance": {
+          "why_critical": "Empresa pode ter lucro no papel mas quebrar por falta de caixa!",
+          "difference": "DRE mostra lucro contábil, Fluxo mostra dinheiro real",
+          "golden_rule": "Dinheiro em caixa é Rei! (Cash is King)"
+        },
+        "cash_flow_types": [
+          {
+            "type": "🔄 Fluxo Operacional",
+            "description": "Dinheiro das atividades principais do negócio",
+            "examples": ["Recebimento de clientes", "Pagamento de fornecedores", "Pagamento de salários"],
+            "positive_sign": "Bom sinal quando positivo"
+          },
+          {
+            "type": "🏗️ Fluxo de Investimentos",
+            "description": "Dinheiro em compra/venda de ativos",
+            "examples": ["Compra de equipamentos", "Venda de imóveis", "Aplicações financeiras"],
+            "negative_normal": "Normalmente negativo (empresa está crescendo)"
+          },
+          {
+            "type": "💰 Fluxo de Financiamento",
+            "description": "Dinheiro de captação/pagamento de capital",
+            "examples": ["Empréstimos bancários", "Investimento dos sócios", "Pagamento de dívidas"],
+            "varies": "Depende da estratégia da empresa"
+          }
+        ],
+        "practical_example": {
+          "scenario": "Mês de Janeiro da Lanchonete",
+          "opening_balance": "R$ 5.000 (saldo inicial)",
+          "cash_inflows": {
+            "sales": "+R$ 15.000 (vendas)",
+            "loan": "+R$ 10.000 (empréstimo)",
+            "total_in": "R$ 25.000"
+          },
+          "cash_outflows": {
+            "suppliers": "-R$ 8.000 (compras)",
+            "salaries": "-R$ 3.000 (salários)",
+            "rent": "-R$ 2.000 (aluguel)",
+            "expenses": "-R$ 1.500 (outras despesas)",
+            "total_out": "R$ 14.500"
+          },
+          "closing_balance": "R$ 5.000 + R$ 25.000 - R$ 14.500 = R$ 15.500",
+          "interpretation": "Saldo aumentou R$ 10.500 - ótimo movimento de caixa!"
+        }
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Você sabia que 80% das empresas que quebram não por falta de lucro, mas por problemas de caixa? Isso mostra como contabilidade é vital! E profissionais que entendem de números são os mais bem pagos do mercado - porque eles transformam dados em decisões que valem milhões!",
+      "icon": "💰"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Mini Balanço!",
+      "instructions": [
+        "Crie um balanço simplificado de um negócio fictício:",
+        "1️⃣ Escolha um tipo de negócio (lanchonete, loja, serviços)",
+        "2️⃣ Liste 5 ativos (coisas que o negócio tem)",
+        "3️⃣ Liste 3 passivos (dívidas do negócio)",
+        "4️⃣ Calcule o patrimônio líquido",
+        "5️⃣ Crie uma DRE simples de 1 mês",
+        "6️⃣ Calcule se deu lucro ou prejuízo",
+        "7️⃣ Analise: o negócio está saudável? Por quê?"
+      ],
+      "reward": "65 XP",
+      "completion_message": "Fantástico! Você já fala a linguagem dos negócios! 💰"
+    },
+    "quiz": {
+      "title": "Quiz Contábil - Teste seu conhecimento financeiro!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que significa Ativo na contabilidade?",
+          "options": [
+            "a) Dívidas da empresa",
+            "b) Bens e direitos da empresa",
+            "c) Investimentos dos sócios"
+          ],
+          "correct": 1,
+          "explanation": "Ativo representa tudo que a empresa possui e tem direito a receber!"
+        },
+        {
+          "id": 2,
+          "question": "Qual é a fórmula do Balanço Patrimonial?",
+          "options": [
+            "a) Ativo = Passivo + Patrimônio Líquido",
+            "b) Receitas - Despesas = Lucro",
+            "c) Dinheiro + Investimentos = Caixa"
+          ],
+          "correct": 0,
+          "explanation": "A equação fundamental é Ativo = Passivo + Patrimônio Líquido!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: DRE mostra se a empresa tem lucro ou prejuízo.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! DRE (Demonstração do Resultado) mostra exatamente o resultado do período!"
+        },
+        {
+          "id": 4,
+          "question": "O que é mais importante para não quebrar uma empresa?",
+          "options": [
+            "a) Ter lucro no papel",
+            "b) Ter dinheiro em caixa",
+            "c) Ter muitos clientes"
+          ],
+          "correct": 1,
+          "explanation": "Dinheiro em caixa é vital! Empresa pode ter lucro mas quebrar sem caixa!"
+        },
+        {
+          "id": 5,
+          "question": "Qual técnica contábil registra os fatos do dia a dia?",
+          "options": [
+            "a) Auditoria",
+            "b) Escrituração",
+            "c) Análise"
+          ],
+          "correct": 1,
+          "explanation": "Escrituração é o registro diário de todos os fatos contábeis!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "45 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Parabéns! Agora você entende a linguagem dos negócios! Você completou o módulo administrativo do ADRA-TEC e está pronto para aplicar tudo isso na vida real! O próximo passo? Colocar em prática e continuar aprendendo!",
+      "teaser": "🎓 Próximo passo: Módulo Financeiro - Nível Avançado ou Começar a Praticar!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "numero-uno",
+      "name": "Número Um",
+      "description": "Dominou os conceitos fundamentais de contabilidade",
+      "icon": "💰",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "balance_calculator": {
+      "title": "Monte seu Balanço",
+      "instructions": "Digite os valores e veja se a equação fecha",
+      "fields": ["Ativos", "Passivos", "Patrimônio Líquido"]
+    },
+    "dre_simulator": {
+      "title": "Simulador de DRE",
+      "scenario": "Você tem uma pequena empresa",
+      "inputs": ["Receitas", "Custos", "Despesas"]
+    },
+    "reflection": {
+      "prompt": "Qual conceito contábil você achou mais interessante? Como você usaria isso no futuro?",
+      "save_to_profile": true
+    }
+  }
+}

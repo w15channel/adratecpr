@@ -1,0 +1,374 @@
+{
+  "id": "admin-06",
+  "title": "Capítulo 6: O Super-Herói da Empresa - Funções do Auxiliar Administrativo!",
+  "module": "administrativo",
+  "order": 6,
+  "xp_reward": 110,
+  "badge_earned": "auxiliar-estrela",
+  "estimated_time": 18,
+  "difficulty": "pratico",
+  "prerequisites": ["admin-05"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Pronto para descobrir seu superpoder profissional?",
+      "text": "Imagina ser aquele profissional que tudo funciona graças à sua organização! O Auxiliar Administrativo é como o 'capitão time' da empresa - aquele que garante que todas as peças se encaixem perfeitamente. É uma carreira cheia de oportunidades e onde você pode brilhar! Vamos descobrir se você tem o perfil para ser esse profissional super requisitado?",
+      "engaging_question": "Se você pudesse organizar qualquer empresa, qual área você gostaria de comandar?"
+    },
+    "main_content": [
+      {
+        "type": "explanation",
+        "title": "O que faz um Auxiliar Administrativo?",
+        "text": "Ser Auxiliar Administrativo é ser o 'cérebro organizacional' da empresa! Você é aquele profissional que faz tudo acontecer nos bastidores, garantindo que a empresa funcione como um relógio suíço!",
+        "key_responsibilities": [
+          "📋 **Organização de documentos**: Tudo no lugar certo",
+          "💻 **Gestão de informações**: Saber onde está cada dado",
+          "📞 **Comunicação**: Ser o ponto de contato principal",
+          "📊 **Suporte financeiro**: Ajudar com contas e pagamentos",
+          "🤝 **Coordenação**: Conectar todos os departamentos"
+        ],
+        "daily_routine": {
+          "title": "Um dia na vida de um Auxiliar Administrativo:",
+          "morning": [
+            "☕ Verificar emails e mensagens importantes",
+            "📅 Organizar agenda do dia",
+            "📋 Preparar documentos necessários",
+            "🤝 Coordenar com outras equipes"
+          ],
+          "afternoon": [
+            "💻 Atualizar sistemas e planilhas",
+            "📞 Atender fornecedores e clientes",
+            "📊 Ajudar com relatórios financeiros",
+            "🗂️ Organizar arquivos e documentos"
+          ],
+          "end_day": [
+            "✅ Verificar tarefas pendentes",
+            "📋 Preparar lista para o dia seguinte",
+            "🔐 Garantir segurança das informações",
+            "📝 Registrar o que foi feito"
+          ]
+        }
+      },
+      {
+        "type": "skills_section",
+        "title": "🎯 Superpoderes Necessários",
+        "subtitle": "Para ser um Auxiliar Administrativo de sucesso, você precisa desenvolver:",
+        "skills": [
+          {
+            "name": "Organização Ninja",
+            "emoji": "🗂️",
+            "description": "Capacidade de encontrar qualquer coisa em segundos",
+            "daily_example": "Saber exatamente onde está aquele documento de 3 meses atrás",
+            "development_tips": [
+              "Use pastas coloridas para diferentes tipos de documentos",
+              "Crie um sistema de nomes para arquivos digitais",
+              "Mantenha sua mesa sempre organizada",
+              "Use apps de organização no celular"
+            ]
+          },
+          {
+            "name": "Comunicação Mágica",
+            "emoji": "🗣️",
+            "description": "Falar e escrever de forma clara e profissional",
+            "daily_example": "Explicar um processo complexo de forma simples",
+            "development_tips": [
+              "Pratique escrever emails profissionais",
+              "Aprenda a escutar atentamente",
+              "Desenvolva empatia para entender os outros",
+              "Use linguagem clara, sem jargões desnecessários"
+            ]
+          },
+          {
+            "name": "Resolução de Problemas",
+            "emoji": "🔧",
+            "description": "Encontrar soluções rápidas e eficazes",
+            "daily_example": "Resolver um problema de última hora antes de uma reunião",
+            "development_tips": [
+              "Pense em alternativas antes de pedir ajuda",
+              "Mantenha a calma sob pressão",
+              "Aprenda com os erros passados",
+              "Seja criativo nas soluções"
+            ]
+          },
+          {
+            "name": "Gestão do Tempo",
+            "emoji": "⏰",
+            "description": "Fazer tudo no prazo certo sem estresse",
+            "daily_example": "Conciliar 5 tarefas diferentes no mesmo dia",
+            "development_tips": [
+              "Use listas de tarefas priorizadas",
+              "Aprenda a dizer 'não' quando necessário",
+              "Estabeleça prazos realistas",
+              "Use técnicas como Pomodoro"
+            ]
+          },
+          {
+            "name": "Discrição Profissional",
+            "emoji": "🤫",
+            "description": "Manter sigilo das informações importantes",
+            "daily_example": "Não comentar sobre projetos confidenciais",
+            "development_tips": [
+              "Nunca compartilhe senhas ou dados confidenciais",
+              "Evite fofocas no ambiente de trabalho",
+              "Use cadeados em documentos importantes",
+              "Saiba quando e como falar sobre assuntos sensíveis"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "career_paths",
+        "title": "🚀 Onde você pode trabalhar?",
+        "subtitle": "O Auxiliar Administrativo é necessário em TODOS os lugares!",
+        "opportunities": [
+          {
+            "sector": "🏢 Escritórios em Geral",
+            "examples": ["Advocacia", "Contabilidade", "Consultoria", "Engenharia"],
+            "why_needed": "Toda empresa precisa de organização",
+            "growth_potential": "Alto - pode virar gerente administrativo"
+          },
+          {
+            "sector": "🏭 Indústrias",
+            "examples": ["Metalúrgicas", "Alimentícias", "Têxteis", "Tecnologia"],
+            "why_needed": "Controle de produção e logística",
+            "growth_potential": "Médio - pode especializar em produção"
+          },
+          {
+            "sector": "🏥 Saúde e Educação",
+            "examples": ["Hospitais", "Clínicas", "Escolas", "Universidades"],
+            "why_needed": "Organização de pacientes e alunos",
+            "growth_potential": "Alto - pode virar coordenador"
+          },
+          {
+            "sector": "🛒 Comércio e Serviços",
+            "examples": ["Lojas", "Shopping", "Restaurantes", "Hotéis"],
+            "why_needed": "Gestão do dia a dia operacional",
+            "growth_potential": "Médio - pode virar gerente de loja"
+          },
+          {
+            "sector": "🏛️ Setor Público",
+            "examples": ["Prefeituras", "Governo", "Escolas públicas"],
+            "why_needed": "Burocracia organizada",
+            "growth_potential": "Estável - concursos públicos"
+          }
+        ]
+      },
+      {
+        "type": "qualification_section",
+        "title": "📚 Como se Tornar um Auxiliar Administrativo?",
+        "subtitle": "O caminho para entrar nessa carreira super promissora:",
+        "requirements": {
+          "essential": [
+            {
+              "item": "Ensino Médio Completo",
+              "why": "Base fundamental para qualquer profissão",
+              "tips": "Concentre-se em português e matemática"
+            },
+            {
+              "item": "Informática Básica",
+              "why": "Ferramenta essencial do dia a dia",
+              "tips": "Domine Word, Excel e internet"
+            },
+            {
+              "item": "Organização Pessoal",
+              "why": "Habilidade que faz a diferença",
+              "tips": "Pratique desde já com seus estudos"
+            }
+          ],
+          "differential": [
+            {
+              "item": "Inglês Básico",
+              "why": "Diferencial competitivo",
+              "tips": "Apps como Duolingo ajudam muito"
+            },
+            {
+              "item": "Cursos Técnicos",
+              "why": "Conhecimento especializado",
+              "tips": "Busque cursos de administrativo ou secretariado"
+            },
+            {
+              "item": "Experiência Prática",
+              "why": "Nada substitui a prática",
+              "tips": "Estágios ou trabalhos voluntários"
+            }
+          ]
+        },
+        "learning_path": {
+          "title": "Sua Jornada de Aprendizado:",
+          "steps": [
+            {
+              "phase": "Fase 1: Fundamentos",
+              "duration": "3-6 meses",
+              "focus": "Informática + Organização",
+              "activities": ["Curso básico de informática", "Organizar seus próprios arquivos"]
+            },
+            {
+              "phase": "Fase 2: Especialização",
+              "duration": "6-12 meses",
+              "focus": "Técnicas administrativas",
+              "activities": ["Curso técnico", "Estágio em escritório"]
+            },
+            {
+              "phase": "Fase 3: Prática",
+              "duration": "12+ meses",
+              "focus": "Experiência real",
+              "activities": ["Primeiro emprego", "Aprendizado contínuo"]
+            },
+            {
+              "phase": "Fase 4: Crescimento",
+              "duration": "Contínuo",
+              "focus": "Desenvolvimento profissional",
+              "activities": ["Cursos avançados", "Busca por promoções"]
+            }
+          ]
+        }
+      },
+      {
+        "type": "cbo_section",
+        "title": "🏷️ Classificação Brasileira de Ocupações (CBO)",
+        "text": "O Ministério do Trabalho criou um sistema que classifica todas as profissões do Brasil. O Auxiliar Administrativo está na família 4110 e pode ter vários nomes!",
+        "cbo_info": {
+          "family": "Agentes, assistentes e auxiliares administrativos",
+          "code": "4110",
+          "synonyms": [
+            "🏢 Agente administrativo",
+            "🤝 Assistente administrativo sindical",
+            "🛒 Assistente de compras",
+            "📧 Assistente de escritório",
+            "📋 Assistente técnico - serviço público"
+          ],
+          "related_occupations": [
+            {
+              "title": "Auxiliar de escritório",
+              "synonyms": ["Auxiliar administrativo", "Auxiliar de compras", "Escriturário"]
+            },
+            {
+              "title": "Atendente de judiciário",
+              "synonyms": ["Atendente fórum", "Auxiliar cartório"]
+            },
+            {
+              "title": "Auxiliar de pessoal",
+              "synonyms": ["Apontador de ponto", "Auxiliar RH"]
+            }
+          ],
+          "official_description": "Executam serviços de apoio nas áreas de recursos humanos, administração, finanças e logística; atendem fornecedores e clientes, fornecendo e recebendo informações sobre produtos e serviços; tratam de documentos variados, cumprindo todo o procedimento necessário referente aos mesmos."
+        }
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Sabia que o Auxiliar Administrativo é uma das profissões mais estáveis do mercado? Todas as empresas, do pequeno escritório à mega corporação, precisam de alguém para organizar o caos! E o melhor: com experiência, você pode virar gerente, supervisor ou até abrir sua própria empresa de consultoria administrativa!",
+      "icon": "💼"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Plano de Carreira!",
+      "instructions": [
+        "Avalie seu perfil atual:",
+        "1️⃣ Quais dos 5 superpoderes você já tem?",
+        "2️⃣ Quais precisam desenvolver mais?",
+        "3️⃣ Crie um plano de 30 dias para melhorar uma habilidade",
+        "4️⃣ Pesquise 3 vagas de Auxiliar Administrativo na sua cidade",
+        "5️⃣ Identifique quais requisitos você já atende",
+        "6️⃣ Planeje como adquirir os que faltam"
+      ],
+      "reward": "55 XP",
+      "completion_message": "Excelente! Você já está planejando sua carreira como um profissional! 💼"
+    },
+    "quiz": {
+      "title": "Quiz Profissional - Teste seu conhecimento sobre Auxiliar Administrativo!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Qual é a principal função de um Auxiliar Administrativo?",
+          "options": [
+            "a) Vender produtos",
+            "b) Prestar assistência na gestão administrativa",
+            "c) Programar computadores"
+          ],
+          "correct": 1,
+          "explanation": "O Auxiliar Administrativo apoia na gestão administrativa da empresa!"
+        },
+        {
+          "id": 2,
+          "question": "Qual habilidade é ESSENCIAL para um Auxiliar Administrativo?",
+          "options": [
+            "a) Saber dançar",
+            "b) Ser muito alto",
+            "c) Organização"
+          ],
+          "correct": 2,
+          "explanation": "Organização é a habilidade fundamental para o sucesso na área!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: Auxiliar Administrativo precisa saber informática.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! Informática é essencial no dia a dia administrativo!"
+        },
+        {
+          "id": 4,
+          "question": "O que significa CBO?",
+          "options": [
+            "a) Classificação Brasileira de Ocupações",
+            "b) Código Brasileiro de Organização",
+            "c) Central Brasileira de Oportunidades"
+          ],
+          "correct": 0,
+          "explanation": "CBO é a Classificação Brasileira de Ocupações do Ministério do Trabalho!"
+        },
+        {
+          "id": 5,
+          "question": "Qual setor NÃO precisa de Auxiliar Administrativo?",
+          "options": [
+            "a) Escritório de advocacia",
+            "b) Indústria automobilística",
+            "c) Nenhuma das alternativas - todos precisam!"
+          ],
+          "correct": 2,
+          "explanation": "TODOS os setores precisam de organização administrativa!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "35 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você já sabe tudo sobre ser um Auxiliar Administrativo! No próximo capítulo, vamos falar sobre Ética Profissional - algo que vai fazer você se destacar no mercado de trabalho e ser respeitado por todos!",
+      "teaser": "🎯 Próximo capítulo: Ética Profissional - O Código dos Campeões!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "auxiliar-estrela",
+      "name": "Auxiliar Estrela",
+      "description": "Compreendeu a importância e funções do Auxiliar Administrativo",
+      "icon": "⭐",
+      "rarity": "comum"
+    }
+  ],
+  "interactive_elements": {
+    "skill_assessment": {
+      "title": "Teste seus Superpoderes",
+      "skills": [
+        {
+          "name": "Organização",
+          "question": "Como você organiza seus estudos?"
+        },
+        {
+          "name": "Comunicação",
+          "question": "Você se sente confortável falando em público?"
+        },
+        {
+          "name": "Resolução de Problemas",
+          "question": "O que você faz quando enfrenta um desafio?"
+        }
+      ]
+    },
+    "reflection": {
+      "prompt": "Depois de conhecer a profissão, você se vê trabalhando como Auxiliar Administrativo? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}

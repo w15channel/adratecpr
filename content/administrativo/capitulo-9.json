@@ -1,0 +1,524 @@
+{
+  "id": "admin-09",
+  "title": "Capítulo 9: Departamento Pessoal - O Coração Humano das Empresas!",
+  "module": "administrativo",
+  "order": 9,
+  "xp_reward": 125,
+  "badge_earned": "gente-expert",
+  "estimated_time": 22,
+  "difficulty": "intermediario",
+  "prerequisites": ["admin-08"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Pronto para descobrir o coração da empresa?",
+      "text": "O Departamento Pessoal (DP) é como o 'coração humano' da organização - bombeia vida, energia e mantém tudo funcionando! É onde as pessoas são encontradas, desenvolvidas, cuidadas e, quando necessário, despedidas com respeito. Se você gosta de gente e quer entender como as empresas gerenciam seu maior ativo - as pessoas - este capítulo é para você!",
+      "engaging_question": "Se você fosse contratar alguém para sua equipe, o que você mais valorizaria?"
+    },
+    "main_content": [
+      {
+        "type": "dp_overview",
+        "title": "🏢 O que faz o Departamento Pessoal?",
+        "text": "DP é muito mais que papelada e burocracia - é a área que transforma talentos em resultados e cuida do bem-estar de todos na empresa!",
+        "core_functions": [
+          "🔍 **Recrutamento & Seleção**: Encontrar as pessoas certas",
+          "📚 **Treinamento & Desenvolvimento**: Fazer as pessoas crescerem",
+          "📋 **Admissão & Documentação**: Integrar novos talentos",
+          "💰 **Folha de Pagamento**: Cuidar do dinheiro da equipe",
+          "🏖️ **Benefícios & Férias**: Garantir o bem-estar",
+          "👋 **Desligamento**: Encerrar ciclos com respeito"
+        ],
+        "dp_importance": {
+          "why_critical": "O DP é estratégico porque:",
+          "points": [
+            "Pessoas são o maior ativo de qualquer empresa",
+            "Cultura organizacional começa no DP",
+            "Retenção de talentos depende de boa gestão",
+            "Produtividade está ligada ao bem-estar",
+            "Imagem da empresa depende de como trata pessoas"
+          ]
+        }
+      },
+      {
+        "type": "recruitment_section",
+        "title": "🎯 A Caça aos Talentos - Recrutamento & Seleção",
+        "text": "Encontrar a pessoa certa para o lugar certo é como resolver um quebra-cabeça complexo! Vamos descobrir como as empresas fazem essa mágica?",
+        "recruitment_process": {
+          "title": "A Jornada do Candidato:",
+          "steps": [
+            {
+              "phase": "1️⃣ Análise da Vaga",
+              "description": "Entender o que realmente precisa",
+              "activities": [
+                "Definir perfil do candidato ideal",
+                "Estabelecer responsabilidades claras",
+                "Definir salário e benefícios",
+                "Identificar competências necessárias"
+              ]
+            },
+            {
+              "phase": "2️⃣ Divulgação",
+              "description": "Espalhar a notícia",
+              "channels": [
+                "🌐 Sites de vagas (LinkedIn, Vagas.com.br)",
+                "📱 Redes sociais da empresa",
+                "🤝 Indicação de funcionários",
+                "🎓 Parcerias com escolas",
+                "📺 Anúncios em jornais/TV"
+              ]
+            },
+            {
+              "phase": "3️⃣ Triagem",
+              "description": "Separar o joio do trigo",
+              "criteria": [
+                "Experiência profissional relevante",
+                "Formação acadêmica adequada",
+                "Competências técnicas",
+                "Potencial cultural fit"
+              ]
+            },
+            {
+              "phase": "4️⃣ Entrevistas",
+              "description": "Conversar para conhecer",
+              "types": [
+                "📞 Telefone (pré-seleção)",
+                "👥 Individual com RH",
+                "🎯 Técnica com gestor",
+                "👑 Final com diretoria"
+              ]
+            },
+            {
+              "phase": "5️⃣ Testes",
+              "description": "Verificar habilidades",
+              "examples": [
+                "💻 Testes práticos (Excel, software)",
+                "🧠 Testes psicológicos",
+                "📝 Provas de conhecimento",
+                "🎭 Dinâmicas de grupo"
+              ]
+            },
+            {
+              "phase": "6️⃣ Decisão",
+              "description": "Escolher o vencedor",
+              "factors": [
+                "Desempenho nas etapas",
+                "Alinhamento cultural",
+                "Potencial de crescimento",
+                "Referências verificadas"
+              ]
+            }
+          ]
+        },
+        "recruitment_types": {
+          "internal": {
+            "name": "🔄 Recrutamento Interno",
+            "description": "Promover de dentro",
+            "advantages": ["Mais rápido", "Cultura alinhada", "Motiva equipe", "Menos custoso"],
+            "when_use": "Há talentos internos qualificados"
+          },
+          "external": {
+            "name": "🌍 Recrutamento Externo",
+            "description": "Buscar talentos fora",
+            "advantages": ["Novas ideias", "Diversidade", "Especialização", "Renovação"],
+            "when_use": "Precisa de habilidades que não existem internamente"
+          },
+          "mixed": {
+            "name": "🔄🌍 Recrutamento Misto",
+            "description": "Combina interno e externo",
+            "advantages": ["O melhor dos dois mundos", "Mais opções", "Justiça interna"],
+            "when_use": "Situações normais de contratação"
+          }
+        }
+      },
+      {
+        "type": "training_section",
+        "title": "📚 Desenvolvendo Campeões - Treinamento",
+        "text": "Pessoas não nascem prontas - elas se desenvolvem! O treinamento é como academia para o cérebro e habilidades profissionais!",
+        "training_objectives": [
+          "🎯 Preparar para a função específica",
+          "🚀 Desenvolver potencial pessoal",
+          "💡 Aumentar motivação e engajamento",
+          "🔄 Adaptar à cultura organizacional"
+        ],
+        "training_types": [
+          {
+            "type": "🏃‍♂️ Integração",
+            "when": "Primeiros dias/semanas",
+            "focus": "Cultura, processos, pessoas",
+            "example": "Onboarding de novos funcionários"
+          },
+          {
+            "type": "🔧 Técnico",
+            "when": "Quando necessário",
+            "focus": "Habilidades específicas do cargo",
+            "example": "Curso de Excel avançado"
+          },
+          {
+            "type": "👥 Comportamental",
+            "when": "Continuamente",
+            "focus": "Soft skills, liderança",
+            "example": "Workshop de comunicação"
+          },
+          {
+            "type": "📈 Desenvolvimento",
+            "when": "Carreira longa",
+            "focus": "Preparação para novos desafios",
+            "example": "Programa de trainee"
+          }
+        ],
+        "training_methods": {
+          "presential": {
+            "name": "🏫 Presencial",
+            "pros": ["Interação direta", "Networking", "Prático"],
+            "cons": ["Custo alto", "Logística complexa"]
+          },
+          "online": {
+            "name": "💻 Online/EAD",
+            "pros": ["Flexível", "Econômico", "Auto-ritmo"],
+            "cons": ["Menos interação", "Requer disciplina"]
+          },
+          "hybrid": {
+            "name": "🔄 Híbrido",
+            "pros": ["Melhor dos dois", "Flexibilidade"],
+            "cons": ["Planejamento complexo"]
+          },
+          "mentoring": {
+            "name": "🎓 Mentoria",
+            "pros": ["Personalizado", "Experiência real", "Networking"],
+            "cons": ["Depende de mentores", "Tempo intensivo"]
+          }
+        }
+      },
+      {
+        "type": "admission_section",
+        "title": "📋 Bem-vindo à Empresa - Processo de Admissão",
+        "text": "Admitir alguém é como convidar para entrar em sua casa - precisa ser organizado, acolhedor e seguir todas as regras!",
+        "admission_checklist": {
+          "title": "Documentos Obrigatórios:",
+          "essential_docs": [
+            {
+              "doc": "📸 CTPS (Carteira de Trabalho)",
+              "why": "Principal documento profissional",
+              "details": "Precisa ser atualizada e assinada"
+            },
+            {
+              "doc": "🆔 RG (Identidade)",
+              "why": "Identificação civil",
+              "details": "Válido e dentro do prazo"
+            },
+            {
+              "doc": "☑️ CPF",
+              "why": "Cadastro para fins fiscais",
+              "details": "Regular e sem pendências"
+            },
+            {
+              "doc": "🗳️ Título de Eleitor",
+              "why": "Obrigatório para maiores de 18",
+              "details": "Com comprovação de votação"
+            },
+            {
+              "doc": "🪪 Certificado de Reservista",
+              "why": "Obrigatório para homens",
+              "details": "Apenas para sexo masculino"
+            },
+            {
+              "doc": "📋 Comprovante de Residência",
+              "why": "Endereço para contato",
+              "details": "Conta de luz, água, etc."
+            },
+            {
+              "doc": "🏥 Atestado Médico",
+              "why": "Verificação de saúde",
+              "details": "Admissional, do trabalho"
+            }
+          ]
+        },
+        "admission_process": {
+          "steps": [
+            "1️⃣ **Coleta de Documentos**: Reunir toda papelada",
+            "2️⃣ **Verificação**: Conferir autenticidade",
+            "3️⃣ **Cadastro no Sistema**: Inserir dados da empresa",
+            "4️⃣ **CTPS**: Anotar contrato, salário, data",
+            "5️⃣ **Exames**: Agendar admissionais",
+            "6️⃣ **Integração**: Apresentar à equipe e cultura",
+            "7️⃣ **Treinamento Inicial**: Capacitar para a função"
+          ]
+        }
+      },
+      {
+        "type": "payroll_section",
+        "title": "💰 Folha de Pagamento - O Dinheiro da Equipe",
+        "text": "Folha de pagamento é como orquestrar uma sinfonia financeira - cada nota precisa estar no lugar certo para criar a harmonia perfeita!",
+        "payroll_components": {
+          "provents": {
+            "title": "💰 Proventos (O que entra)",
+            "items": [
+              {
+                "item": "💵 Salário Base",
+                "description": "Valor fixo mensal contratado"
+              },
+              {
+                "item": "⏰ Horas Extras",
+                "description": "50% adicional sobre hora normal"
+              },
+              {
+                "item": "🌙 Adicional Noturno",
+                "description": "20% adicional (22h-5h)"
+              },
+              {
+                "item": "☠️ Adicional de Insalubridade",
+                "description": "Riscos à saúde (10-40%)"
+              },
+              {
+                "item": "🎯 Salário Família",
+                "description": "Por filho até 14 anos"
+              },
+              {
+                "item": "🎉 Gratificações",
+                "description": "Bônus por performance"
+              },
+              {
+                "item": "🎁 Ajuda de Custo",
+                "description": "Reembolso de despesas"
+              },
+              {
+                "item": "🏖️ Abono de Férias",
+                "description": "1/3 adicional sobre salário"
+              }
+            ]
+          },
+          "deductions": {
+            "title": "💸 Deduções (O que sai)",
+            "items": [
+              {
+                "item": "🏥 INSS",
+                "description": "Previdência Social (7.5-14%)"
+              },
+              {
+                "item": "💰 IRRF",
+                "description": "Imposto de Renda (progressivo)"
+              },
+              {
+                "item": "🤝 Contribuição Sindical",
+                "description": "Anual, um dia de salário"
+              },
+              {
+                "item": "🚌 Vale-Transporte",
+                "description": "6% do salário (se usar)"
+              },
+              {
+                "item": "🍽️ Vale-Alimentação",
+                "description": "Se oferecido pela empresa"
+              },
+              {
+                "item": "🏥 Plano de Saúde",
+                "description": "Se contratado pelo funcionário"
+              },
+              {
+                "item": "🏦 Empréstimos",
+                "description": "Se autorizado pelo funcionário"
+              }
+            ]
+          }
+        },
+        "payroll_process": {
+          "monthly_timeline": [
+            "📅 **Dia 1-5**: Fechamento de ponto",
+            "📊 **Dia 6-15**: Cálculo da folha",
+            "✅ **Dia 16-20**: Conferência e aprovação",
+            "💰 **Dia 21-25**: Pagamento dos salários",
+            "📋 **Dia 26-30**: Emissão de holerites"
+          ],
+          "responsibilities": [
+            "Calcular valores corretamente",
+            "Descontar impostos e benefícios",
+            "Emitir holerites/comprovantes",
+            "Arquivar documentos",
+            "Atender dúvidas dos funcionários"
+          ]
+        }
+      },
+      {
+        "type": "benefits_section",
+        "title": "🎁 Benefícios - O Presente da Empresa",
+        "text": "Benefícios são como extras especiais que as empresas oferecem para cuidar melhor de suas equipes!",
+        "mandatory_benefits": {
+          "title": "📋 Obrigatórios por Lei:",
+          "items": [
+            {
+              "benefit": "🏖️ Férias",
+              "description": "30 dias após 12 meses de trabalho",
+              "details": "Mais 1/3 constitucional e abono pecuniário opcional"
+            },
+            {
+              "benefit": "🎄 13º Salário",
+              "description": "Salário extra no fim de ano",
+              "details": "50% até novembro, 50% até dezembro"
+            },
+            {
+              "benefit": "🏥 FGTS",
+              "description": "8% sobre salário",
+              "details": "Fundo de garantia, depositado mensalmente"
+            },
+            {
+              "benefit": "🏥 INSS",
+              "description": "Aposentadoria e auxílios",
+              "details": "Contribuição previdenciária obrigatória"
+            },
+            {
+              "benefit": "🤝 Aviso Prévio",
+              "description": "30 dias em caso de demissão",
+              "details": "Pode ser trabalhado ou indenizado"
+            }
+          ]
+        },
+        "voluntary_benefits": {
+          "title": "🎁 Opcionais (Vale a pena!):",
+          "items": [
+            {
+              "benefit": "🏥 Plano de Saúde",
+              "description": "Cobertura médica ampla",
+              "advantage": "Economia e atendimento rápido"
+            },
+            {
+              "benefit": "🦷 Plano Odontológico",
+              "description": "Cuidados com a saúde bucal",
+              "advantage": "Prevenção e economia"
+            },
+            {
+              "benefit": "🚌 Vale-Transporte",
+              "description": "Auxílio para deslocamento",
+              "advantage": "Economia no transporte"
+            },
+            {
+              "benefit": "🍽️ Vale-Alimentação/Refeição",
+              "description": "Ajuda para alimentação",
+              "advantage": "Isento de impostos até limite"
+            },
+            {
+              "benefit": "🏦 Seguro de Vida",
+              "description": "Proteção para a família",
+              "advantage": "Tranquilidade e segurança"
+            },
+            {
+              "benefit": "🎓 Auxílio Educação",
+              "description": "Ajuda para estudos",
+              "advantage": "Investimento no futuro"
+            }
+          ]
+        }
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Você sabia que empresas com bons programas de DP têm 40% menos turnover (rotatividade) e 21% mais produtividade? E que profissionais de DP estão entre os mais bem pagos e valorizados do mercado? Porque no final, negócios são feitos por pessoas, para pessoas!",
+      "icon": "💼"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Processo de Contratação!",
+      "instructions": [
+        "Simule a contratação para um cargo de Auxiliar Administrativo:",
+        "1️⃣ Escreva um anúncio de vaga atrativo",
+        "2️⃣ Crie 5 perguntas para entrevista",
+        "3️⃣ Defina 3 critérios de seleção",
+        "4️⃣ Planeje o programa de integração (primeira semana)",
+        "5️⃣ Calcule um salário líquido (partindo de R$ 2.000 brutos)",
+        "6️⃣ Descreva os benefícios que você ofereceria"
+      ],
+      "reward": "63 XP",
+      "completion_message": "Excelente! Você já pensa como um profissional de DP! 👥"
+    },
+    "quiz": {
+      "title": "Quiz DP - Teste seu conhecimento sobre gestão de pessoas!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que significa DP em uma empresa?",
+          "options": [
+            "a) Departamento de Produção",
+            "b) Departamento Pessoal",
+            "c) Departamento de Projetos"
+          ],
+          "correct": 1,
+          "explanation": "DP é Departamento Pessoal, responsável pela gestão de pessoas!"
+        },
+        {
+          "id": 2,
+          "question": "Qual é o objetivo principal do recrutamento?",
+          "options": [
+            "a) Contratar o mais rápido possível",
+            "b) Encontrar a pessoa certa para o lugar certo",
+            "c) Economizar dinheiro a qualquer custo"
+          ],
+          "correct": 1,
+          "explanation": "Recrutamento busca encontrar a pessoa certa para o lugar certo!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: Férias são obrigatórias por lei.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 0,
+          "explanation": "Verdadeiro! Férias de 30 dias são direito garantido por lei!"
+        },
+        {
+          "id": 4,
+          "question": "Qual documento NÃO é obrigatório para admissão?",
+          "options": [
+            "a) CTPS",
+            "b) RG",
+            "c) Certificado de conclusão do ensino médio"
+          ],
+          "correct": 2,
+          "explanation": "Certificado de ensino médio pode ser exigido dependendo do cargo, mas não é obrigatório universalmente!"
+        },
+        {
+          "id": 5,
+          "question": "O que é 13º salário?",
+          "options": [
+            "a) Bônus por performance",
+            "b) Salário extra pago em dezembro",
+            "c) Aumento salarial anual"
+          ],
+          "correct": 1,
+          "explanation": "13º salário é um salário extra dividido em duas parcelas!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "42 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você entende como as empresas cuidam de seu maior ativo - as pessoas! No próximo capítulo, vamos descobrir as técnicas de arquivamento - a arte de organizar informações de forma que tudo seja encontrado em segundos!",
+      "teaser": "🗂️ Próximo capítulo: Técnicas de Arquivamento - A Ordem Perfeita!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "gente-expert",
+      "name": "Gente Expert",
+      "description": "Compreendeu os fundamentos do Departamento Pessoal",
+      "icon": "👥",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "salary_calculator": {
+      "title": "Simulador de Salário",
+      "instructions": "Digite um salário bruto e veja as deduções",
+      "input_placeholder": "R$ 2.000,00"
+    },
+    "interview_simulator": {
+      "title": "Simulador de Entrevista",
+      "scenarios": [
+        "Fale sobre uma experiência de trabalho em equipe",
+        "Como você lida com prazos apertados?",
+        "Qual seu maior ponto forte como profissional?"
+      ]
+    },
+    "reflection": {
+      "prompt": "Qual área do DP mais te interessou? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}

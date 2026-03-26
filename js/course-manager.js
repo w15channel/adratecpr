@@ -227,7 +227,14 @@ class CourseManager {
             { id: 'capitulo-2.json', title: 'Capítulo 2: PODC - A Fórmula Mágica da Administração!', xp: 150, completed: false },
             { id: 'capitulo-3.json', title: 'Capítulo 3: Tipos de Empresas - Do MEI ao Mega Corporation!', xp: 120, completed: false },
             { id: 'capitulo-4.json', title: 'Capítulo 4: Estrutura Organizacional - O Esqueleto das Empresas!', xp: 130, completed: false },
-            { id: 'capitulo-5.json', title: 'Capítulo 5: Programa 5S - A Mágica da Organização Japonesa!', xp: 140, completed: false }
+            { id: 'capitulo-5.json', title: 'Capítulo 5: Programa 5S - A Mágica da Organização Japonesa!', xp: 140, completed: false },
+            { id: 'capitulo-6.json', title: 'Capítulo 6: O Super-Herói da Empresa - Funções do Auxiliar Administrativo!', xp: 110, completed: false },
+            { id: 'capitulo-7.json', title: 'Capítulo 7: Mercado de Trabalho e Ética - O Código dos Campeões!', xp: 120, completed: false },
+            { id: 'capitulo-8.json', title: 'Capítulo 8: Trabalho em Equipe - O Poder da União!', xp: 115, completed: false },
+            { id: 'capitulo-9.json', title: 'Capítulo 9: Departamento Pessoal - O Coração Humano das Empresas!', xp: 125, completed: false },
+            { id: 'capitulo-10.json', title: 'Capítulo 10: Técnicas de Arquivamento - A Ordem Perfeita!', xp: 105, completed: false },
+            { id: 'capitulo-11.json', title: 'Capítulo 11: Noções de Contabilidade - O Dinheiro Fala!', xp: 130, completed: false },
+            { id: 'capitulo-12.json', title: 'Capítulo 12: Conclusão - Você é um Administrador em Formação!', xp: 150, completed: false }
         ];
 
         // Marca capítulos completos
@@ -257,7 +264,7 @@ class CourseManager {
 
     // Inicia primeiro capítulo disponível
     startFirstAvailableChapter(moduleId) {
-        const chapters = ['capitulo-1', 'capitulo-2', 'capitulo-3', 'capitulo-4', 'capitulo-5'];
+        const chapters = ['capitulo-1', 'capitulo-2', 'capitulo-3', 'capitulo-4', 'capitulo-5', 'capitulo-6', 'capitulo-7', 'capitulo-8', 'capitulo-9', 'capitulo-10', 'capitulo-11', 'capitulo-12'];
         const moduleProgress = this.userProgress.modules[moduleId];
         
         // Encontra primeiro capítulo não completado

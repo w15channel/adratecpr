@@ -1,0 +1,408 @@
+{
+  "id": "admin-07",
+  "title": "Capítulo 7: Mercado de Trabalho e Ética - O Código dos Campeões!",
+  "module": "administrativo",
+  "order": 7,
+  "xp_reward": 120,
+  "badge_earned": "profissional-etico",
+  "estimated_time": 20,
+  "difficulty": "intermediario",
+  "prerequisites": ["admin-06"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Pronto para dominar o mercado de trabalho?",
+      "text": "O mercado de trabalho para Auxiliar Administrativo está explodindo! Empresas de todos os tamanhos estão procurando profissionais organizados e competentes. Mas não basta apenas ter as habilidades técnicas - você precisa ter algo que vai te destacar de todos: ÉTICA PROFISSIONAL! É o que separa os profissionais medíocres dos verdadeiros campeões!",
+      "engaging_question": "O que você acha que faz um profissional ser respeitado no mercado?"
+    },
+    "main_content": [
+      {
+        "type": "market_overview",
+        "title": "🌟 Oportunidades Infinitas!",
+        "text": "O mercado para Auxiliar Administrativo é como um oceano de oportunidades - vasto e cheio de possibilidades!",
+        "market_stats": {
+          "demand_level": "ALTÍSSIMO",
+          "growth_potential": "EXPLOSIVO",
+          "stability": "MUITO ESTÁVEL",
+          "salary_range": "R$ 1.500 - R$ 3.500 (iniciante) | R$ 3.500 - R$ 6.000 (experiente)"
+        },
+        "sectors_hiring": [
+          {
+            "sector": "🏢 Corporativo",
+            "opportunities": "Grandes empresas sempre precisando de organização",
+            "growth": "Pode virar Assistente Administrativo Sênior"
+          },
+          {
+            "sector": "🏥 Saúde",
+            "opportunities": "Clínicas e hospitais em expansão",
+            "growth": "Coordenador administrativo médico"
+          },
+          {
+            "sector": "🎓 Educação",
+            "opportunities": "Escolas e faculdades particulares",
+            "growth": "Secretário escolar ou coordenador"
+          },
+          {
+            "sector": "🛒 Varejo",
+            "opportunities": "Lojas e shopping centers",
+            "growth": "Gerente administrativo de loja"
+          },
+          {
+            "sector": "🏛️ Público",
+            "opportunities": "Concursos federais, estaduais e municipais",
+            "growth": "Estabilidade e benefícios excelentes"
+          }
+        ]
+      },
+      {
+        "type": "qualification_boost",
+        "title": "🚀 Como se Tornar IMBATÍVEL no Mercado",
+        "subtitle": "Diferenciais que vão fazer você brilhar:",
+        "superpowers": [
+          {
+            "name": "📚 Qualificação Contínua",
+            "what_it_is": "Nunca parar de aprender",
+            "action_plan": [
+              "Cursos técnicos (6-12 meses)",
+              "Graduação em Administração (4 anos)",
+              "Pós-graduação (especialização)",
+              "Certificações específicas"
+            ],
+            "immediate_action": "Pesquise 3 cursos técnicos na sua cidade"
+          },
+          {
+            "name": "🌐 Idiomas",
+            "what_it_is": "Comunicação global",
+            "impact": "Salário 30-50% maior",
+            "learning_path": [
+              "Inglês básico (3-6 meses)",
+              "Inglês intermediário (6-12 meses)",
+              "Espanhol (bônus para mercado latino)",
+              "Outros idiomas (diferencial competitivo)"
+            ],
+            "free_resources": ["Duolingo", "YouTube", "Apps de conversação"]
+          },
+          {
+            "name": "💻 Tecnologia Avançada",
+            "what_it_is": "Dominar ferramentas digitais",
+            "essential_skills": [
+              "Excel avançado (fórmulas, macros)",
+              "PowerPoint profissional",
+              "Sistemas ERP básicos",
+              "Ferramentas de gestão online"
+            ],
+            "certifications": ["Microsoft Office", "Google Workspace", "ERP básico"]
+          },
+          {
+            "name": "🤝 Soft Skills",
+            "what_it_is": "Habilidades comportamentais",
+            "critical_skills": [
+              "Liderança democrática",
+              "Comunicação assertiva",
+              "Trabalho em equipe",
+              "Inteligência emocional"
+            ],
+            "development": "Prática diária e feedback constante"
+          },
+          {
+            "name": "📊 Especialização",
+            "what_it_is": "Área de expertise",
+            "options": [
+              "Financeiro e contábil",
+              "Recursos Humanos",
+              "Compras e logística",
+              "Marketing administrativo"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ethics_deep_dive",
+        "title": "🎯 Ética Profissional - O Segredo do Sucesso",
+        "text": "Ética não é apenas 'ser bonzinho' - é o código que vai te tornar um profissional respeitado, confiável e indispensável!",
+        "ethics_definition": {
+          "origin": "Do grego 'ethos' = costume, modo de ser",
+          "meaning": "Conjunto de princípios que regulam a conduta profissional",
+          "importance": "Diferencia profissionais medíocres de campeões"
+        },
+        "ethical_principles": [
+          {
+            "principle": "🤍 Honestidade Absoluta",
+            "daily_application": [
+              "Fale sempre a verdade, mesmo quando difícil",
+              "Assuma seus erros sem tentar culpar outros",
+              "Seja transparente em todas as comunicações",
+              "Não exagere em relatórios ou resultados"
+            ],
+            "real_example": {
+              "situation": "Você cometeu um erro em um relatório importante",
+              "ethical_action": "Informe imediatamente seu chefe, explique o que aconteceu e apresente uma solução",
+              "unethical_action": "Tentar esconder ou culpar outro colega"
+            }
+          },
+          {
+            "principle": "🔐 Sigilo Profissional",
+            "daily_application": [
+              "Nunca compartilhe informações confidenciais",
+              "Mantenha senhas e dados seguros",
+              "Evite fofocas sobre assuntos de trabalho",
+              "Proteja dados de clientes e colegas"
+            ],
+            "real_example": {
+              "situation": "Ouviu sobre uma demissão que ainda não foi anunciada",
+              "ethical_action": "Mantenha absolutamente sigilo, nem mesmo com amigos próximos",
+              "unethical_action": "Comentar com colegas ou nas redes sociais"
+            }
+          },
+          {
+            "principle": "🏆 Competência e Compromisso",
+            "daily_application": [
+              "Faça seu trabalho com excelência",
+              "Busque sempre aprender e melhorar",
+              "Cumpra prazos e responsabilidades",
+              "Coloque o interesse da empresa acima do pessoal"
+            ],
+            "real_example": {
+              "situation": "Tarefa difícil com prazo curto",
+              "ethical_action": "Dedique-se extra, peça ajuda se necessário, mas entregue qualidade",
+              "unethical_action": "Entregar um trabalho mal feito só para cumprir prazo"
+            }
+          },
+          {
+            "principle": "⚖️ Imparcialidade e Justiça",
+            "daily_application": [
+              "Trate todos com igual respeito",
+              "Não favoreça amigos ou parentes",
+              "Baseie decisões em fatos, não em opiniões pessoais",
+              "Separe relações pessoais das profissionais"
+            ],
+            "real_example": {
+              "situation": "Precisa escolher entre dois fornecedores, um é amigo",
+              "ethical_action": "Avalie objetivamente qualidade, preço e condições do serviço",
+              "unethical_action": "Escolher o amigo apenas por amizade"
+            }
+          },
+          {
+            "principle": "🤝 Respeito e Humildade",
+            "daily_application": [
+              "Respeite a hierarquia, mas questione com respeito",
+              "Ouça atentamente opiniões diferentes",
+              "Reconheça quando está errado",
+              "Valorize o trabalho dos outros"
+            ],
+            "real_example": {
+              "situation": "Um colega mais júnior dá uma ideia melhor que a sua",
+              "ethical_action": "Reconheça a qualidade da ideia e dê os créditos merecidos",
+              "unethical_action": "Ignorar ou tentar tomar crédito pela ideia"
+            }
+          }
+        ]
+      },
+      {
+        "type": "code_of_ethics",
+        "title": "📜 Seu Código Pessoal de Ética",
+        "subtitle": "Compromissos que vão transformar sua carreira:",
+        "daily_commitments": [
+          {
+            "commitment": "Julgar igual aos colegas, independente do nível",
+            "why_it_matters": "Promove igualdade e respeito mútuo",
+            "daily_practice": "Trate estagiários e diretores com o mesmo respeito"
+          },
+          {
+            "commitment": "Ajudar colegas quando possível",
+            "why_it_matters": "Cria ambiente colaborativo",
+            "daily_practice": "Ofereça ajuda quando vir alguém com dificuldade"
+          },
+          {
+            "commitment": "Aceitar orientações com humildade",
+            "why_it_matters": "Demonstra maturidade e vontade de aprender",
+            "daily_practice": "Ouça feedback sem ficar na defensiva"
+          },
+          {
+            "commitment": "Manter o ambiente organizado",
+            "why_it_matters": "Reflete profissionalismo e respeito",
+            "daily_practice": "Deixe seu espaço de trabalho sempre arrumado"
+          },
+          {
+            "commitment": "Pedir ajuda quando não souber",
+            "why_it_matters": "Evita erros e mostra responsabilidade",
+            "daily_practice": "Não tenha medo de dizer 'não sei, pode me ensinar?'"
+          },
+          {
+            "commitment": "Ser pontual e responsável",
+            "why_it_matters": "Demonstra comprometimento",
+            "daily_practice": "Chegue 10 minutos antes e cumpra seus prazos"
+          },
+          {
+            "commitment": "Dar feedbacks construtivos",
+            "why_it_matters": "Ajuda no crescimento de todos",
+            "daily_practice": "Critique o trabalho, nunca a pessoa"
+          },
+          {
+            "commitment": "Ser honesto em todas as situações",
+            "why_it_matters": "Constrói confiança e credibilidade",
+            "daily_practice": "Mesmo em situações pequenas, mantenha a honestidade"
+          }
+        ]
+      },
+      {
+        "type": "ethical_dilemmas",
+        "title": "⚖️ Dilemas Éticos do Dia a Dia",
+        "subtitle": "Como agir em situações desafiadoras:",
+        "scenarios": [
+          {
+            "situation": "📊 Seu chefe pede para 'ajustar' números em um relatório",
+            "wrong_approach": "Fazer o ajuste sem questionar",
+            "right_approach": [
+              "Pergunte educadamente o motivo do ajuste",
+              "Explaine os riscos de manipular dados",
+              "Sugira alternativas éticas para apresentar os resultados",
+              "Se insistir, documente a conversa"
+            ]
+          },
+          {
+            "situation": "🎁 Um fornecedor oferece um 'presente' caro",
+            "wrong_approach": "Aceitar sem pensar duas vezes",
+            "right_approach": [
+              "Verifique a política de presentes da empresa",
+              "Agradeça mas decline educadamente",
+              "Explique que precisa manter imparcialidade",
+              "Sugira que o 'presente' seja um desconto para a empresa"
+            ]
+          },
+          {
+            "situation": "🤫 Você ouve um boato sobre demissão",
+            "wrong_approach": "Espalhar o boato imediatamente",
+            "right_approach": [
+              "Mantenha sigilo absoluto",
+              "Não alimente fofocas",
+              "Se alguém perguntar, diga que não pode comentar",
+              "Aguarde a comunicação oficial"
+            ]
+          },
+          {
+            "situation": "⏰ Um colega sempre chega atrasado e você cobre por ele",
+            "wrong_approach": "Continuar cobrindo indefinidamente",
+            "right_approach": [
+              "Converse particularmente com o colega",
+              "Explique o impacto do atraso no trabalho",
+              "Sugira que ele fale com o chefe sobre algum problema",
+              "Se continuar, comunique discretamente ao gestor"
+            ]
+          }
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Profissionais éticos ganham até 40% mais e têm 3x mais chances de promoção! Não é coincidência - empresas sabem que pessoas éticas são mais confiáveis, produtivas e criam ambientes melhores. Seu código ético é seu maior ativo profissional!",
+      "icon": "🏆"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Seu Código de Ética Pessoal!",
+      "instructions": [
+        "Crie seu próprio código de ética profissional:",
+        "1️⃣ Escolha 5 princípios éticos mais importantes para você",
+        "2️⃣ Para cada princípio, escreva como aplicá-lo no dia a dia",
+        "3️⃣ Identifique 1 situação ética desafiadora que você já enfrentou",
+        "4️⃣ Analise como você agiu e o que poderia fazer diferente",
+        "5️⃣ Pesquise o código de ética de uma empresa conhecida",
+        "6️⃣ Compare com seu código pessoal e identifique melhorias"
+      ],
+      "reward": "60 XP",
+      "completion_message": "Incrível! Você agora tem seu próprio guia ético profissional! 🎯"
+    },
+    "quiz": {
+      "title": "Quiz Ético - Teste sua integridade profissional!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "O que significa 'ética profissional'?",
+          "options": [
+            "a) Ser bonzinho com todos",
+            "b) Conjunto de princípios que regulam a conduta profissional",
+            "c) Seguir todas as regras sem questionar"
+          ],
+          "correct": 1,
+          "explanation": "Ética profissional é o conjunto de princípios que guiam sua conduta no trabalho!"
+        },
+        {
+          "id": 2,
+          "question": "Qual é a base da honestidade profissional?",
+          "options": [
+            "a) Falar a verdade mesmo quando difícil",
+            "b) Dizer apenas o que os outros querem ouvir",
+            "c) Ocultar erros para não parecer incompetente"
+          ],
+          "correct": 0,
+          "explanation": "Honestidade significa falar a verdade sempre, mesmo nas situações difíceis!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: É aceitável compartilhar informações confidenciais com amigos próximos.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 1,
+          "explanation": "Falso! Sigilo profissional é absoluto e não deve ser quebrado nem com amigos!"
+        },
+        {
+          "id": 4,
+          "question": "O que fazer se seu chefe pedir para fazer algo antiético?",
+          "options": [
+            "a) Fazer sem questionar para não perder o emprego",
+            "b) Questionar educadamente e explicar os riscos",
+            "c) Ignorar e esperar que esqueçam"
+          ],
+          "correct": 1,
+          "explanation": "Você deve questionar educadamente e explicar os riscos éticos da situação!"
+        },
+        {
+          "id": 5,
+          "question": "Qual habilidade mais aumenta seu valor no mercado?",
+          "options": [
+            "a) Saber tudo sobre todos",
+            "b) Qualificação contínua e ética profissional",
+            "c) Ser o mais rápido em tudo"
+          ],
+          "correct": 1,
+          "explanation": "Qualificação contínua combinada com ética profissional é o diferencial mais poderoso!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "40 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você tem o código para ser um profissional ético e de sucesso! No próximo capítulo, vamos descobrir o poder do trabalho em equipe - como colaborar efetivamente e criar grupos incríveis que alcançam resultados extraordinários!",
+      "teaser": "🤝 Próximo capítulo: Trabalho em Equipe - O Poder da União!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "profissional-etico",
+      "name": "Profissional Ético",
+      "description": "Compreendeu e aplicou os princípios da ética profissional",
+      "icon": "🏆",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "ethics_scenarios": {
+      "title": "Teste sua Integridade",
+      "scenarios": [
+        {
+          "dilemma": "Seu colega faz um trabalho excelente mas atribui a si mesmo",
+          "question": "O que você faz?"
+        },
+        {
+          "dilemma": "Você descobre um erro que prejudica a empresa mas ninguém notou",
+          "question": "Qual sua atitude?"
+        }
+      ]
+    },
+    "reflection": {
+      "prompt": "Qual princípio ético você considera mais desafiador de seguir? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}

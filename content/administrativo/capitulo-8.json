@@ -1,0 +1,408 @@
+{
+  "id": "admin-08",
+  "title": "Capítulo 8: Trabalho em Equipe - O Poder da União!",
+  "module": "administrativo",
+  "order": 8,
+  "xp_reward": 115,
+  "badge_earned": "mestre-da-equipe",
+  "estimated_time": 19,
+  "difficulty": "pratico",
+  "prerequisites": ["admin-07"],
+  "content": {
+    "introduction": {
+      "title": "E aí! Pronto para descobrir o poder de trabalhar junto?",
+      "text": "Sozinho você vai mais rápido, mas juntos vamos mais longe! O trabalho em equipe é como formar um supergrupo - cada pessoa com seus poderes especiais, unidos para alcançar objetivos extraordinários! Empresas de sucesso sabem que o segredo não são indivíduos geniais, mas equipes incríveis que se apoiam e se complementam!",
+      "engaging_question": "Qual foi a melhor equipe que você já fez parte? O que a tornava especial?"
+    },
+    "main_content": [
+      {
+        "type": "team_fundamentals",
+        "title": "🤝 O que é Trabalho em Equipe de Verdade?",
+        "text": "Trabalho em equipe não é apenas várias pessoas trabalhando no mesmo lugar - é a sinergia mágica que acontece quando todos contribuem para um objetivo comum!",
+        "true_team_characteristics": [
+          "🎯 **Objetivos Compartilhados**: Todos sabem para onde estão indo",
+          "🗣️ **Comunicação Aberta**: Todos podem expressar opiniões",
+          "🤲 **Responsabilidade Compartilhada**: Sucessos e fracassos são de todos",
+          "💡 **Complementaridade**: Cada um contribui com seus pontos fortes",
+          "🏆 **Confiança Mútua**: Todos confiam na competência dos outros"
+        ],
+        "team_vs_group": {
+          "title": "Grupo vs Equipe - A Grande Diferença:",
+          "group_characteristics": [
+            "👤 Trabalho individual",
+            "🎯 Objetivos pessoais",
+            "📊 Competição interna",
+            "🗣️ Comunicação limitada",
+            "🤫 Individualismo"
+          ],
+          "team_characteristics": [
+            "👥 Esforço coletivo",
+            "🎯 Metas compartilhadas",
+            "🤗 Colaboração ativa",
+            "📣 Comunicação constante",
+            "🤝 Apoio mútuo"
+          ]
+        }
+      },
+      {
+        "type": "leadership_section",
+        "title": "👑 O Líder que Inspira Equipes",
+        "text": "Um grande líder não é aquele que manda, mas aquele que inspira! O líder de equipe é como o maestro de uma orquestra - não toca todos os instrumentos, mas faz todos tocarem em harmonia!",
+        "leadership_essentials": [
+          {
+            "quality": "🎯 Visão Clara",
+            "description": "Sabe exatamente para onde está levando a equipe",
+            "daily_action": "Começa cada semana compartilhando os objetivos",
+            "example": "Esta semana precisamos finalizar o projeto X com qualidade Y"
+          },
+          {
+            "quality": "👂 Escuta Ativa",
+            "description": "Ouve mais do que fala, valoriza cada opinião",
+            "daily_action": "Faz perguntas antes de dar soluções",
+            "example": "O que vocês acham que devemos fazer sobre este problema?"
+          },
+          {
+            "quality": "🤝 Empatia Genuína",
+            "description": "Se coloca no lugar dos outros",
+            "daily_action": "Pergunta 'como você está' e espera a resposta",
+            "example": "Entendo que você está sobrecarregado, como posso ajudar?"
+          },
+          {
+            "quality": "💪 Decisão Firme",
+            "description": "Toma decisões difíceis quando necessário",
+            "daily_action": "Não adia decisões importantes",
+            "example": "Precisamos mudar a estratégia agora, vou explicar o porquê"
+          },
+          {
+            "quality": "🎉 Reconhecimento",
+            "description": "Celebra as conquistas da equipe",
+            "daily_action": "Agradece publicamente as contribuições",
+            "example": "Ótimo trabalho equipe! Conseguimos porque todos colaboraram!"
+          }
+        ],
+        "leadership_types": {
+          "democratic": {
+            "name": "🗳️ Líder Democrático",
+            "style": "Inclui todos nas decisões",
+            "when_use": "Projetos criativos e complexos",
+            "pros": ["Maior engajamento", "Ideias melhores", "Comprometimento"],
+            "cons": ["Mais lento", "Pode gerar discussões"]
+          },
+          "transformational": {
+            "name": "⚡ Líder Transformacional",
+            "style": "Inspira mudanças e inovação",
+            "when_use": "Projetos que precisam de mudança",
+            "pros": ["Motivação alta", "Inovação constante", "Crescimento"],
+            "cons": ["Exige energia", "Pode ser intenso"]
+          },
+          "servant": {
+            "name": "🤲 Líder Servidor",
+            "style": "Prioriza as necessidades da equipe",
+            "when_use": "Equipes que precisam de apoio",
+            "pros": ["Lealdade alta", "Clima excelente", "Desenvolvimento"],
+            "cons": ["Parece fraco", "Decisões lentas"]
+          }
+        }
+      },
+      {
+        "type": "team_dynamics",
+        "title": "🌊 A Dinâmica das Equipes Vencedoras",
+        "text": "Equipes de sucesso não nascem prontas - elas se constroem dia após dia com práticas e hábitos que fortalecem os laços e a performance!",
+        "winning_habits": [
+          {
+            "habit": "📅 Reuniões Eficazes",
+            "description": "Encontros que realmente avançam o trabalho",
+            "best_practices": [
+              "Agenda clara enviada antes",
+              "Duração máxima definida",
+              "Todos participam ativamente",
+              "Ações definidas ao final",
+              "Seguimento das decisões"
+            ],
+            "what_to_avoid": [
+              "Reuniões sem objetivo",
+              "Pessoas no celular",
+              "Discussões que não terminam",
+              "Sem anotações ou conclusões"
+            ]
+          },
+          {
+            "habit": "🎯 Feedback Construtivo",
+            "description": "Comentários que ajudam a crescer",
+            "feedback_formula": "Situação + Comportamento + Impacto + Sugestão",
+            "examples": [
+              "Quando você entregou o relatório ontem (situação), e esqueceu os gráficos (comportamento), isso atrasou nossa apresentação (impacto). Da próxima vez, use a checklist que criamos (sugestão)."
+            ],
+            "rules": [
+              "Seja específico, não genérico",
+              "Fale sobre comportamentos, não personalidades",
+              "Ofereça sugestões, não apenas críticas",
+              "Escolha o momento e lugar adequados"
+            ]
+          },
+          {
+            "habit": "🤝 Resolução de Conflitos",
+            "description": "Transformar problemas em oportunidades",
+            "conflict_resolution_steps": [
+              "1️⃣ **Identificar**: Reconhecer que existe o conflito",
+              "2️⃣ **Escutar**: Ouvir todos os lados sem julgar",
+              "3️⃣ **Empatizar**: Entender os sentimentos envolvidos",
+              "4️⃣ **Negociar**: Buscar soluções que beneficiem a todos",
+              "5️⃣ **Acordar**: Definir claramente o que foi combinado",
+              "6️⃣ **Acompanhar**: Verificar se o acordo está sendo cumprido"
+            ]
+          },
+          {
+            "habit": "🎉 Celebração de Conquistas",
+            "description": "Reconhecer e comemorar os sucessos",
+            "celebration_ideas": [
+              "Pequenas vitórias diárias",
+              "Conquistas semanais em reuniões",
+              "Marcos mensais com equipe",
+              "Grandes projetos com evento especial"
+            ],
+            "why_important": [
+              "Aumenta a motivação",
+              "Fortalece os laços",
+              "Cria cultura positiva",
+              "Reforça comportamentos desejados"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "team_challenges",
+        "title": "⚠️ Armadilhas que Destroem Equipes",
+        "subtitle": "Cuidado! Esses comportamentos podem destruir até a melhor equipe:",
+        "team_destroyers": [
+          {
+            "trap": "🐍 Fofoca e Intrigas",
+            "how_it_destroys": "Cria desconfiança e ambiente tóxico",
+            "prevention": [
+              "Nunca fale sobre ausentes",
+              "Se ouvir fofoca, não alimente",
+              "Encoraje comunicação direta",
+              "Crie cultura de transparência"
+            ],
+            "real_example": {
+              "wrong": "Você viu como o João errou na apresentação?",
+              "right": "Vamos conversar diretamente com João sobre como podemos melhorar"
+            }
+          },
+          {
+            "trap": "👤 Individualismo Excessivo",
+            "how_it_destroys": "Quebra o espírito de colaboração",
+            "prevention": [
+              "Defina metas coletivas",
+              "Recompense trabalhos em equipe",
+              "Crie sistemas de ajuda mútua",
+              "Valorize contribuições de todos"
+            ]
+          },
+          {
+            "trap": "😠 Conflitos Não Resolvidos",
+            "how_it_destroys": "Gera ressentimentos e afasta as pessoas",
+            "prevention": [
+              "Aborde problemas rapidamente",
+              "Crie espaço seguro para diálogo",
+              "Busque mediadores se necessário",
+              "Não deixe 'feridas abertas'"
+            ]
+          },
+          {
+            "trap": "🤐 Falta de Comunicação",
+            "how_it_destroys": "Cria desinformação e erros",
+            "prevention": [
+              "Estabeleça canais claros",
+              "Promova atualizações regulares",
+              "Use ferramentas de comunicação",
+              "Incentive perguntas e esclarecimentos"
+            ]
+          },
+          {
+            "trap": "🎯 Falta de Objetivos Comuns",
+            "how_it_destroys": "Cada um puxa para um lado diferente",
+            "prevention": [
+              "Defina metas claras e compartilhadas",
+              "Reforce os objetivos regularmente",
+              "Conecte tarefas individuais aos objetivos gerais",
+              "Celebre quando alcançam metas juntos"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "practical_guide",
+        "title": "🚀 Guia Prático para Montar Equipes Incríveis",
+        "subtitle": "Passo a passo para criar times que brilham:",
+        "team_building_steps": [
+          {
+            "step": "1️⃣ Definição clara",
+            "title": "Objetivos e Papéis",
+            "actions": [
+              "Estabeleça metas SMART (Específicas, Mensuráveis, Atingíveis, Relevantes, Temporais)",
+              "Defina claramente o papel de cada membro",
+              "Crie uma 'declaração de missão' para a equipe",
+              "Alinhe expectativas desde o início"
+            ],
+            "tools": ["Reunião de kick-off", "Documento de papéis", "Plano de projeto"]
+          },
+          {
+            "step": "2️⃣ Conhecimento Mútuo",
+            "title": "Conectando as Pessoas",
+            "actions": [
+              "Crie atividades de integração",
+              "Descubra pontos fortes de cada um",
+              "Identifique estilos de trabalho",
+              "Estabeleça preferências de comunicação"
+            ],
+            "tools": ["Dinâmicas de grupo", "Testes de personalidade", "Coffee breaks"]
+          },
+          {
+            "step": "3️⃣ Regras do Jogo",
+            "title": "Acordos de Convivência",
+            "actions": [
+              "Definam juntos regras de comunicação",
+              "Estabeleçam como tomar decisões",
+              "Criem sistema de feedback",
+              "Definam como lidar com conflitos"
+            ],
+            "tools": ["Contrato de equipe", "Regras de reunião", "Código de conduta"]
+          },
+          {
+            "step": "4️⃣ Sistema de Trabalho",
+            "title": "Processos e Ferramentas",
+            "actions": [
+              "Escolham ferramentas colaborativas",
+              "Definam fluxos de trabalho",
+              "Estabeleçam prazos e checkpoints",
+              "Criem sistema de acompanhamento"
+            ],
+            "tools": ["Slack/Teams", "Trello/Asana", "Google Drive", "Calendários compartilhados"]
+          },
+          {
+            "step": "5️⃣ Crescimento Contínuo",
+            "title": "Aprendizado e Evolução",
+            "actions": [
+              "Façam retrospectivas regulares",
+              "Celebrem aprendizados com erros",
+              "Invistam em capacitação",
+              "Mantenham-se atualizados"
+            ],
+            "tools": ["Reuniões retrospectivas", "Sessões de aprendizado", "Cursos e workshops"]
+          }
+        ]
+      }
+    ],
+    "special_box": {
+      "type": "fala_serio",
+      "title": "Fala Sério!",
+      "content": "Estudos mostram que equipes bem formadas são até 5x mais produtivas que indivíduos trabalhando sozinhos! E o mais incrível: pessoas que trabalham em equipes relatam maior satisfação no trabalho, menos estresse e melhor saúde mental. O poder da união não é só profissional - é pessoal!",
+      "icon": "🌟"
+    },
+    "activity": {
+      "type": "mao_na_massa",
+      "title": "Atividade Mão na Massa - Sua Equipe dos Sonhos!",
+      "instructions": [
+        "Crie um plano para montar uma equipe incrível:",
+        "1️⃣ Escolha um projeto (trabalho escolar, evento, grupo de estudos)",
+        "2️⃣ Defina 3 objetivos claros para essa equipe",
+        "3️⃣ Identifique que tipo de pessoas você precisaria",
+        "4️⃣ Crie 5 regras de convivência para o grupo",
+        "5️⃣ Planeje como você lidaria com um conflito entre membros",
+        "6️⃣ Descreva como celebrariam uma conquista importante"
+      ],
+      "reward": "58 XP",
+      "completion_message": "Fantástico! Você agora sabe como montar equipes de sucesso! 🤝"
+    },
+    "quiz": {
+      "title": "Quiz de Equipe - Teste seu espírito colaborativo!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Qual é a principal diferença entre grupo e equipe?",
+          "options": [
+            "a) Número de pessoas",
+            "b) Equipe tem objetivos compartilhados e colaboração",
+            "c) Grupo é mais organizado"
+          ],
+          "correct": 1,
+          "explanation": "Equipes têm objetivos compartilhados e colaboração ativa, diferentemente de grupos!"
+        },
+        {
+          "id": 2,
+          "question": "Qual qualidade é ESSENCIAL em um líder de equipe?",
+          "options": [
+            "a) Ser o mais inteligente",
+            "b) Saber ouvir e inspirar os outros",
+            "c) Mandar em todos"
+          ],
+          "correct": 1,
+          "explanation": "Um grande líder sabe ouvir e inspirar, não apenas comandar!"
+        },
+        {
+          "id": 3,
+          "question": "Verdadeiro ou Falso: Fofoca no ambiente de trabalho fortalece a equipe.",
+          "options": ["Verdadeiro", "Falso"],
+          "correct": 1,
+          "explanation": "Falso! Fofoca cria desconfiança e destrói o espírito de equipe!"
+        },
+        {
+          "id": 4,
+          "question": "O que é feedback construtivo?",
+          "options": [
+            "a) Dizer apenas coisas positivas",
+            "b) Críticas que ajudam a pessoa a melhorar",
+            "c) Ignorar problemas para não ofender"
+          ],
+          "correct": 1,
+          "explanation": "Feedback construtivo ajuda a pessoa a crescer de forma positiva!"
+        },
+        {
+          "id": 5,
+          "question": "Qual comportamento NÃO destrói equipes?",
+          "options": [
+            "a) Comunicação clara e aberta",
+            "b) Individualismo excessivo",
+            "c) Conflitos não resolvidos"
+          ],
+          "correct": 0,
+          "explanation": "Comunicação clara e aberta fortalece as equipes, não destrói!"
+        }
+      ],
+      "passing_score": 70,
+      "reward": "38 XP"
+    },
+    "next_steps": {
+      "title": "Próximos Passos",
+      "message": "Agora você é um mestre do trabalho em equipe! No próximo capítulo, vamos mergulhar no Departamento Pessoal - o coração humano das empresas, onde lidamos com recrutamento, treinamento e tudo que envolve as pessoas na organização!",
+      "teaser": "👥 Próximo capítulo: Departamento Pessoal - O Coração da Empresa!"
+    }
+  },
+  "achievements": [
+    {
+      "id": "mestre-da-equipe",
+      "name": "Mestre da Equipe",
+      "description": "Dominou a arte de trabalhar e liderar equipes",
+      "icon": "👑",
+      "rarity": "raro"
+    }
+  ],
+  "interactive_elements": {
+    "team_builder": {
+      "title": "Monte sua Equipe Ideal",
+      "scenario": "Você precisa organizar um grande evento na escola",
+      "roles": [
+        "Líder de projeto",
+        "Responsável por comunicação",
+        "Coordenador de logística",
+        "Gerente financeiro",
+        "Responsável por marketing"
+      ]
+    },
+    "reflection": {
+      "prompt": "Qual tipo de líder você gostaria de ser? Por quê?",
+      "save_to_profile": true
+    }
+  }
+}
