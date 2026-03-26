@@ -1,4 +1,4 @@
-// AD-RATEC PR - Portal de Educação Profissional
+// ADRA-TEC - Portal de Educação Profissional
 // Sistema principal de gerenciamento de curso
 
 // Estado global da aplicação
@@ -232,7 +232,7 @@ class StorageManager {
 // Sistema de gerenciamento de usuário
 class UserManager {
     static init() {
-        const savedUser = StorageManager.load('adratecpr_user');
+        const savedUser = StorageManager.load('adra-tec_user');
         if (savedUser) {
             AppState.user = { ...AppState.user, ...savedUser };
         }
@@ -241,7 +241,7 @@ class UserManager {
     }
 
     static saveUser() {
-        StorageManager.save('adratecpr_user', AppState.user);
+        StorageManager.save('adra-tec_user', AppState.user);
     }
 
     static updateProgress() {

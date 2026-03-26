@@ -1,7 +1,7 @@
 {
-  "name": "adratecpr",
+  "name": "adra-tec",
   "version": "1.0.0",
-  "description": "Portal de Educação Profissional - 90 Dias de Formação em RH, Finanças, Marketing e Programação",
+  "description": "ADRA-TEC - Portal de Educação Profissional",
   "main": "index.html",
   "scripts": {
     "dev": "live-server --port=3000 --open=index.html",

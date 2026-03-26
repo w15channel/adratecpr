@@ -1,4 +1,4 @@
-// Componente Header para AD-RATEC PR
+// Componente Header para ADRA-TEC
 export class Header {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
@@ -19,7 +19,7 @@ export class Header {
                     <div class="logo">
                         <div class="logo-icon">🚀</div>
                         <div>
-                            <h1>AD-RATEC PR</h1>
+                            <h1>ADRA-TEC</h1>
                             <p>Portal de Educação Profissional</p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ export class Header {
                     </nav>
 
                     <div class="user-actions">
-                        <button class="btn btn-secondary" onclick="IATutor.open()">
+                        <button class="btn btn-secondary" onclick="window.openIATutor()">
                             <i class="fas fa-robot"></i>
                             IA Tutor
                         </button>
@@ -56,15 +56,15 @@ export class Header {
                                 <span class="user-points" id="header-points">0 pts</span>
                             </div>
                             <div class="user-dropdown">
-                                <a href="#" onclick="UserManager.showProfile()">
+                                <a href="#" onclick="window.showProfile()">
                                     <i class="fas fa-user"></i>
                                     Perfil
                                 </a>
-                                <a href="#" onclick="UserManager.showSettings()">
+                                <a href="#" onclick="window.showSettings()">
                                     <i class="fas fa-cog"></i>
                                     Configurações
                                 </a>
-                                <a href="#" onclick="UserManager.logout()">
+                                <a href="#" onclick="window.logout()">
                                     <i class="fas fa-sign-out-alt"></i>
                                     Sair
                                 </a>
@@ -82,7 +82,24 @@ export class Header {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const viewId = link.dataset.view;
-                NavigationManager.showView(viewId);
+                if (window.NavigationManager) {
+                    window.NavigationManager.showView(viewId);
+                } else {
+                    // Fallback simples
+                    document.querySelectorAll('.view').forEach(view => {
+                        view.classList.add('hidden');
+                    });
+                    const targetView = document.getElementById(`${viewId}-view`);
+                    if (targetView) {
+                        targetView.classList.remove('hidden');
+                    }
+                    
+                    // Atualizar links ativos
+                    this.container.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                }
             });
         });
 
@@ -96,7 +113,7 @@ export class Header {
     }
 
     loadUserData() {
-        const savedUser = localStorage.getItem('adratecpr_user');
+        const savedUser = localStorage.getItem('adra-tec_user');
         if (savedUser) {
             this.user = JSON.parse(savedUser);
             this.updateUserInfo();
