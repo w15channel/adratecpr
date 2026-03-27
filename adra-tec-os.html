@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADRA-TEC OS - Sistema Operacional Educacional</title>
+    <link rel="stylesheet" href="css/os-style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Tela de Boot (Loading) -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="boot-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>ADRA-TEC OS</h1>
+            </div>
+            <div class="boot-messages">
+                <div class="boot-message">Iniciando sistema educacional...</div>
+                <div class="boot-message">Carregando módulos de aprendizado...</div>
+                <div class="boot-message">Preparando ambiente interativo...</div>
+                <div class="boot-message">Sistema pronto para uso!</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de Trabalho (Desktop) -->
+    <div id="desktop" class="desktop">
+        <!-- Wallpaper -->
+        <div class="wallpaper">
+            <div class="wallpaper-overlay"></div>
+            <div class="wallpaper-content">
+                <h2>ADRA-TEC OS</h2>
+                <p>Educação Profissional Transformadora</p>
+            </div>
+        </div>
+
+        <!-- Ícones da Área de Trabalho -->
+        <div class="desktop-icons">
+            <!-- Módulo Administrativo -->
+            <div class="desktop-icon" data-module="administrativo">
+                <div class="icon-wrapper">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <span class="icon-label">Administrativo</span>
+            </div>
+
+            <!-- Módulo Empreendedorismo -->
+            <div class="desktop-icon" data-module="empreendedorismo">
+                <div class="icon-wrapper">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <span class="icon-label">Empreendedorismo</span>
+            </div>
+
+            <!-- Módulo Marketing -->
+            <div class="desktop-icon" data-module="marketing">
+                <div class="icon-wrapper">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <span class="icon-label">Marketing</span>
+            </div>
+
+            <!-- Módulo Programação -->
+            <div class="desktop-icon" data-module="programacao">
+                <div class="icon-wrapper">
+                    <i class="fas fa-code"></i>
+                </div>
+                <span class="icon-label">Programação</span>
+            </div>
+
+            <!-- Ferramentas do Sistema -->
+            <div class="desktop-icon system-tool" data-tool="settings">
+                <div class="icon-wrapper">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <span class="icon-label">Configurações</span>
+            </div>
+
+            <div class="desktop-icon system-tool" data-tool="about">
+                <div class="icon-wrapper">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <span class="icon-label">Sobre</span>
+            </div>
+        </div>
+
+        <!-- Janelas Flutuantes -->
+        <div id="window-container" class="window-container"></div>
+    </div>
+
+    <!-- Barra de Tarefas -->
+    <div class="taskbar">
+        <!-- Menu Iniciar -->
+        <div class="start-menu">
+            <button id="start-button" class="start-button">
+                <i class="fas fa-th"></i>
+                <span>Menu</span>
+            </button>
+            
+            <!-- Menu Iniciar Dropdown -->
+            <div id="start-menu-dropdown" class="start-menu-dropdown">
+                <div class="menu-header">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <div class="username">Estudante ADRA-TEC</div>
+                            <div class="user-status">Pronto para aprender!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-sections">
+                    <!-- Módulos Principais -->
+                    <div class="menu-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Módulos de Aprendizado</h3>
+                        <div class="menu-items">
+                            <div class="menu-item" data-module="administrativo">
+                                <i class="fas fa-briefcase"></i>
+                                <div>
+                                    <span class="item-title">Administrativo</span>
+                                    <span class="item-description">Gestão e organização empresarial</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-module="empreendedorismo">
+                                <i class="fas fa-rocket"></i>
+                                <div>
+                                    <span class="item-title">Empreendedorismo</span>
+                                    <span class="item-description">Como criar e gerir seu negócio</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-module="marketing">
+                                <i class="fas fa-bullhorn"></i>
+                                <div>
+                                    <span class="item-title">Marketing</span>
+                                    <span class="item-description">Estratégias e comunicação</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-module="programacao">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <span class="item-title">Programação</span>
+                                    <span class="item-description">Desenvolvimento de software</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ferramentas -->
+                    <div class="menu-section">
+                        <h3><i class="fas fa-tools"></i> Ferramentas</h3>
+                        <div class="menu-items">
+                            <div class="menu-item" data-tool="progress">
+                                <i class="fas fa-chart-line"></i>
+                                <div>
+                                    <span class="item-title">Meu Progresso</span>
+                                    <span class="item-description">Acompanhe seu aprendizado</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-tool="achievements">
+                                <i class="fas fa-trophy"></i>
+                                <div>
+                                    <span class="item-title">Conquistas</span>
+                                    <span class="item-description">Badges e certificados</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-tool="settings">
+                                <i class="fas fa-cog"></i>
+                                <div>
+                                    <span class="item-title">Configurações</span>
+                                    <span class="item-description">Personalize seu sistema</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sistema -->
+                    <div class="menu-section">
+                        <h3><i class="fas fa-power-off"></i> Sistema</h3>
+                        <div class="menu-items">
+                            <div class="menu-item" data-tool="help">
+                                <i class="fas fa-question-circle"></i>
+                                <div>
+                                    <span class="item-title">Ajuda</span>
+                                    <span class="item-description">Suporte e tutoriais</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" data-tool="about">
+                                <i class="fas fa-info-circle"></i>
+                                <div>
+                                    <span class="item-title">Sobre ADRA-TEC OS</span>
+                                    <span class="item-description">Informações do sistema</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" id="shutdown-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <div>
+                                    <span class="item-title">Sair</span>
+                                    <span class="item-description">Fechar o sistema</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Janelas Abertas -->
+        <div class="open-windows">
+            <div class="window-tabs">
+                <!-- Tabs serão adicionadas dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Área de Notificação -->
+        <div class="notification-area">
+            <div class="system-icons">
+                <div class="system-icon" id="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="system-icon" id="volume-icon">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <div class="system-icon" id="network-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <div class="system-icon" id="clock">
+                    <span class="time">00:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Painel de Notificações -->
+    <div id="notification-panel" class="notification-panel">
+        <div class="panel-header">
+            <h3>Notificações</h3>
+            <button class="close-panel">&times;</button>
+        </div>
+        <div class="notifications-list">
+            <div class="notification-item">
+                <i class="fas fa-trophy"></i>
+                <div>
+                    <strong>Novo Conquista!</strong>
+                    <p>Você completou o módulo administrativo</p>
+                    <span class="notification-time">há 5 minutos</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <strong>Novo Conteúdo</strong>
+                    <p>Módulo de empreendedorismo disponível</p>
+                    <span class="notification-time">há 1 hora</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <i class="fas fa-star"></i>
+                <div>
+                    <strong>Meta Atingida</strong>
+                    <p>Você estudou por 7 dias seguidos!</p>
+                    <span class="notification-time">há 2 horas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/os-manager.js"></script>
+</body>
+</html>
