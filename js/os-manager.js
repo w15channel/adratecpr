@@ -1,8 +1,11 @@
-// ADRA-TEC OS - Sistema Operacional Educacional
+// ADRA-TEC OS - Sistema Operacional Educacional com Login e Banco de Dados
 class OSTecManager {
     constructor() {
+        this.loginScreen = document.getElementById('login-screen');
+        this.osSystem = document.getElementById('os-system');
         this.bootScreen = document.getElementById('boot-screen');
         this.desktop = document.getElementById('desktop');
+        this.taskbar = document.querySelector('.taskbar');
         this.startButton = document.getElementById('start-button');
         this.startMenuDropdown = document.getElementById('start-menu-dropdown');
         this.windowContainer = document.getElementById('window-container');
@@ -15,12 +18,34 @@ class OSTecManager {
         this.currentWindow = null;
         this.offset = { x: 0, y: 0 };
         
+        // Dados do usuário
+        this.userData = {
+            name: '',
+            name2: '',
+            accessType: 'individual',
+            progress: {
+                modules: {
+                    administrativo: { completed: [], xp: 0, progress: 0 },
+                    empreendedorismo: { completed: [], xp: 0, progress: 0 },
+                    marketing: { completed: [], xp: 0, progress: 0 },
+                    programacao: { completed: [], xp: 0, progress: 0 }
+                },
+                totalXP: 0,
+                achievements: [],
+                studyTime: 0,
+                lastAccess: null
+            }
+        };
+        
         this.init();
     }
     
     init() {
-        // Iniciar boot sequence
-        this.startBootSequence();
+        // Inicializar sistema de login
+        this.setupLoginSystem();
+        
+        // Verificar se há dados salvos
+        this.loadSavedData();
         
         // Configurar event listeners
         this.setupEventListeners();
@@ -28,19 +53,122 @@ class OSTecManager {
         // Iniciar clock
         this.updateClock();
         setInterval(() => this.updateClock(), 1000);
+    }
+    
+    setupLoginSystem() {
+        // Tipo de acesso
+        const accessTypeBtns = document.querySelectorAll('.access-type-btn');
+        accessTypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                accessTypeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                this.userData.accessType = btn.dataset.type;
+                this.updateNameLabels();
+            });
+        });
         
-        // Carregar dados do usuário
-        this.loadUserData();
+        // Botão de login
+        const loginBtn = document.getElementById('login-btn');
+        loginBtn.addEventListener('click', () => this.performLogin());
+        
+        // Enter no formulário
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !this.loginScreen.classList.contains('hidden')) {
+                this.performLogin();
+            }
+        });
+        
+        // Carregar banco de dados
+        const loadDbBtn = document.getElementById('load-db-btn');
+        const dbFileInput = document.getElementById('db-file-input');
+        
+        loadDbBtn.addEventListener('click', () => dbFileInput.click());
+        dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
+        
+        // Menu iniciar - carregar BD
+        const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
+        const dbUploadInput = document.getElementById('db-upload-input');
+        
+        loadDbMenuBtn.addEventListener('click', () => dbUploadInput.click());
+        dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
+        
+        // Menu iniciar - salvar BD
+        const saveDbBtn = document.getElementById('save-db-btn');
+        saveDbBtn.addEventListener('click', () => this.saveDatabase());
+        
+        // Logout
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', () => this.logout());
+    }
+    
+    updateNameLabels() {
+        const nameLabel = document.getElementById('name-label');
+        const duplaNames = document.getElementById('dupla-names');
+        
+        if (this.userData.accessType === 'dupla') {
+            nameLabel.textContent = 'Nome do Primeiro Aluno';
+            duplaNames.classList.remove('hidden');
+        } else {
+            nameLabel.textContent = 'Seu Nome';
+            duplaNames.classList.add('hidden');
+        }
+    }
+    
+    performLogin() {
+        const nameInput = document.getElementById('student-name');
+        const name2Input = document.getElementById('student-name-2');
+        
+        const name = nameInput.value.trim();
+        const name2 = name2Input.value.trim();
+        
+        if (!name) {
+            this.showNotification('Por favor, preencha seu nome!', 'error');
+            return;
+        }
+        
+        if (this.userData.accessType === 'dupla' && !name2) {
+            this.showNotification('Por favor, preencha o nome do segundo aluno!', 'error');
+            return;
+        }
+        
+        // Salvar dados do usuário
+        this.userData.name = name;
+        this.userData.name2 = name2;
+        this.userData.progress.lastAccess = new Date().toISOString();
+        
+        // Salvar em cookies
+        this.saveUserData();
+        
+        // Iniciar boot sequence
+        this.startBootSequence();
     }
     
     startBootSequence() {
+        // Atualizar mensagens de boot
+        const bootUserName = document.getElementById('boot-user-name');
+        const displayName = this.userData.accessType === 'dupla' 
+            ? `${this.userData.name} e ${this.userData.name2}`
+            : this.userData.name;
+        bootUserName.textContent = displayName;
+        
+        // Mostrar boot screen
+        this.loginScreen.classList.add('hidden');
+        this.osSystem.classList.remove('hidden');
+        this.bootScreen.classList.remove('hidden');
+        
+        // Atualizar welcome message
+        const welcomeMessage = document.getElementById('welcome-message');
+        welcomeMessage.textContent = `Bem-vindo(a), ${displayName}!`;
+        
+        // Atualizar menu iniciar
+        const menuUsername = document.getElementById('menu-username');
+        menuUsername.textContent = displayName;
+        
         setTimeout(() => {
-            this.bootScreen.style.opacity = '0';
-            setTimeout(() => {
-                this.bootScreen.style.display = 'none';
-                this.desktop.style.display = 'block';
-                this.showWelcomeNotification();
-            }, 500);
+            this.bootScreen.classList.add('hidden');
+            this.desktop.classList.remove('hidden');
+            this.taskbar.classList.remove('hidden');
+            this.showWelcomeNotification();
         }, 3000);
     }
     
@@ -91,8 +219,6 @@ class OSTecManager {
                     this.openHelpWindow();
                 } else if (tool === 'about') {
                     this.openAboutWindow();
-                } else if (item.id === 'shutdown-btn') {
-                    this.shutdown();
                 }
                 
                 this.closeStartMenu();
@@ -115,8 +241,9 @@ class OSTecManager {
             }
         });
         
-        // Sistema de janelas
+        // Sistema de janelas com funcionalidades completas
         this.setupWindowDragging();
+        this.setupWindowControls();
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
@@ -126,6 +253,30 @@ class OSTecManager {
             }
             if (e.ctrlKey && e.key === 'Escape') {
                 this.closeAllWindows();
+            }
+        });
+    }
+    
+    setupWindowControls() {
+        // Delegação de eventos para controles de janela
+        this.windowContainer.addEventListener('click', (e) => {
+            const closeBtn = e.target.closest('.window-control.close');
+            const minimizeBtn = e.target.closest('.window-control.minimize');
+            const maximizeBtn = e.target.closest('.window-control.maximize');
+            const header = e.target.closest('.window-header');
+            
+            if (closeBtn) {
+                const window = closeBtn.closest('.os-window');
+                this.closeWindow(window);
+            } else if (minimizeBtn) {
+                const window = minimizeBtn.closest('.os-window');
+                this.minimizeWindow(window);
+            } else if (maximizeBtn) {
+                const window = maximizeBtn.closest('.os-window');
+                this.maximizeWindow(window);
+            } else if (header) {
+                const window = header.closest('.os-window');
+                this.focusWindow(window);
             }
         });
     }
@@ -156,6 +307,9 @@ class OSTecManager {
         
         this.windows.push(window);
         this.focusWindow(window);
+        
+        // Atualizar progresso
+        this.updateModuleProgress(moduleId);
     }
     
     getModuleInfo(moduleId) {
@@ -206,9 +360,9 @@ class OSTecManager {
                     <span>${moduleInfo.title}</span>
                 </div>
                 <div class="window-controls">
-                    <div class="window-control minimize"></div>
-                    <div class="window-control maximize"></div>
-                    <div class="window-control close"></div>
+                    <div class="window-control minimize" title="Minimizar">−</div>
+                    <div class="window-control maximize" title="Maximizar">□</div>
+                    <div class="window-control close" title="Fechar">×</div>
                 </div>
             </div>
             <div class="window-content">
@@ -220,15 +374,6 @@ class OSTecManager {
         `;
         
         this.windowContainer.appendChild(window);
-        
-        // Configurar controles da janela
-        const closeBtn = window.querySelector('.window-control.close');
-        const minimizeBtn = window.querySelector('.window-control.minimize');
-        const maximizeBtn = window.querySelector('.window-control.maximize');
-        
-        closeBtn.addEventListener('click', () => this.closeWindow(window));
-        minimizeBtn.addEventListener('click', () => this.minimizeWindow(window));
-        maximizeBtn.addEventListener('click', () => this.maximizeWindow(window));
         
         // Adicionar à barra de tarefas
         this.addWindowTab(moduleInfo.title, window);
@@ -263,15 +408,16 @@ class OSTecManager {
                 .then(html => {
                     content.innerHTML = html;
                     
-                    // Inicializar o course manager se necessário
-                    if (window.courseManager) {
-                        window.courseManager.init();
-                    }
-                    
-                    // Adicionar script do course manager
+                    // Adicionar scripts necessários
                     const script = document.createElement('script');
                     script.src = 'js/course-manager.js';
                     content.appendChild(script);
+                    
+                    // Adicionar CSS
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = 'css/course.css';
+                    document.head.appendChild(link);
                 })
                 .catch(error => {
                     content.innerHTML = this.getModulePlaceholder(moduleId);
@@ -299,8 +445,8 @@ class OSTecManager {
                             <span class="stat-label">XP Total</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Completo</span>
+                            <span class="stat-number">${this.userData.progress.modules.administrativo.progress}%</span>
+                            <span class="stat-label">Progresso</span>
                         </div>
                     </div>
                     <button class="btn-primary" onclick="window.location.href='course-view.html'">
@@ -351,6 +497,12 @@ class OSTecManager {
     
     openTool(tool) {
         switch(tool) {
+            case 'progress':
+                this.openProgressWindow();
+                break;
+            case 'achievements':
+                this.openAchievementsWindow();
+                break;
             case 'settings':
                 this.openSettingsWindow();
                 break;
@@ -381,7 +533,7 @@ class OSTecManager {
                     <div class="overview-card">
                         <i class="fas fa-clock"></i>
                         <div>
-                            <span class="card-number">24h</span>
+                            <span class="card-number">${this.userData.progress.studyTime}h</span>
                             <span class="card-label">Tempo de Estudo</span>
                         </div>
                     </div>
@@ -398,30 +550,30 @@ class OSTecManager {
                     <div class="progress-item">
                         <span>Administrativo</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 100%"></div>
+                            <div class="progress-fill" style="width: ${this.userData.progress.modules.administrativo.progress}%"></div>
                         </div>
-                        <span>100%</span>
+                        <span>${this.userData.progress.modules.administrativo.progress}%</span>
                     </div>
                     <div class="progress-item">
                         <span>Empreendedorismo</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: ${this.userData.progress.modules.empreendedorismo.progress}%"></div>
                         </div>
-                        <span>0%</span>
+                        <span>${this.userData.progress.modules.empreendedorismo.progress}%</span>
                     </div>
                     <div class="progress-item">
                         <span>Marketing</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: ${this.userData.progress.modules.marketing.progress}%"></div>
                         </div>
-                        <span>0%</span>
+                        <span>${this.userData.progress.modules.marketing.progress}%</span>
                     </div>
                     <div class="progress-item">
                         <span>Programação</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" style="width: ${this.userData.progress.modules.programacao.progress}%"></div>
                         </div>
-                        <span>0%</span>
+                        <span>${this.userData.progress.modules.programacao.progress}%</span>
                     </div>
                 </div>
             </div>
@@ -438,24 +590,21 @@ class OSTecManager {
             color: '#ffd700'
         });
         
+        const achievements = this.userData.progress.achievements || [];
+        
         window.element.querySelector('.window-content').innerHTML = `
             <div class="achievements-dashboard">
                 <h3>Suas Conquistas</h3>
                 <div class="achievements-grid">
-                    <div class="achievement unlocked">
-                        <i class="fas fa-trophy"></i>
-                        <div>
-                            <strong>Administrador Certificado</strong>
-                            <p>Completou todo o módulo administrativo</p>
+                    ${achievements.map(achievement => `
+                        <div class="achievement unlocked">
+                            <i class="${achievement.icon}"></i>
+                            <div>
+                                <strong>${achievement.name}</strong>
+                                <p>${achievement.description}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="achievement unlocked">
-                        <i class="fas fa-star"></i>
-                        <div>
-                            <strong>Primeiros Passos</strong>
-                            <p>Iniciou sua jornada no ADRA-TEC</p>
-                        </div>
-                    </div>
+                    `).join('')}
                     <div class="achievement locked">
                         <i class="fas fa-lock"></i>
                         <div>
@@ -490,6 +639,26 @@ class OSTecManager {
                 <h3>Configurações do Sistema</h3>
                 <div class="settings-sections">
                     <div class="settings-section">
+                        <h4>Perfil do Usuário</h4>
+                        <div class="setting-item">
+                            <label>Nome</label>
+                            <input type="text" value="${this.userData.name}" id="settings-name">
+                        </div>
+                        ${this.userData.accessType === 'dupla' ? `
+                            <div class="setting-item">
+                                <label>Segundo Aluno</label>
+                                <input type="text" value="${this.userData.name2}" id="settings-name2">
+                            </div>
+                        ` : ''}
+                        <div class="setting-item">
+                            <label>Tipo de Acesso</label>
+                            <select>
+                                <option value="individual" ${this.userData.accessType === 'individual' ? 'selected' : ''}>Individual</option>
+                                <option value="dupla" ${this.userData.accessType === 'dupla' ? 'selected' : ''}>Dupla</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
                         <h4>Aparência</h4>
                         <div class="setting-item">
                             <label>Tema</label>
@@ -517,25 +686,9 @@ class OSTecManager {
                             </label>
                         </div>
                     </div>
-                    <div class="settings-section">
-                        <h4>Sistema</h4>
-                        <div class="setting-item">
-                            <label>Idioma</label>
-                            <select>
-                                <option>Português (Brasil)</option>
-                                <option>Inglês</option>
-                                <option>Espanhol</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <label>
-                                <input type="checkbox" checked> Animações
-                            </label>
-                        </div>
-                    </div>
                 </div>
                 <div class="settings-actions">
-                    <button class="btn-primary">Salvar Configurações</button>
+                    <button class="btn-primary" onclick="osManager.saveSettings()">Salvar Configurações</button>
                     <button class="btn-secondary">Restaurar Padrão</button>
                 </div>
             </div>
@@ -562,7 +715,17 @@ class OSTecManager {
                             <li>Duplo clique nos ícones para abrir módulos</li>
                             <li>Use o Menu Iniciar para acessar todas as ferramentas</li>
                             <li>Arraste as janelas para reorganizar</li>
+                            <li>Use os controles − □ × para minimizar, maximizar e fechar</li>
                             <li>Pressione ESC para fechar menus</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h4><i class="fas fa-database"></i> Banco de Dados</h4>
+                        <ul>
+                            <li>Use "Salvar BD" para exportar seu progresso</li>
+                            <li>Use "Carregar BD" para importar dados salvos</li>
+                            <li>Seus dados são salvos como arquivo .txt</li>
+                            <li>Mantenha backup regular do seu progresso</li>
                         </ul>
                     </div>
                     <div class="help-section">
@@ -611,6 +774,7 @@ class OSTecManager {
                         <li>Interface de sistema operacional completa</li>
                         <li>Módulos educacionais integrados</li>
                         <li>Sistema de gamificação e conquistas</li>
+                        <li>Banco de dados local para progresso</li>
                         <li>Ambiente de aprendizado colaborativo</li>
                     </ul>
                     
@@ -618,7 +782,7 @@ class OSTecManager {
                     <div class="modules-list">
                         <div class="module-item">
                             <i class="fas fa-briefcase"></i>
-                            <span>Administrativo - 100% Completo</span>
+                            <span>Administrativo - ${this.userData.progress.modules.administrativo.progress}% Completo</span>
                         </div>
                         <div class="module-item">
                             <i class="fas fa-rocket"></i>
@@ -646,10 +810,11 @@ class OSTecManager {
         this.focusWindow(window);
     }
     
+    // Sistema de janelas completo
     setupWindowDragging() {
         document.addEventListener('mousedown', (e) => {
             const header = e.target.closest('.window-header');
-            if (header) {
+            if (header && !e.target.closest('.window-controls')) {
                 const window = header.closest('.os-window');
                 this.startDragging(window, e);
             }
@@ -722,32 +887,32 @@ class OSTecManager {
     }
     
     closeWindow(window) {
-        const index = this.windows.findIndex(w => w.id === window.id);
+        const index = this.windows.findIndex(w => w.element === window || w.id === window.id);
         if (index > -1) {
             this.windows.splice(index, 1);
-            window.element.remove();
+            window.remove();
             this.updateWindowTabs();
         }
     }
     
     minimizeWindow(window) {
         window.minimized = true;
-        window.element.style.display = 'none';
+        window.style.display = 'none';
         this.updateWindowTabs();
     }
     
     maximizeWindow(window) {
         if (window.maximized) {
             // Restaurar tamanho original
-            window.element.style.width = '800px';
-            window.element.style.height = '600px';
+            window.style.width = '800px';
+            window.style.height = '600px';
             window.maximized = false;
         } else {
             // Maximizar
-            window.element.style.width = '100%';
-            window.element.style.height = 'calc(100% - 60px)';
-            window.element.style.top = '0';
-            window.element.style.left = '0';
+            window.style.width = '100%';
+            window.style.height = 'calc(100% - 60px)';
+            window.style.top = '0';
+            window.style.left = '0';
             window.maximized = true;
         }
     }
@@ -772,7 +937,7 @@ class OSTecManager {
         tab.addEventListener('click', () => {
             if (window.minimized) {
                 window.minimized = false;
-                window.element.style.display = 'flex';
+                window.style.display = 'flex';
                 this.focusWindow(window);
             } else {
                 this.focusWindow(window);
@@ -808,32 +973,207 @@ class OSTecManager {
         this.clock.textContent = `${hours}:${minutes}`;
     }
     
-    loadUserData() {
-        // Carregar dados do usuário do localStorage
-        const userData = localStorage.getItem('adra-tec_user_data');
-        if (userData) {
-            const data = JSON.parse(userData);
-            // Atualizar interface com dados do usuário
+    // Sistema de Banco de Dados
+    saveDatabase() {
+        const dbData = {
+            version: '1.0.0',
+            exportDate: new Date().toISOString(),
+            userData: this.userData
+        };
+        
+        const dataStr = JSON.stringify(dbData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'text/plain' });
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `adra-tec-backup-${new Date().toISOString().split('T')[0]}.txt`;
+        link.click();
+        
+        this.showNotification('Banco de dados salvo com sucesso!', 'success');
+    }
+    
+    loadDatabase(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const dbData = JSON.parse(e.target.result);
+                
+                // Validar dados
+                if (!dbData.userData) {
+                    throw new Error('Formato de banco de dados inválido');
+                }
+                
+                // Confirmar importação
+                if (confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
+                    this.userData = dbData.userData;
+                    this.saveUserData();
+                    this.showNotification('Banco de dados carregado com sucesso!', 'success');
+                    
+                    // Atualizar interface
+                    this.updateInterface();
+                }
+            } catch (error) {
+                this.showNotification('Erro ao carregar banco de dados: ' + error.message, 'error');
+            }
+        };
+        
+        reader.readAsText(file);
+        
+        // Limpar input
+        event.target.value = '';
+    }
+    
+    saveUserData() {
+        const data = {
+            userData: this.userData,
+            timestamp: new Date().toISOString()
+        };
+        
+        // Salvar em localStorage
+        localStorage.setItem('adra-tec-user-data', JSON.stringify(data));
+        
+        // Salvar em cookies (backup)
+        const cookieData = btoa(JSON.stringify(data));
+        document.cookie = `adra-tec-data=${cookieData}; max-age=31536000; path=/`;
+    }
+    
+    loadSavedData() {
+        // Tentar carregar do localStorage primeiro
+        const localData = localStorage.getItem('adra-tec-user-data');
+        if (localData) {
+            try {
+                const data = JSON.parse(localData);
+                this.userData = data.userData || this.userData;
+                return;
+            } catch (e) {
+                console.error('Erro ao carregar dados do localStorage:', e);
+            }
+        }
+        
+        // Tentar carregar dos cookies
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'adra-tec-data') {
+                try {
+                    const data = JSON.parse(atob(value));
+                    this.userData = data.userData || this.userData;
+                    return;
+                } catch (e) {
+                    console.error('Erro ao carregar dados dos cookies:', e);
+                }
+            }
+        }
+    }
+    
+    updateInterface() {
+        // Atualizar nome de usuário
+        const displayName = this.userData.accessType === 'dupla' 
+            ? `${this.userData.name} e ${this.userData.name2}`
+            : this.userData.name;
+        
+        const menuUsername = document.getElementById('menu-username');
+        if (menuUsername) menuUsername.textContent = displayName;
+        
+        const welcomeMessage = document.getElementById('welcome-message');
+        if (welcomeMessage) welcomeMessage.textContent = `Bem-vindo(a), ${displayName}!`;
+    }
+    
+    updateModuleProgress(moduleId) {
+        // Simular progresso (implementação real viria do conteúdo do módulo)
+        const progress = Math.min(100, this.userData.progress.modules[moduleId].progress + 5);
+        this.userData.progress.modules[moduleId].progress = progress;
+        
+        if (progress === 100 && !this.userData.progress.modules[moduleId].completed.includes('completed')) {
+            this.userData.progress.modules[moduleId].completed.push('completed');
+            this.unlockAchievement({
+                id: `module-${moduleId}-completed`,
+                name: `${moduleId.charAt(0).toUpperCase() + moduleId.slice(1)} Completo`,
+                description: `Você completou 100% do módulo ${moduleId}`,
+                icon: 'fas fa-trophy'
+            });
+        }
+        
+        this.saveUserData();
+    }
+    
+    unlockAchievement(achievement) {
+        if (!this.userData.progress.achievements.find(a => a.id === achievement.id)) {
+            this.userData.progress.achievements.push(achievement);
+            this.showNotification(`Nova conquista: ${achievement.name}!`, 'achievement');
+            this.saveUserData();
         }
     }
     
     showWelcomeNotification() {
-        // Mostrar notificação de boas-vindas
         setTimeout(() => {
-            this.showNotification('Bem-vindo ao ADRA-TEC OS!', 'Sistema operacional educacional pronto para uso.');
+            this.showNotification(`Bem-vindo(a) ao ADRA-TEC OS!`, 'success');
         }, 3500);
     }
     
-    showNotification(title, message) {
-        // Implementar sistema de notificações toast
-        console.log(`Notificação: ${title} - ${message}`);
+    showNotification(message, type = 'info') {
+        // Adicionar ao painel de notificações
+        const notificationsList = document.querySelector('.notifications-list');
+        if (notificationsList) {
+            const notification = document.createElement('div');
+            notification.className = 'notification-item';
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <div>
+                    <strong>${type === 'success' ? 'Sucesso!' : type === 'error' ? 'Erro!' : 'Informação'}</strong>
+                    <p>${message}</p>
+                    <span class="notification-time">Agora</span>
+                </div>
+            `;
+            
+            notificationsList.insertBefore(notification, notificationsList.firstChild);
+            
+            // Limitar a 10 notificações
+            while (notificationsList.children.length > 10) {
+                notificationsList.removeChild(notificationsList.lastChild);
+            }
+        }
+        
+        // Atualizar badge
+        const badge = document.querySelector('.notification-badge');
+        if (badge) {
+            const currentCount = parseInt(badge.textContent) || 0;
+            badge.textContent = currentCount + 1;
+        }
+        
+        console.log(`Notificação: ${message}`);
     }
     
-    shutdown() {
-        if (confirm('Deseja realmente sair do ADRA-TEC OS?')) {
+    saveSettings() {
+        const nameInput = document.getElementById('settings-name');
+        const name2Input = document.getElementById('settings-name2');
+        
+        if (nameInput) {
+            this.userData.name = nameInput.value.trim();
+        }
+        
+        if (name2Input) {
+            this.userData.name2 = name2Input.value.trim();
+        }
+        
+        this.saveUserData();
+        this.updateInterface();
+        this.showNotification('Configurações salvas com sucesso!', 'success');
+    }
+    
+    logout() {
+        if (confirm('Deseja realmente sair do ADRA-TEC OS? Seu progresso será salvo automaticamente.')) {
+            // Salvar dados
+            this.saveUserData();
+            
             // Animação de desligamento
             this.bootScreen.style.display = 'flex';
-            this.bootScreen.style.opacity = '1';
+            this.bootScreen.classList.remove('hidden');
+            this.desktop.classList.add('hidden');
+            this.taskbar.classList.add('hidden');
             
             const bootMessages = this.bootScreen.querySelector('.boot-messages');
             bootMessages.innerHTML = `
@@ -844,7 +1184,22 @@ class OSTecManager {
             `;
             
             setTimeout(() => {
-                window.location.href = 'index.html';
+                // Resetar para tela de login
+                this.bootScreen.classList.add('hidden');
+                this.osSystem.classList.add('hidden');
+                this.loginScreen.classList.remove('hidden');
+                
+                // Limpar campos
+                document.getElementById('student-name').value = '';
+                document.getElementById('student-name-2').value = '';
+                
+                // Resetar tipo de acesso
+                document.querySelectorAll('.access-type-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector('.access-type-btn[data-type="individual"]').classList.add('active');
+                this.userData.accessType = 'individual';
+                this.updateNameLabels();
             }, 3000);
         }
     }
@@ -855,375 +1210,177 @@ document.addEventListener('DOMContentLoaded', () => {
     window.osManager = new OSTecManager();
 });
 
-// Estilos adicionais para componentes dinâmicos
+// Adicionar CSS adicional para login e funcionalidades
 const additionalStyles = `
-    .loading-content {
+    /* Estilos para login */
+    .login-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 200px;
-        color: rgba(255, 255, 255, 0.7);
+        z-index: 9999;
     }
     
-    .loading-content i {
-        font-size: 2rem;
-        margin-bottom: 15px;
-        color: #00d4ff;
-    }
-    
-    .module-placeholder {
-        text-align: center;
+    .login-container {
+        background: rgba(40, 40, 40, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
         padding: 40px;
+        max-width: 450px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .module-placeholder i {
-        font-size: 4rem;
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .login-header .logo i {
+        font-size: 3rem;
         color: #00d4ff;
+        margin-bottom: 15px;
+        display: block;
+    }
+    
+    .login-header h1 {
+        color: white;
+        font-size: 2rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .login-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 5px;
+    }
+    
+    .form-group {
         margin-bottom: 20px;
     }
     
-    .module-placeholder h3 {
-        color: white;
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
-    
-    .module-placeholder p {
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 30px;
-    }
-    
-    .module-stats {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-bottom: 30px;
-    }
-    
-    .stat {
-        text-align: center;
-    }
-    
-    .stat-number {
+    .form-label {
         display: block;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #00d4ff;
-    }
-    
-    .stat-label {
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .coming-soon {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-    }
-    
-    .coming-soon i {
-        font-size: 2rem;
-        color: #ffd700;
-        margin-bottom: 10px;
-    }
-    
-    .btn-primary {
-        background: linear-gradient(135deg, #00d4ff, #00ff88);
         color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        cursor: pointer;
         font-weight: 600;
-        transition: all 0.3s ease;
+        margin-bottom: 8px;
     }
     
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
-    }
-    
-    .progress-dashboard, .achievements-dashboard, .settings-dashboard, .help-dashboard, .about-dashboard {
-        padding: 20px;
-    }
-    
-    .progress-dashboard h3, .achievements-dashboard h3, .settings-dashboard h3 {
-        color: white;
-        margin-bottom: 25px;
-        font-size: 1.3rem;
-    }
-    
-    .progress-overview {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-    
-    .overview-card {
-        flex: 1;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-    }
-    
-    .overview-card i {
-        font-size: 2rem;
-        color: #00d4ff;
-        margin-bottom: 10px;
-    }
-    
-    .card-number {
-        display: block;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: white;
-    }
-    
-    .card-label {
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .module-progress h4 {
-        color: white;
-        margin-bottom: 15px;
-    }
-    
-    .progress-item {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 10px;
-    }
-    
-    .progress-item span:first-child {
-        color: white;
-        min-width: 120px;
-    }
-    
-    .progress-item .progress-bar {
-        flex: 1;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-        overflow: hidden;
-    }
-    
-    .progress-item .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #00d4ff, #00ff88);
-    }
-    
-    .progress-item span:last-child {
-        color: rgba(255, 255, 255, 0.7);
-        min-width: 40px;
-        text-align: right;
-    }
-    
-    .achievements-grid {
+    .access-type-selector {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
     
-    .achievement {
+    .access-type-btn {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 8px;
         padding: 15px;
         background: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-    }
-    
-    .achievement.unlocked {
-        border: 1px solid rgba(0, 212, 255, 0.3);
-    }
-    
-    .achievement.locked {
-        opacity: 0.5;
-    }
-    
-    .achievement i {
-        font-size: 2rem;
-    }
-    
-    .achievement.unlocked i {
-        color: #ffd700;
-    }
-    
-    .achievement.locked i {
-        color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .achievement strong {
-        color: white;
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    .achievement p {
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 0.9rem;
-    }
-    
-    .settings-sections {
-        display: grid;
-        gap: 30px;
-    }
-    
-    .settings-section h4 {
-        color: #00d4ff;
-        margin-bottom: 15px;
-    }
-    
-    .setting-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-    
-    .setting-item label {
-        color: white;
-    }
-    
-    .setting-item select,
-    .setting-item input[type="range"] {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 4px;
-    }
-    
-    .settings-actions {
-        display: flex;
-        gap: 15px;
-        margin-top: 30px;
-    }
-    
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 10px 20px;
-        border-radius: 6px;
         cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
-    }
-    
-    .help-sections {
-        display: grid;
-        gap: 30px;
-    }
-    
-    .help-section h4 {
-        color: #00d4ff;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .help-section ul {
-        list-style: none;
-    }
-    
-    .help-section li {
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 8px;
-        padding-left: 15px;
-        position: relative;
-    }
-    
-    .help-section li:before {
-        content: "•";
-        color: #00d4ff;
-        position: absolute;
-        left: 0;
-    }
-    
-    kbd {
+    .access-type-btn:hover {
         background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 2px 6px;
-        border-radius: 3px;
-        font-family: monospace;
-        font-size: 0.8rem;
     }
     
-    .about-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    
-    .about-header i {
-        font-size: 4rem;
-        color: #00d4ff;
-        margin-bottom: 15px;
-    }
-    
-    .about-header h3 {
+    .access-type-btn.active {
+        background: linear-gradient(135deg, #00d4ff, #00ff88);
+        border-color: #00d4ff;
         color: white;
-        font-size: 1.8rem;
-        margin-bottom: 5px;
     }
     
-    .about-header p {
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 10px;
+    .form-input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        font-size: 1rem;
     }
     
-    .version {
-        color: #00d4ff;
+    .form-input:focus {
+        outline: none;
+        border-color: #00d4ff;
+    }
+    
+    .db-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #ffd700, #ff8c00);
+        border: none;
+        border-radius: 8px;
+        color: white;
         font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
     
-    .about-content h4 {
-        color: white;
-        margin: 25px 0 15px;
+    .db-btn:hover {
+        transform: translateY(-2px);
     }
     
-    .about-content p {
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.6;
-        margin-bottom: 15px;
+    .db-info {
+        margin-top: 10px;
+        text-align: center;
     }
     
-    .modules-list {
-        margin: 20px 0;
+    .db-info small {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
     }
     
-    .module-item {
+    .hidden {
+        display: none !important;
+    }
+    
+    /* Melhorias nos controles de janela */
+    .window-control {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
-        color: rgba(255, 255, 255, 0.8);
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        color: white;
     }
     
-    .module-item i {
-        color: #00d4ff;
+    .window-control:hover {
+        opacity: 0.8;
     }
     
-    .about-footer {
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        text-align: center;
+    .window-control.close {
+        background: #ff5f56;
     }
     
-    .about-footer p {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 0.9rem;
-        margin-bottom: 5px;
+    .window-control.minimize {
+        background: #ffbd2e;
+    }
+    
+    .window-control.maximize {
+        background: #27c93f;
+    }
+    
+    .os-window.focused {
+        box-shadow: 0 15px 50px rgba(0, 212, 255, 0.3);
     }
 `;
 

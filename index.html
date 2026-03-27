@@ -23,280 +23,338 @@
 
             <nav class="nav">
                 <a href="#" class="nav-link active" data-view="dashboard" onclick="NavigationManager.showView('dashboard')">
-                    <i class="fas fa-home"></i>
-                    Dashboard
-                </a>
-                <a href="#" class="nav-link" data-view="modules" onclick="NavigationManager.showView('modules')">
-                    <i class="fas fa-book"></i>
-                    Módulos
-                </a>
-                <a href="#" class="nav-link" data-view="progress" onclick="NavigationManager.showView('progress')">
-                    <i class="fas fa-chart-line"></i>
-                    Progresso
-                </a>
-                <a href="#" class="nav-link" data-view="community" onclick="NavigationManager.showView('community')">
-                    <i class="fas fa-users"></i>
-                    Comunidade
-                </a>
-            </nav>
-
-            <div class="user-actions">
-                <button class="btn btn-secondary" onclick="IATutor.open()">
-                    <i class="fas fa-robot"></i>
-                    IA Tutor
-                </button>
-                
-                <div class="user-info" onclick="this.classList.toggle('active')">
-                    <div class="user-avatar" id="header-avatar">🎯</div>
-                    <div class="user-details">
-                        <span class="user-name" id="header-name">Carregando...</span>
-                        <span class="user-points" id="header-points">0 pts</span>
-                    </div>
-                    <div class="user-dropdown">
-                        <a href="#" onclick="UserManager.showProfile()">
                             <i class="fas fa-user"></i>
-                            Perfil
-                        </a>
-                        <a href="#" onclick="UserManager.showSettings()">
-                            <i class="fas fa-cog"></i>
-                            Configurações
-                        </a>
-                        <a href="#" onclick="UserManager.logout()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Sair
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div id="header-container" class="hidden"></div>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Dashboard View -->
-        <div id="dashboard-view" class="view">
-            <!-- Content will be rendered by Dashboard component -->
-        </div>
-
-        <!-- Modules View -->
-        <div id="modules-view" class="view hidden">
-            <!-- Content will be rendered by Modules component -->
-        </div>
-
-        <!-- Module Detail View -->
-        <div id="module-view" class="view hidden">
-            <div class="module-detail-content">
-                <button class="btn btn-secondary" onclick="NavigationManager.showView('modules')">
-                    <i class="fas fa-arrow-left"></i>
-                    Voltar aos Módulos
-                </button>
-                <div id="module-content">
-                    <!-- Module content will be rendered dynamically -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Progress View -->
-        <div id="progress-view" class="view hidden">
-            <div class="progress-dashboard">
-                <h1>Seu Progresso</h1>
-                <div class="progress-overview">
-                    <div class="progress-stats">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-value" id="total-progress">0%</div>
-                                <div class="stat-label">Progresso Total</div>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-value" id="completed-lessons">0</div>
-                                <div class="stat-label">Aulas Concluídas</div>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-value" id="current-streak">0</div>
-                                <div class="stat-label">Dias Consecutivos</div>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-value" id="total-points">0</div>
-                                <div class="stat-label">Pontos Totais</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modules-progress">
-                    <h2>Progresso por Módulo</h2>
-                    <div class="module-progress-list" id="module-progress-list">
-                        <!-- Module progress will be rendered dynamically -->
-                    </div>
-                </div>
-
-                <div class="achievements-section">
-                    <h2>Conquistas</h2>
-                    <div class="achievements-grid" id="achievements-grid">
-                        <!-- Achievements will be rendered dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Community View -->
-        <div id="community-view" class="view hidden">
-            <div class="community-dashboard">
-                <h1>Comunidade</h1>
-                
-                <div class="community-content">
-                    <div class="community-sidebar">
-                        <div class="community-card">
-                            <h3>Ranking Semanal</h3>
-                            <div class="ranking-list" id="community-ranking">
-                                <!-- Ranking will be rendered dynamically -->
-                            </div>
-                        </div>
-
-                        <div class="community-card">
-                            <h3>Discussões Ativas</h3>
-                            <div class="discussions-list" id="discussions-list">
-                                <!-- Discussions will be rendered dynamically -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="community-main">
-                        <div class="community-card">
-                            <h3>Feed da Comunidade</h3>
-                            <div class="community-feed" id="community-feed">
-                                <!-- Feed will be rendered dynamically -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modals -->
-    <div id="lesson-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="lesson-title">Título da Aula</h2>
-                <button class="btn btn-secondary" onclick="LessonRenderer.closeLessonModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="lesson-content">
-                <!-- Lesson content will be rendered dynamically -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="complete-lesson-btn">
-                    <i class="fas fa-check"></i>
-                    Concluir Aula
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="ia-tutor-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🤖 IA Tutor</h2>
-                <button class="btn btn-secondary" onclick="IATutor.close()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="chat-container">
-                    <div class="chat-messages" id="ia-chat-messages">
-                        <div class="message ai-message">
-                            Olá! Sou seu tutor de IA. Como posso ajudar com seus estudos hoje?
-                        </div>
-                    </div>
-                    <div class="chat-input-container">
-                        <input type="text" id="ia-chat-input" placeholder="Digite sua pergunta..." class="form-input">
-                        <button class="btn btn-primary" onclick="IATutor.sendMessage()">
-                            <i class="fas fa-paper-plane"></i>
+                            <span>Aula Individual</span>
+                        </button>
+                        <button class="access-type-btn" data-type="dupla">
+                            <i class="fas fa-users"></i>
+                            <span>Aula em Dupla</span>
                         </button>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="form-label" id="name-label">Seu Nome</label>
+                    <input type="text" id="student-name" class="form-input" placeholder="Digite seu nome completo" maxlength="50">
+                </div>
+                
+                <div class="form-group dupla-names hidden" id="dupla-names">
+                    <label class="form-label">Nome do Segundo Aluno</label>
+                    <input type="text" id="student-name-2" class="form-input" placeholder="Digite o nome do segundo aluno" maxlength="50">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Recuperar Dados Anteriores?</label>
+                    <div class="db-options">
+                        <button class="db-btn" id="load-db-btn">
+                            <i class="fas fa-upload"></i>
+                            <span>Carregar Banco de Dados</span>
+                        </button>
+                        <input type="file" id="db-file-input" accept=".txt" style="display: none;">
+                        
+                        <div class="db-info">
+                            <small>Salve seu progresso para não perder dados. Use a opção "Salvar BD" no menu iniciar.</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="login-actions">
+                    <button class="btn-primary btn-large" id="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Acessar Sistema</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-footer">
+                <p>ADRA-TEC - Educação Profissional Transformadora</p>
+                <small>Versão 1.0.0 | Sistema Operacional Educacional</small>
             </div>
         </div>
     </div>
 
-    <div id="profile-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Meu Perfil</h2>
-                <button class="btn btn-secondary" onclick="UserManager.closeProfile()">
-                    <i class="fas fa-times"></i>
-                </button>
+    <!-- Sistema Operacional -->
+    <div id="os-system" class="os-system hidden">
+        <!-- Boot Screen -->
+        <div id="boot-screen" class="boot-screen hidden">
+            <div class="boot-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>ADRA-TEC OS</h1>
+                </div>
+                <div class="boot-messages">
+                    <div class="boot-message">Bem-vindo(a), <span id="boot-user-name">Aluno</span>!</div>
+                    <div class="boot-message">Carregando sistema educacional...</div>
+                    <div class="boot-message">Preparando ambiente de aprendizado...</div>
+                    <div class="boot-message">Inicializando módulos...</div>
+                    <div class="boot-message">Sistema pronto para uso!</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="profile-form">
-                    <div class="form-group">
-                        <label class="form-label">Nome</label>
-                        <input type="text" id="profile-name" class="form-input">
+        </div>
+
+        <!-- Área de Trabalho (Desktop) -->
+        <div id="desktop" class="desktop hidden">
+            <!-- Wallpaper -->
+            <div class="wallpaper">
+                <div class="wallpaper-overlay"></div>
+                <div class="wallpaper-content">
+                    <h2>ADRA-TEC OS</h2>
+                    <p id="welcome-message">Bem-vindo(a) ao Sistema!</p>
+                </div>
+            </div>
+
+            <!-- Ícones da Área de Trabalho -->
+            <div class="desktop-icons">
+                <!-- Módulo Administrativo -->
+                <div class="desktop-icon" data-module="administrativo">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-briefcase"></i>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="profile-email" class="form-input">
+                    <span class="icon-label">Administrativo</span>
+                </div>
+
+                <!-- Módulo Empreendedorismo -->
+                <div class="desktop-icon" data-module="empreendedorismo">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Avatar</label>
-                        <div class="avatar-selector">
-                            <div class="avatar-options">
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('🎯')">🎯</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('🚀')">🚀</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('💡')">💡</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('⭐')">⭐</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('🎓')">🎓</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('💼')">💼</span>
-                                <span class="avatar-option" onclick="UserManager.selectAvatar('🏆')">🏆</span>
+                    <span class="icon-label">Empreendedorismo</span>
+                </div>
+
+                <!-- Módulo Marketing -->
+                <div class="desktop-icon" data-module="marketing">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <span class="icon-label">Marketing</span>
+                </div>
+
+                <!-- Módulo Programação -->
+                <div class="desktop-icon" data-module="programacao">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="icon-label">Programação</span>
+                </div>
+
+                <!-- Ferramentas do Sistema -->
+                <div class="desktop-icon system-tool" data-tool="progress">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="icon-label">Progresso</span>
+                </div>
+
+                <div class="desktop-icon system-tool" data-tool="achievements">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="icon-label">Conquistas</span>
+                </div>
+
+                <div class="desktop-icon system-tool" data-tool="settings">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="icon-label">Configurações</span>
+                </div>
+
+                <div class="desktop-icon system-tool" data-tool="about">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <span class="icon-label">Sobre</span>
+                </div>
+            </div>
+
+            <!-- Janelas Flutuantes -->
+            <div id="window-container" class="window-container"></div>
+        </div>
+
+        <!-- Barra de Tarefas -->
+        <div class="taskbar hidden">
+            <!-- Menu Iniciar -->
+            <div class="start-menu">
+                <button id="start-button" class="start-button">
+                    <i class="fas fa-th"></i>
+                    <span>Menu</span>
+                </button>
+                
+                <!-- Menu Iniciar Dropdown -->
+                <div id="start-menu-dropdown" class="start-menu-dropdown">
+                    <div class="menu-header">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <div>
+                                <div class="username" id="menu-username">Estudante ADRA-TEC</div>
+                                <div class="user-status" id="menu-user-status">Pronto para aprender!</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-sections">
+                        <!-- Módulos Principais -->
+                        <div class="menu-section">
+                            <h3><i class="fas fa-graduation-cap"></i> Módulos de Aprendizado</h3>
+                            <div class="menu-items">
+                                <div class="menu-item" data-module="administrativo">
+                                    <i class="fas fa-briefcase"></i>
+                                    <div>
+                                        <span class="item-title">Administrativo</span>
+                                        <span class="item-description">Gestão e organização empresarial</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-module="empreendedorismo">
+                                    <i class="fas fa-rocket"></i>
+                                    <div>
+                                        <span class="item-title">Empreendedorismo</span>
+                                        <span class="item-description">Como criar e gerir seu negócio</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-module="marketing">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <div>
+                                        <span class="item-title">Marketing</span>
+                                        <span class="item-description">Estratégias e comunicação</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-module="programacao">
+                                    <i class="fas fa-code"></i>
+                                    <div>
+                                        <span class="item-title">Programação</span>
+                                        <span class="item-description">Desenvolvimento de software</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ferramentas -->
+                        <div class="menu-section">
+                            <h3><i class="fas fa-tools"></i> Ferramentas</h3>
+                            <div class="menu-items">
+                                <div class="menu-item" data-tool="progress">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div>
+                                        <span class="item-title">Meu Progresso</span>
+                                        <span class="item-description">Acompanhe seu aprendizado</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-tool="achievements">
+                                    <i class="fas fa-trophy"></i>
+                                    <div>
+                                        <span class="item-title">Conquistas</span>
+                                        <span class="item-description">Badges e certificados</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-tool="settings">
+                                    <i class="fas fa-cog"></i>
+                                    <div>
+                                        <span class="item-title">Configurações</span>
+                                        <span class="item-description">Personalize seu sistema</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Banco de Dados -->
+                        <div class="menu-section">
+                            <h3><i class="fas fa-database"></i> Banco de Dados</h3>
+                            <div class="menu-items">
+                                <div class="menu-item" id="save-db-btn">
+                                    <i class="fas fa-save"></i>
+                                    <div>
+                                        <span class="item-title">Salvar BD</span>
+                                        <span class="item-description">Exportar dados de progresso</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" id="load-db-menu-btn">
+                                    <i class="fas fa-upload"></i>
+                                    <div>
+                                        <span class="item-title">Carregar BD</span>
+                                        <span class="item-description">Importar dados salvos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sistema -->
+                        <div class="menu-section">
+                            <h3><i class="fas fa-power-off"></i> Sistema</h3>
+                            <div class="menu-items">
+                                <div class="menu-item" data-tool="help">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div>
+                                        <span class="item-title">Ajuda</span>
+                                        <span class="item-description">Suporte e tutoriais</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" data-tool="about">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div>
+                                        <span class="item-title">Sobre ADRA-TEC OS</span>
+                                        <span class="item-description">Informações do sistema</span>
+                                    </div>
+                                </div>
+                                <div class="menu-item" id="logout-btn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <div>
+                                        <span class="item-title">Sair</span>
+                                        <span class="item-description">Encerrar sessão</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="UserManager.closeProfile()">
-                    Cancelar
-                </button>
-                <button class="btn btn-primary" onclick="UserManager.saveProfile()">
-                    Salvar Alterações
-                </button>
+
+            <!-- Janelas Abertas -->
+            <div class="open-windows">
+                <div class="window-tabs">
+                    <!-- Tabs serão adicionadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Área de Notificação -->
+            <div class="notification-area">
+                <div class="system-icons">
+                    <div class="system-icon" id="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </div>
+                    <div class="system-icon" id="volume-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="system-icon" id="network-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="system-icon" id="clock">
+                        <span class="time">00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel de Notificações -->
+        <div id="notification-panel" class="notification-panel">
+            <div class="panel-header">
+                <h3>Notificações</h3>
+                <button class="close-panel">&times;</button>
+            </div>
+            <div class="notifications-list">
+                <!-- Notificações dinâmicas -->
             </div>
         </div>
     </div>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay hidden">
-        <div class="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>Carregando...</p>
-        </div>
-    </div>
+    <!-- Input oculto para upload de BD -->
+    <input type="file" id="db-upload-input" accept=".txt" style="display: none;">
 
     <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/course-manager.js"></script>
-    <link rel="stylesheet" href="css/course.css">
+    <script src="js/os-manager.js"></script>
+    <link rel="stylesheet" href="css/os-style.css">
 </body>
 </html>
