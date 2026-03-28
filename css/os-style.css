@@ -236,6 +236,10 @@ body {
     background: linear-gradient(145deg, #ecf6ee, #3b9f50);
 }
 
+.desktop-icon[data-tool="games"] .icon-wrapper {
+    background: linear-gradient(145deg, #b0f3cb, #2d9d54);
+}
+
 .icon-wrapper i {
     font-size: 2rem;
     color: #fff;
@@ -860,4 +864,51 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+
+.games-dashboard {
+    color: #132116;
+    padding: 18px;
+}
+
+.games-intro {
+    margin: 6px 0 18px;
+    color: #3a4d3f;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.game-card {
+    background: #f5fff7;
+    border: 1px solid #d0eed5;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 6px 18px rgba(26, 75, 34, 0.08);
+}
+
+.rps-buttons,
+.guess-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.guess-controls input {
+    flex: 1;
+    min-width: 90px;
+    border: 1px solid #aacdb0;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.game-result {
+    color: #22552b;
+    font-weight: 600;
+    min-height: 24px;
 }
