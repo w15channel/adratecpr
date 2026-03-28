@@ -405,11 +405,45 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
+    gap: 12px;
+}
+
+.taskbar-shortcuts {
+    display: flex;
+    align-items: center;
+}
+
+.taskbar-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.14);
+    transition: all 0.2s ease;
+}
+
+.taskbar-shortcut:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+.taskbar-shortcut i {
+    font-size: 1rem;
+}
+
+.taskbar-shortcut span {
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .window-tabs {
     display: flex;
     gap: 5px;
+    overflow-x: auto;
+    scrollbar-width: thin;
 }
 
 .window-tab {
@@ -776,6 +810,10 @@ body {
         width: 90vw;
         max-width: 300px;
         right: 5vw;
+    }
+
+    .taskbar-shortcut span {
+        display: none;
     }
     
     .wallpaper-content h2 {
