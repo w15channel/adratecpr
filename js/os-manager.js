@@ -89,7 +89,10 @@ class OSTecManager {
             const dbInput = document.getElementById('db-upload-input');
             const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
             if (loadDbMenuBtn && dbInput) {
-                loadDbMenuBtn.addEventListener('click', () => dbInput.click());
+                loadDbMenuBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    this.promptLoadDatabase('db-upload-input');
+                });
                 dbInput.addEventListener('change', (e) => this.loadDatabase(e));
             }
 
@@ -129,7 +132,7 @@ class OSTecManager {
         const dbFileInput = document.getElementById('db-file-input');
         
         if (loadDbBtn && dbFileInput) {
-            loadDbBtn.addEventListener('click', () => dbFileInput.click());
+            loadDbBtn.addEventListener('click', () => this.promptLoadDatabase('db-file-input'));
             dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
         }
         
@@ -138,7 +141,10 @@ class OSTecManager {
         const dbUploadInput = document.getElementById('db-upload-input');
         
         if (loadDbMenuBtn && dbUploadInput) {
-            loadDbMenuBtn.addEventListener('click', () => dbUploadInput.click());
+            loadDbMenuBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                this.promptLoadDatabase('db-upload-input');
+            });
             dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
         }
         
@@ -277,6 +283,8 @@ class OSTecManager {
                     this.openHelpWindow();
                 } else if (tool === 'about') {
                     this.openAboutWindow();
+                } else if (tool === 'games') {
+                    this.openGamesWindow();
                 }
                 
                 this.closeStartMenu();
@@ -550,6 +558,9 @@ class OSTecManager {
             case 'about':
                 this.openAboutWindow();
                 break;
+            case 'games':
+                this.openGamesWindow();
+                break;
         }
     }
     
@@ -792,6 +803,103 @@ class OSTecManager {
         this.focusWindow(window);
     }
     
+    openGamesWindow() {
+        const window = this.createWindow({
+            title: 'Passatempos',
+            icon: 'fas fa-gamepad',
+            color: '#70d7a1'
+        });
+
+        window.element.querySelector('.window-content').innerHTML = `
+            <div class="games-dashboard">
+                <h3>🎮 Ambiente de Joguinhos de Passatempo</h3>
+                <p class="games-intro">Escolha um jogo rápido para treinar o raciocínio e relaxar entre os estudos.</p>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <h4>Pedra, Papel e Tesoura</h4>
+                        <p>Faça sua jogada e veja se vence o computador.</p>
+                        <div class="rps-buttons">
+                            <button class="btn-secondary" data-rps="pedra">✊ Pedra</button>
+                            <button class="btn-secondary" data-rps="papel">✋ Papel</button>
+                            <button class="btn-secondary" data-rps="tesoura">✌️ Tesoura</button>
+                        </div>
+                        <p class="game-result" id="rps-result">Faça uma jogada!</p>
+                    </div>
+                    <div class="game-card">
+                        <h4>Adivinhe o Número</h4>
+                        <p>Tente descobrir o número secreto entre 1 e 20.</p>
+                        <div class="guess-controls">
+                            <input type="number" min="1" max="20" id="guess-input" placeholder="1-20">
+                            <button class="btn-primary" id="guess-btn">Tentar</button>
+                            <button class="btn-secondary" id="reset-guess-btn">Novo jogo</button>
+                        </div>
+                        <p class="game-result" id="guess-result">Você tem 6 tentativas.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        let targetNumber = Math.floor(Math.random() * 20) + 1;
+        let attempts = 6;
+        const choices = ['pedra', 'papel', 'tesoura'];
+        const rpsResult = window.element.querySelector('#rps-result');
+        const guessResult = window.element.querySelector('#guess-result');
+        const guessInput = window.element.querySelector('#guess-input');
+
+        window.element.querySelectorAll('[data-rps]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const userPick = btn.dataset.rps;
+                const cpuPick = choices[Math.floor(Math.random() * choices.length)];
+                if (userPick === cpuPick) {
+                    rpsResult.textContent = `Empate! Ambos escolheram ${cpuPick}.`;
+                    return;
+                }
+                const victory =
+                    (userPick === 'pedra' && cpuPick === 'tesoura') ||
+                    (userPick === 'papel' && cpuPick === 'pedra') ||
+                    (userPick === 'tesoura' && cpuPick === 'papel');
+                rpsResult.textContent = victory
+                    ? `Você ganhou! O computador escolheu ${cpuPick}.`
+                    : `Você perdeu! O computador escolheu ${cpuPick}.`;
+            });
+        });
+
+        const playGuess = () => {
+            const value = Number(guessInput.value);
+            if (!Number.isInteger(value) || value < 1 || value > 20) {
+                guessResult.textContent = 'Digite um número inteiro entre 1 e 20.';
+                return;
+            }
+            attempts -= 1;
+            if (value === targetNumber) {
+                guessResult.textContent = `🎉 Acertou! Número secreto: ${targetNumber}.`;
+                return;
+            }
+            if (attempts <= 0) {
+                guessResult.textContent = `Fim de jogo! O número era ${targetNumber}.`;
+                return;
+            }
+            guessResult.textContent = value > targetNumber
+                ? `Quase! O número secreto é menor. Tentativas restantes: ${attempts}.`
+                : `Quase! O número secreto é maior. Tentativas restantes: ${attempts}.`;
+        };
+
+        window.element.querySelector('#guess-btn').addEventListener('click', playGuess);
+        guessInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') playGuess();
+        });
+
+        window.element.querySelector('#reset-guess-btn').addEventListener('click', () => {
+            targetNumber = Math.floor(Math.random() * 20) + 1;
+            attempts = 6;
+            guessInput.value = '';
+            guessResult.textContent = 'Você tem 6 tentativas.';
+        });
+
+        this.windows.push(window);
+        this.focusWindow(window);
+    }
+
     openAboutWindow() {
         const window = this.createWindow({
             title: 'Sobre ADRA-TEC OS',
@@ -1020,6 +1128,16 @@ class OSTecManager {
         this.clock.textContent = `${hours}:${minutes}`;
     }
     
+    promptLoadDatabase(inputId = 'db-upload-input') {
+        const input = document.getElementById(inputId) || document.getElementById('db-upload-input') || document.getElementById('db-file-input');
+        if (!input) {
+            this.showNotification('Não foi possível abrir o seletor de arquivo agora.', 'error');
+            return;
+        }
+        input.value = '';
+        input.click();
+    }
+
     // Sistema de Banco de Dados
     saveDatabase() {
         const dbData = {
@@ -1040,37 +1158,67 @@ class OSTecManager {
     }
     
     loadDatabase(event) {
-        const file = event.target.files[0];
+        const file = event?.target?.files?.[0];
         if (!file) return;
-        
+
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const dbData = JSON.parse(e.target.result);
-                
-                // Validar dados
-                if (!dbData.userData) {
-                    throw new Error('Formato de banco de dados inválido');
-                }
-                
-                // Confirmar importação
+                const importedData = this.normalizeImportedData(e.target.result);
+
                 if (window.confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
-                    this.userData = dbData.userData;
+                    this.userData = importedData;
                     this.saveUserData();
                     this.showNotification('Banco de dados carregado com sucesso!', 'success');
-                    
-                    // Atualizar interface
                     this.updateInterface();
                 }
             } catch (error) {
                 this.showNotification('Erro ao carregar banco de dados: ' + error.message, 'error');
             }
         };
-        
+
         reader.readAsText(file);
-        
-        // Limpar input
         event.target.value = '';
+    }
+
+    normalizeImportedData(rawContent) {
+        const parsed = JSON.parse(rawContent);
+        const source = parsed?.userData || parsed;
+
+        if (!source || typeof source !== 'object' || !source.progress) {
+            throw new Error('Formato de banco de dados inválido.');
+        }
+
+        const defaults = {
+            name: '',
+            name2: '',
+            accessType: 'individual',
+            progress: {
+                modules: {
+                    administrativo: { completed: [], xp: 0, progress: 0 },
+                    empreendedorismo: { completed: [], xp: 0, progress: 0 },
+                    marketing: { completed: [], xp: 0, progress: 0 },
+                    programacao: { completed: [], xp: 0, progress: 0 }
+                },
+                totalXP: 0,
+                achievements: [],
+                studyTime: 0,
+                lastAccess: null
+            }
+        };
+
+        return {
+            ...defaults,
+            ...source,
+            progress: {
+                ...defaults.progress,
+                ...source.progress,
+                modules: {
+                    ...defaults.progress.modules,
+                    ...(source.progress?.modules || {})
+                }
+            }
+        };
     }
     
     saveUserData() {
@@ -1255,11 +1403,10 @@ class OSTecManager {
         const icons = [...document.querySelectorAll('.desktop-icon')];
         if (!icons.length) return;
 
-        const columnWidth = 110;
         icons.forEach((icon, index) => {
             if (!icon.style.left || !icon.style.top) {
-                icon.style.left = `${20 + Math.floor(index / 6) * columnWidth}px`;
-                icon.style.top = `${20 + (index % 6) * 110}px`;
+                icon.style.left = `${20 + Math.floor(index / 6) * 120}px`;
+                icon.style.top = `${20 + (index % 6) * 120}px`;
             }
 
             icon.addEventListener('mousedown', (event) => {
@@ -1288,9 +1435,28 @@ class OSTecManager {
         document.addEventListener('mouseup', () => {
             if (this.iconDragState.icon) {
                 this.iconDragState.icon.classList.remove('active');
+                this.snapIconToGrid(this.iconDragState.icon);
             }
             this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
         });
+
+        this.alignDesktopIcons();
+    }
+
+    alignDesktopIcons() {
+        document.querySelectorAll('.desktop-icon').forEach((icon) => this.snapIconToGrid(icon));
+    }
+
+    snapIconToGrid(icon) {
+        if (!icon) return;
+        const gridX = 120;
+        const gridY = 120;
+        const left = parseFloat(icon.style.left || '20');
+        const top = parseFloat(icon.style.top || '20');
+        const snappedLeft = Math.max(20, Math.round((left - 20) / gridX) * gridX + 20);
+        const snappedTop = Math.max(20, Math.round((top - 20) / gridY) * gridY + 20);
+        icon.style.left = `${snappedLeft}px`;
+        icon.style.top = `${snappedTop}px`;
     }
 
     ensureWindowsInViewport() {
