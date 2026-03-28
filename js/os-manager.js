@@ -17,6 +17,32 @@ class OSTecManager {
         this.isDragging = false;
         this.currentWindow = null;
         this.offset = { x: 0, y: 0 };
+        this.moduleTopics = {
+            administrativo: [
+                'Introdução à Administração',
+                'Processos Internos e Rotinas',
+                'Organização de Documentos',
+                'Gestão de Pessoas'
+            ],
+            empreendedorismo: [
+                'Mentalidade Empreendedora',
+                'Modelagem de Negócios',
+                'Validação de Ideias',
+                'Plano de Ação Inicial'
+            ],
+            marketing: [
+                'Fundamentos de Marketing',
+                'Posicionamento de Marca',
+                'Marketing Digital',
+                'Métricas e Otimização'
+            ],
+            programacao: [
+                'Lógica de Programação',
+                'Estruturas de Dados Básicas',
+                'Boas Práticas de Código',
+                'Projetos Práticos'
+            ]
+        };
         
         // Dados do usuário
         this.userData = {
@@ -190,7 +216,7 @@ class OSTecManager {
         
         // Ícones da área de trabalho
         document.querySelectorAll('.desktop-icon').forEach(icon => {
-            icon.addEventListener('dblclick', () => {
+            icon.addEventListener('click', () => {
                 const module = icon.dataset.module;
                 const tool = icon.dataset.tool;
                 if (module) {
@@ -266,17 +292,21 @@ class OSTecManager {
             const header = e.target.closest('.window-header');
             
             if (closeBtn) {
-                const window = closeBtn.closest('.os-window');
-                this.closeWindow(window);
+                const windowElement = closeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.closeWindow(windowData);
             } else if (minimizeBtn) {
-                const window = minimizeBtn.closest('.os-window');
-                this.minimizeWindow(window);
+                const windowElement = minimizeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.minimizeWindow(windowData);
             } else if (maximizeBtn) {
-                const window = maximizeBtn.closest('.os-window');
-                this.maximizeWindow(window);
+                const windowElement = maximizeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.maximizeWindow(windowData);
             } else if (header) {
-                const window = header.closest('.os-window');
-                this.focusWindow(window);
+                const windowElement = header.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.focusWindow(windowData);
             }
         });
     }
@@ -302,8 +332,8 @@ class OSTecManager {
         const moduleInfo = this.getModuleInfo(moduleId);
         const window = this.createWindow(moduleInfo);
         
-        // Carregar conteúdo do módulo
-        this.loadModuleContent(window, moduleId);
+        // Carregar pasta do módulo
+        this.loadModuleFolder(window, moduleId);
         
         this.windows.push(window);
         this.focusWindow(window);
@@ -388,111 +418,54 @@ class OSTecManager {
         };
     }
     
-    loadModuleContent(window, moduleId) {
+    loadModuleFolder(window, moduleId) {
         const content = window.element.querySelector('.window-content');
-        
-        // Mapeamento de módulos para páginas
-        const modulePages = {
-            administrativo: 'course-view.html',
-            empreendedorismo: 'empreendedorismo-view.html',
-            marketing: 'marketing-view.html',
-            programacao: 'programacao-view.html'
-        };
-        
-        const page = modulePages[moduleId];
-        
-        if (page === 'course-view.html') {
-            // Carregar o módulo administrativo existente
-            fetch(page)
-                .then(response => response.text())
-                .then(html => {
-                    content.innerHTML = html;
-                    
-                    // Adicionar scripts necessários
-                    const script = document.createElement('script');
-                    script.src = 'js/course-manager.js';
-                    content.appendChild(script);
-                    
-                    // Adicionar CSS
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = 'css/course.css';
-                    document.head.appendChild(link);
-                })
-                .catch(error => {
-                    content.innerHTML = this.getModulePlaceholder(moduleId);
-                });
-        } else {
-            // Para outros módulos, mostrar placeholder
-            content.innerHTML = this.getModulePlaceholder(moduleId);
-        }
-    }
-    
-    getModulePlaceholder(moduleId) {
-        const placeholders = {
-            administrativo: `
-                <div class="module-placeholder">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>Módulo Administrativo</h3>
-                    <p>Gestão, organização e eficiência empresarial</p>
-                    <div class="module-stats">
-                        <div class="stat">
-                            <span class="stat-number">12</span>
-                            <span class="stat-label">Capítulos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">1.410</span>
-                            <span class="stat-label">XP Total</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">${this.userData.progress.modules.administrativo.progress}%</span>
-                            <span class="stat-label">Progresso</span>
-                        </div>
-                    </div>
-                    <button class="btn-primary" onclick="window.location.href='course-view.html'">
-                        <i class="fas fa-play"></i> Iniciar Módulo
+        const moduleInfo = this.getModuleInfo(moduleId);
+        const topics = this.moduleTopics[moduleId] || [];
+
+        content.innerHTML = `
+            <div class="module-folder">
+                <div class="folder-toolbar">
+                    <button class="folder-action" data-folder-action="toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Recolher</span>
                     </button>
-                </div>
-            `,
-            empreendedorismo: `
-                <div class="module-placeholder">
-                    <i class="fas fa-rocket"></i>
-                    <h3>Módulo Empreendedorismo</h3>
-                    <p>Transforme ideias em negócios de sucesso</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
+                    <div class="folder-path">
+                        <i class="fas fa-folder-open"></i>
+                        <span>ADRA-TEC OS / ${moduleInfo.title}</span>
                     </div>
                 </div>
-            `,
-            marketing: `
-                <div class="module-placeholder">
-                    <i class="fas fa-bullhorn"></i>
-                    <h3>Módulo Marketing</h3>
-                    <p>Estratégias, comunicação e crescimento</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
+                <div class="folder-tree expanded">
+                    <div class="folder-group">
+                        <div class="folder-group-title">
+                            <i class="fas fa-folder"></i>
+                            <strong>Tópicos do módulo</strong>
+                        </div>
+                        <ul class="folder-items">
+                            ${topics.map(topic => `
+                                <li class="folder-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>${topic}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
                 </div>
-            `,
-            programacao: `
-                <div class="module-placeholder">
-                    <i class="fas fa-code"></i>
-                    <h3>Módulo Programação</h3>
-                    <p>Desenvolvimento de software e tecnologia</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
-                    </div>
-                </div>
-            `
-        };
-        
-        return placeholders[moduleId] || placeholders.administrativo;
+                <p class="folder-footer">Estrutura pronta para você adicionar conteúdos específicos em cada tópico.</p>
+            </div>
+        `;
+
+        const toggleBtn = content.querySelector('[data-folder-action="toggle"]');
+        const folderTree = content.querySelector('.folder-tree');
+        const toggleIcon = toggleBtn.querySelector('i');
+        const toggleText = toggleBtn.querySelector('span');
+
+        toggleBtn.addEventListener('click', () => {
+            const expanded = folderTree.classList.toggle('expanded');
+            folderTree.classList.toggle('collapsed', !expanded);
+            toggleIcon.className = expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
+            toggleText.textContent = expanded ? 'Recolher' : 'Expandir';
+        });
     }
     
     openTool(tool) {
@@ -712,7 +685,7 @@ class OSTecManager {
                     <div class="help-section">
                         <h4><i class="fas fa-book"></i> Guia Rápido</h4>
                         <ul>
-                            <li>Duplo clique nos ícones para abrir módulos</li>
+                            <li>Clique nos ícones para abrir módulos e pastas</li>
                             <li>Use o Menu Iniciar para acessar todas as ferramentas</li>
                             <li>Arraste as janelas para reorganizar</li>
                             <li>Use os controles − □ × para minimizar, maximizar e fechar</li>
@@ -870,6 +843,10 @@ class OSTecManager {
         });
         return highest;
     }
+
+    getWindowData(windowElement) {
+        return this.windows.find(window => window.element === windowElement);
+    }
     
     focusWindow(window) {
         // Remover foco de outras janelas
@@ -887,32 +864,32 @@ class OSTecManager {
     }
     
     closeWindow(window) {
-        const index = this.windows.findIndex(w => w.element === window || w.id === window.id);
+        const index = this.windows.findIndex(w => w.element === window.element || w.id === window.id);
         if (index > -1) {
             this.windows.splice(index, 1);
-            window.remove();
+            window.element.remove();
             this.updateWindowTabs();
         }
     }
     
     minimizeWindow(window) {
         window.minimized = true;
-        window.style.display = 'none';
+        window.element.style.display = 'none';
         this.updateWindowTabs();
     }
     
     maximizeWindow(window) {
         if (window.maximized) {
             // Restaurar tamanho original
-            window.style.width = '800px';
-            window.style.height = '600px';
+            window.element.style.width = '800px';
+            window.element.style.height = '600px';
             window.maximized = false;
         } else {
             // Maximizar
-            window.style.width = '100%';
-            window.style.height = 'calc(100% - 60px)';
-            window.style.top = '0';
-            window.style.left = '0';
+            window.element.style.width = '100%';
+            window.element.style.height = 'calc(100% - 60px)';
+            window.element.style.top = '0';
+            window.element.style.left = '0';
             window.maximized = true;
         }
     }
@@ -929,6 +906,9 @@ class OSTecManager {
         const tabsContainer = document.querySelector('.window-tabs');
         const tab = document.createElement('div');
         tab.className = 'window-tab';
+        if (window.minimized) {
+            tab.classList.add('minimized');
+        }
         tab.innerHTML = `
             <i class="fas fa-window-maximize"></i>
             <span>${title}</span>
@@ -937,7 +917,7 @@ class OSTecManager {
         tab.addEventListener('click', () => {
             if (window.minimized) {
                 window.minimized = false;
-                window.style.display = 'flex';
+                window.element.style.display = 'flex';
                 this.focusWindow(window);
             } else {
                 this.focusWindow(window);
@@ -952,9 +932,7 @@ class OSTecManager {
         tabsContainer.innerHTML = '';
         
         this.windows.forEach(window => {
-            if (!window.minimized) {
-                this.addWindowTab(window.title, window);
-            }
+            this.addWindowTab(window.title, window);
         });
     }
     
