@@ -17,6 +17,8 @@ class OSTecManager {
         this.isDragging = false;
         this.currentWindow = null;
         this.offset = { x: 0, y: 0 };
+        this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
+        this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
         this.moduleTopics = {
             administrativo: [
                 'Introdução à Administração',
@@ -67,7 +69,7 @@ class OSTecManager {
     }
     
     init() {
-        // Inicializar sistema de login
+        // Inicializar sistema de login/banco de dados
         this.setupLoginSystem();
         
         // Verificar se há dados salvos
@@ -75,6 +77,7 @@ class OSTecManager {
         
         // Configurar event listeners
         this.setupEventListeners();
+        this.setupDesktopIcons();
         
         // Iniciar clock
         this.updateClock();
@@ -82,6 +85,21 @@ class OSTecManager {
     }
     
     setupLoginSystem() {
+        if (!this.loginScreen) {
+            const dbInput = document.getElementById('db-upload-input');
+            const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
+            if (loadDbMenuBtn && dbInput) {
+                loadDbMenuBtn.addEventListener('click', () => dbInput.click());
+                dbInput.addEventListener('change', (e) => this.loadDatabase(e));
+            }
+
+            const saveDbBtn = document.getElementById('save-db-btn');
+            if (saveDbBtn) {
+                saveDbBtn.addEventListener('click', () => this.saveDatabase());
+            }
+            return;
+        }
+
         // Tipo de acesso
         const accessTypeBtns = document.querySelectorAll('.access-type-btn');
         accessTypeBtns.forEach(btn => {
@@ -95,7 +113,9 @@ class OSTecManager {
         
         // Botão de login
         const loginBtn = document.getElementById('login-btn');
-        loginBtn.addEventListener('click', () => this.performLogin());
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => this.performLogin());
+        }
         
         // Enter no formulário
         document.addEventListener('keypress', (e) => {
@@ -108,23 +128,31 @@ class OSTecManager {
         const loadDbBtn = document.getElementById('load-db-btn');
         const dbFileInput = document.getElementById('db-file-input');
         
-        loadDbBtn.addEventListener('click', () => dbFileInput.click());
-        dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
+        if (loadDbBtn && dbFileInput) {
+            loadDbBtn.addEventListener('click', () => dbFileInput.click());
+            dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
+        }
         
         // Menu iniciar - carregar BD
         const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
         const dbUploadInput = document.getElementById('db-upload-input');
         
-        loadDbMenuBtn.addEventListener('click', () => dbUploadInput.click());
-        dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
+        if (loadDbMenuBtn && dbUploadInput) {
+            loadDbMenuBtn.addEventListener('click', () => dbUploadInput.click());
+            dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
+        }
         
         // Menu iniciar - salvar BD
         const saveDbBtn = document.getElementById('save-db-btn');
-        saveDbBtn.addEventListener('click', () => this.saveDatabase());
+        if (saveDbBtn) {
+            saveDbBtn.addEventListener('click', () => this.saveDatabase());
+        }
         
         // Logout
         const logoutBtn = document.getElementById('logout-btn');
-        logoutBtn.addEventListener('click', () => this.logout());
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
+        }
     }
     
     updateNameLabels() {
@@ -200,19 +228,23 @@ class OSTecManager {
     
     setupEventListeners() {
         // Menu Iniciar
-        this.startButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleStartMenu();
-        });
+        if (this.startButton) {
+            this.startButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleStartMenu();
+            });
+        }
         
         // Fechar menu ao clicar fora
         document.addEventListener('click', () => {
             this.closeStartMenu();
         });
         
-        this.startMenuDropdown.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+        if (this.startMenuDropdown) {
+            this.startMenuDropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
         
         // Ícones da área de trabalho
         document.querySelectorAll('.desktop-icon').forEach(icon => {
@@ -252,13 +284,15 @@ class OSTecManager {
         });
         
         // Sistema de notificações
-        document.getElementById('notification-icon').addEventListener('click', () => {
-            this.toggleNotificationPanel();
-        });
+        const notificationIcon = document.getElementById('notification-icon');
+        if (notificationIcon) {
+            notificationIcon.addEventListener('click', () => this.toggleNotificationPanel());
+        }
         
-        document.querySelector('.close-panel').addEventListener('click', () => {
-            this.closeNotificationPanel();
-        });
+        const closePanel = document.querySelector('.close-panel');
+        if (closePanel) {
+            closePanel.addEventListener('click', () => this.closeNotificationPanel());
+        }
         
         // Fechar painel ao clicar fora
         document.addEventListener('click', (e) => {
@@ -280,6 +314,12 @@ class OSTecManager {
             if (e.ctrlKey && e.key === 'Escape') {
                 this.closeAllWindows();
             }
+        });
+
+        window.addEventListener('resize', () => {
+            this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
+            this.ensureWindowsInViewport();
+            this.ensureIconsInViewport();
         });
     }
     
@@ -375,15 +415,17 @@ class OSTecManager {
     
     createWindow(moduleInfo) {
         const windowId = 'window-' + Date.now();
-        const window = document.createElement('div');
-        window.className = 'os-window';
-        window.id = windowId;
-        window.style.width = '800px';
-        window.style.height = '600px';
-        window.style.top = Math.random() * 100 + 50 + 'px';
-        window.style.left = Math.random() * 200 + 100 + 'px';
-        
-        window.innerHTML = `
+        const windowElement = document.createElement('div');
+        windowElement.className = 'os-window';
+        windowElement.id = windowId;
+        const safeWidth = Math.min(820, Math.max(380, globalThis.innerWidth - 120));
+        const safeHeight = Math.min(620, Math.max(280, globalThis.innerHeight - 170));
+        windowElement.style.width = safeWidth + 'px';
+        windowElement.style.height = safeHeight + 'px';
+        windowElement.style.top = Math.max(20, Math.random() * 80 + 30) + 'px';
+        windowElement.style.left = Math.max(20, Math.random() * 120 + 50) + 'px';
+
+        windowElement.innerHTML = `
             <div class="window-header">
                 <div class="window-title">
                     <i class="${moduleInfo.icon}"></i>
@@ -403,13 +445,13 @@ class OSTecManager {
             </div>
         `;
         
-        this.windowContainer.appendChild(window);
+        this.windowContainer.appendChild(windowElement);
         
         // Adicionar à barra de tarefas
-        this.addWindowTab(moduleInfo.title, window);
-        
+        this.addWindowTab(moduleInfo.title, windowElement);
+
         return {
-            element: window,
+            element: windowElement,
             id: windowId,
             title: moduleInfo.title,
             module: moduleInfo.title.toLowerCase().replace('módulo ', ''),
@@ -466,6 +508,32 @@ class OSTecManager {
             toggleIcon.className = expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
             toggleText.textContent = expanded ? 'Recolher' : 'Expandir';
         });
+
+        const folderTitle = content.querySelector('.folder-group-title');
+        const folderGroup = content.querySelector('.folder-group');
+        if (folderTitle && folderGroup) {
+            folderTitle.addEventListener('mousedown', (event) => {
+                const startX = event.clientX;
+                const startY = event.clientY;
+                const currentTransform = folderGroup.style.transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
+                const baseX = currentTransform ? parseFloat(currentTransform[1]) : 0;
+                const baseY = currentTransform ? parseFloat(currentTransform[2]) : 0;
+                folderGroup.classList.add('dragging');
+
+                const onMove = (moveEvent) => {
+                    const dx = moveEvent.clientX - startX;
+                    const dy = moveEvent.clientY - startY;
+                    folderGroup.style.transform = `translate(${baseX + dx}px, ${baseY + dy}px)`;
+                };
+                const onEnd = () => {
+                    folderGroup.classList.remove('dragging');
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onEnd);
+                };
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onEnd);
+            });
+        }
     }
     
     openTool(tool) {
@@ -892,6 +960,7 @@ class OSTecManager {
             window.element.style.left = '0';
             window.maximized = true;
         }
+        this.ensureWindowInViewport(window.element);
     }
     
     closeAllWindows() {
@@ -985,7 +1054,7 @@ class OSTecManager {
                 }
                 
                 // Confirmar importação
-                if (confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
+                if (window.confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
                     this.userData = dbData.userData;
                     this.saveUserData();
                     this.showNotification('Banco de dados carregado com sucesso!', 'success');
@@ -1143,7 +1212,7 @@ class OSTecManager {
     }
     
     logout() {
-        if (confirm('Deseja realmente sair do ADRA-TEC OS? Seu progresso será salvo automaticamente.')) {
+        if (window.confirm('Deseja realmente sair do ADRA-TEC OS? Seu progresso será salvo automaticamente.')) {
             // Salvar dados
             this.saveUserData();
             
@@ -1180,6 +1249,77 @@ class OSTecManager {
                 this.updateNameLabels();
             }, 3000);
         }
+    }
+
+    setupDesktopIcons() {
+        const icons = [...document.querySelectorAll('.desktop-icon')];
+        if (!icons.length) return;
+
+        const columnWidth = 110;
+        icons.forEach((icon, index) => {
+            if (!icon.style.left || !icon.style.top) {
+                icon.style.left = `${20 + Math.floor(index / 6) * columnWidth}px`;
+                icon.style.top = `${20 + (index % 6) * 110}px`;
+            }
+
+            icon.addEventListener('mousedown', (event) => {
+                if (event.button !== 0 || event.target.closest('.icon-label')) return;
+                this.iconDragState.active = true;
+                this.iconDragState.icon = icon;
+                const rect = icon.getBoundingClientRect();
+                this.iconDragState.offsetX = event.clientX - rect.left;
+                this.iconDragState.offsetY = event.clientY - rect.top;
+                icon.classList.add('active');
+                event.preventDefault();
+            });
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!this.iconDragState.active || !this.iconDragState.icon) return;
+            const icon = this.iconDragState.icon;
+            const maxX = window.innerWidth - icon.offsetWidth - 12;
+            const maxY = window.innerHeight - icon.offsetHeight - 80;
+            const nextX = Math.max(8, Math.min(event.clientX - this.iconDragState.offsetX, maxX));
+            const nextY = Math.max(8, Math.min(event.clientY - this.iconDragState.offsetY, maxY));
+            icon.style.left = `${nextX}px`;
+            icon.style.top = `${nextY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (this.iconDragState.icon) {
+                this.iconDragState.icon.classList.remove('active');
+            }
+            this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
+        });
+    }
+
+    ensureWindowsInViewport() {
+        this.windows.forEach((windowData) => this.ensureWindowInViewport(windowData.element));
+    }
+
+    ensureWindowInViewport(windowEl) {
+        if (!windowEl) return;
+        const rect = windowEl.getBoundingClientRect();
+        const maxLeft = Math.max(0, window.innerWidth - rect.width);
+        const maxTop = Math.max(0, window.innerHeight - rect.height - 60);
+        const left = Math.max(0, Math.min(rect.left, maxLeft));
+        const top = Math.max(0, Math.min(rect.top, maxTop));
+        windowEl.style.left = `${left}px`;
+        windowEl.style.top = `${top}px`;
+    }
+
+    ensureIconsInViewport() {
+        document.querySelectorAll('.desktop-icon').forEach((icon) => {
+            const rect = icon.getBoundingClientRect();
+            const maxLeft = Math.max(8, window.innerWidth - rect.width - 8);
+            const maxTop = Math.max(8, window.innerHeight - rect.height - 72);
+            if (rect.left > maxLeft) {
+                icon.style.left = `${maxLeft}px`;
+            }
+            if (rect.top > maxTop) {
+                icon.style.top = `${maxTop}px`;
+            }
+        });
     }
 }
 
