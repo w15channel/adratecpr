@@ -290,6 +290,16 @@ class OSTecManager {
                 this.closeStartMenu();
             });
         });
+
+        // Atalhos da barra de tarefas
+        document.querySelectorAll('.taskbar-shortcut').forEach((shortcut) => {
+            shortcut.addEventListener('click', () => {
+                const tool = shortcut.dataset.tool;
+                if (tool) {
+                    this.openTool(tool);
+                }
+            });
+        });
         
         // Sistema de notificações
         const notificationIcon = document.getElementById('notification-icon');
@@ -321,6 +331,10 @@ class OSTecManager {
             }
             if (e.ctrlKey && e.key === 'Escape') {
                 this.closeAllWindows();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                this.openGamesWindow();
             }
         });
 
@@ -1403,12 +1417,7 @@ class OSTecManager {
         const icons = [...document.querySelectorAll('.desktop-icon')];
         if (!icons.length) return;
 
-        icons.forEach((icon, index) => {
-            if (!icon.style.left || !icon.style.top) {
-                icon.style.left = `${20 + Math.floor(index / 6) * 120}px`;
-                icon.style.top = `${20 + (index % 6) * 120}px`;
-            }
-
+        icons.forEach((icon) => {
             icon.addEventListener('mousedown', (event) => {
                 if (event.button !== 0 || event.target.closest('.icon-label')) return;
                 this.iconDragState.active = true;
@@ -1444,7 +1453,22 @@ class OSTecManager {
     }
 
     alignDesktopIcons() {
-        document.querySelectorAll('.desktop-icon').forEach((icon) => this.snapIconToGrid(icon));
+        const icons = [...document.querySelectorAll('.desktop-icon')];
+        if (!icons.length) return;
+
+        const marginLeft = 20;
+        const marginTop = 20;
+        const gridX = 120;
+        const gridY = 120;
+        const usableHeight = Math.max(120, window.innerHeight - 120);
+        const rowsPerColumn = Math.max(1, Math.floor((usableHeight - marginTop) / gridY));
+
+        icons.forEach((icon, index) => {
+            const column = Math.floor(index / rowsPerColumn);
+            const row = index % rowsPerColumn;
+            icon.style.left = `${marginLeft + column * gridX}px`;
+            icon.style.top = `${marginTop + row * gridY}px`;
+        });
     }
 
     snapIconToGrid(icon) {
