@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'SF Pro Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
     background: #000;
     user-select: none;
@@ -108,7 +108,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: radial-gradient(circle at 20% 20%, rgba(76, 175, 80, 0.35), transparent 40%),
+                radial-gradient(circle at 80% 10%, rgba(22, 140, 48, 0.28), transparent 45%),
+                linear-gradient(160deg, #020402 0%, #0d1f0d 50%, #173b17 100%);
     background-size: cover;
     background-position: center;
 }
@@ -119,7 +121,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.5), rgba(12, 64, 24, 0.45));
 }
 
 .wallpaper-content {
@@ -136,14 +138,35 @@ body {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 20px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
     letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
 .wallpaper-content p {
     font-size: 1.2rem;
     opacity: 0.9;
     font-weight: 300;
+    letter-spacing: 0.2rem;
+    text-transform: lowercase;
+}
+
+.wallpaper-globe {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 35px rgba(255, 255, 255, 0.22), 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.wallpaper-globe i {
+    font-size: 4rem;
+    color: #f4fff4;
 }
 
 /* Ícones da Área de Trabalho */
@@ -151,13 +174,13 @@ body {
     position: absolute;
     top: 20px;
     left: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 100px);
-    gap: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 100px);
     z-index: 10;
 }
 
 .desktop-icon {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -166,6 +189,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    width: 92px;
 }
 
 .desktop-icon:hover {
@@ -183,36 +207,38 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 18px;
     margin-bottom: 8px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3), 0 10px 16px rgba(0, 0, 0, 0.26);
 }
 
 .desktop-icon[data-module="administrativo"] .icon-wrapper {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(145deg, #67d46f, #11892e);
 }
 
 .desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
+    background: linear-gradient(145deg, #a8f3b0, #2fa14d);
 }
 
 .desktop-icon[data-module="marketing"] .icon-wrapper {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    background: linear-gradient(145deg, #9ce4ab, #1f7f36);
 }
 
 .desktop-icon[data-module="programacao"] .icon-wrapper {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    background: linear-gradient(145deg, #0f2f10, #40c557);
 }
 
 .desktop-icon.system-tool .icon-wrapper {
-    background: linear-gradient(135deg, #30cfd0, #330867);
+    background: linear-gradient(145deg, #ecf6ee, #3b9f50);
 }
 
 .icon-wrapper i {
     font-size: 2rem;
-    color: white;
+    color: #fff;
     z-index: 1;
 }
 
@@ -232,8 +258,8 @@ body {
     left: 0;
     right: 0;
     height: 60px;
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(16, 32, 16, 0.76));
+    backdrop-filter: blur(16px) saturate(160%);
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -563,11 +589,11 @@ body {
 
 .os-window {
     position: absolute;
-    background: rgba(40, 40, 40, 0.98);
-    backdrop-filter: blur(20px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(0, 0, 0, 0.52));
+    backdrop-filter: blur(18px) saturate(150%);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 12px 34px rgba(0, 0, 0, 0.45);
     min-width: 400px;
     min-height: 300px;
     display: flex;
@@ -581,7 +607,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background: rgba(30, 30, 30, 0.8);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(43, 85, 47, 0.38));
     border-radius: 12px 12px 0 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: move;
@@ -629,6 +655,18 @@ body {
     padding: 20px;
     overflow-y: auto;
     color: white;
+}
+
+.folder-group {
+    position: relative;
+}
+
+.folder-group-title {
+    cursor: grab;
+}
+
+.folder-group.dragging {
+    opacity: 0.65;
 }
 
 /* Pastas dos módulos */
@@ -712,8 +750,8 @@ body {
 /* Responsividade */
 @media (max-width: 768px) {
     .desktop-icons {
-        grid-template-columns: repeat(auto-fill, 80px);
-        gap: 15px;
+        width: calc(100% - 20px);
+        left: 10px;
     }
     
     .icon-wrapper {
@@ -738,6 +776,11 @@ body {
     
     .wallpaper-content h2 {
         font-size: 2.5rem;
+    }
+
+    .os-window {
+        min-width: min(92vw, 400px);
+        min-height: 260px;
     }
 }
 
