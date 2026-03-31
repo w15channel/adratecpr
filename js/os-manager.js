@@ -1619,16 +1619,15 @@ class OSTecManager {
         const icons = [...document.querySelectorAll('.desktop-icon')];
         if (!icons.length) return;
 
-        const marginLeft = 20;
-        const marginTop = 20;
-        const gridX = 120;
-        const gridY = 120;
-        const usableHeight = Math.max(120, window.innerHeight - 120);
-        const rowsPerColumn = Math.max(1, Math.floor((usableHeight - marginTop) / gridY));
+        const marginLeft = 24;
+        const marginTop = 24;
+        const gridX = 128;
+        const gridY = 128;
+        const rowsPerColumn = 4; // Layout fixo em coluna 2x4
 
         icons.forEach((icon, index) => {
-            const column = Math.floor(index / rowsPerColumn);
             const row = index % rowsPerColumn;
+            const column = Math.floor(index / rowsPerColumn);
             icon.style.left = `${marginLeft + column * gridX}px`;
             icon.style.top = `${marginTop + row * gridY}px`;
         });
