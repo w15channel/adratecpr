@@ -35,8 +35,11 @@
         <div class="wallpaper">
             <div class="wallpaper-overlay"></div>
             <div class="wallpaper-content">
+                <div class="wallpaper-globe" aria-hidden="true">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
                 <h2>ADRA-TEC OS</h2>
-                <p>Educação Profissional Transformadora</p>
+                <p>adratecpr</p>
             </div>
         </div>
 
@@ -87,6 +90,13 @@
                     <i class="fas fa-info-circle"></i>
                 </div>
                 <span class="icon-label">Sobre</span>
+            </div>
+
+            <div class="desktop-icon system-tool" data-tool="games">
+                <div class="icon-wrapper">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <span class="icon-label">Jogos de Passatempo</span>
             </div>
         </div>
 
@@ -176,6 +186,13 @@
                                     <span class="item-description">Personalize seu sistema</span>
                                 </div>
                             </div>
+                            <div class="menu-item" data-tool="games">
+                                <i class="fas fa-gamepad"></i>
+                                <div>
+                                    <span class="item-title">Passatempos</span>
+                                    <span class="item-description">Joguinhos rápidos para relaxar</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -183,6 +200,20 @@
                     <div class="menu-section">
                         <h3><i class="fas fa-power-off"></i> Sistema</h3>
                         <div class="menu-items">
+                            <div class="menu-item" id="load-db-menu-btn">
+                                <i class="fas fa-file-import"></i>
+                                <div>
+                                    <span class="item-title">Carregar BD</span>
+                                    <span class="item-description">Importar progresso salvo</span>
+                                </div>
+                            </div>
+                            <div class="menu-item" id="save-db-btn">
+                                <i class="fas fa-file-export"></i>
+                                <div>
+                                    <span class="item-title">Salvar BD</span>
+                                    <span class="item-description">Exportar backup local</span>
+                                </div>
+                            </div>
                             <div class="menu-item" data-tool="help">
                                 <i class="fas fa-question-circle"></i>
                                 <div>
@@ -212,6 +243,12 @@
 
         <!-- Janelas Abertas -->
         <div class="open-windows">
+            <div class="taskbar-shortcuts">
+                <button class="taskbar-shortcut" data-tool="games" title="Abrir jogos de passatempo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Passatempos</span>
+                </button>
+            </div>
             <div class="window-tabs">
                 <!-- Tabs serão adicionadas dinamicamente -->
             </div>
@@ -270,6 +307,8 @@
             </div>
         </div>
     </div>
+
+    <input type="file" id="db-upload-input" accept=".txt,.json,application/json,text/plain" hidden>
 
     <!-- Scripts -->
     <script src="js/os-manager.js"></script>

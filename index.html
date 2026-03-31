@@ -10,19 +10,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon">🚀</div>
-                <div>
-                    <h1>ADRA-TEC</h1>
-                    <p>Portal de Educação Profissional</p>
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="logo">
+                    <div class="logo-icon">🎓</div>
+                    <div>
+                        <h2>ADRA-TEC OS</h2>
+                        <p>Sistema Operacional Educacional</p>
+                    </div>
                 </div>
+                <p>Escolha o tipo de acesso e informe os dados para iniciar.</p>
             </div>
 
-            <nav class="nav">
-                <a href="#" class="nav-link active" data-view="dashboard" onclick="NavigationManager.showView('dashboard')">
+            <div class="login-form">
+                <div class="form-group">
+                    <label class="form-label">Tipo de Acesso</label>
+                    <div class="access-type-buttons">
+                        <button class="access-type-btn active" data-type="individual">
                             <i class="fas fa-user"></i>
                             <span>Aula Individual</span>
                         </button>
@@ -32,17 +38,17 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label" id="name-label">Seu Nome</label>
                     <input type="text" id="student-name" class="form-input" placeholder="Digite seu nome completo" maxlength="50">
                 </div>
-                
+
                 <div class="form-group dupla-names hidden" id="dupla-names">
                     <label class="form-label">Nome do Segundo Aluno</label>
                     <input type="text" id="student-name-2" class="form-input" placeholder="Digite o nome do segundo aluno" maxlength="50">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Recuperar Dados Anteriores?</label>
                     <div class="db-options">
@@ -51,13 +57,13 @@
                             <span>Carregar Banco de Dados</span>
                         </button>
                         <input type="file" id="db-file-input" accept=".txt" style="display: none;">
-                        
+
                         <div class="db-info">
                             <small>Salve seu progresso para não perder dados. Use a opção "Salvar BD" no menu iniciar.</small>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="login-actions">
                     <button class="btn-primary btn-large" id="login-btn">
                         <i class="fas fa-sign-in-alt"></i>
@@ -65,7 +71,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <div class="login-footer">
                 <p>ADRA-TEC - Educação Profissional Transformadora</p>
                 <small>Versão 1.0.0 | Sistema Operacional Educacional</small>

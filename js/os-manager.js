@@ -17,6 +17,34 @@ class OSTecManager {
         this.isDragging = false;
         this.currentWindow = null;
         this.offset = { x: 0, y: 0 };
+        this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
+        this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
+        this.moduleTopics = {
+            administrativo: [
+                'Introdução à Administração',
+                'Processos Internos e Rotinas',
+                'Organização de Documentos',
+                'Gestão de Pessoas'
+            ],
+            empreendedorismo: [
+                'Mentalidade Empreendedora',
+                'Modelagem de Negócios',
+                'Validação de Ideias',
+                'Plano de Ação Inicial'
+            ],
+            marketing: [
+                'Fundamentos de Marketing',
+                'Posicionamento de Marca',
+                'Marketing Digital',
+                'Métricas e Otimização'
+            ],
+            programacao: [
+                'Lógica de Programação',
+                'Estruturas de Dados Básicas',
+                'Boas Práticas de Código',
+                'Projetos Práticos'
+            ]
+        };
         
         // Dados do usuário
         this.userData = {
@@ -41,7 +69,7 @@ class OSTecManager {
     }
     
     init() {
-        // Inicializar sistema de login
+        // Inicializar sistema de login/banco de dados
         this.setupLoginSystem();
         
         // Verificar se há dados salvos
@@ -49,6 +77,7 @@ class OSTecManager {
         
         // Configurar event listeners
         this.setupEventListeners();
+        this.setupDesktopIcons();
         
         // Iniciar clock
         this.updateClock();
@@ -56,6 +85,24 @@ class OSTecManager {
     }
     
     setupLoginSystem() {
+        if (!this.loginScreen) {
+            const dbInput = document.getElementById('db-upload-input');
+            const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
+            if (loadDbMenuBtn && dbInput) {
+                loadDbMenuBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    this.promptLoadDatabase('db-upload-input');
+                });
+                dbInput.addEventListener('change', (e) => this.loadDatabase(e));
+            }
+
+            const saveDbBtn = document.getElementById('save-db-btn');
+            if (saveDbBtn) {
+                saveDbBtn.addEventListener('click', () => this.saveDatabase());
+            }
+            return;
+        }
+
         // Tipo de acesso
         const accessTypeBtns = document.querySelectorAll('.access-type-btn');
         accessTypeBtns.forEach(btn => {
@@ -69,7 +116,9 @@ class OSTecManager {
         
         // Botão de login
         const loginBtn = document.getElementById('login-btn');
-        loginBtn.addEventListener('click', () => this.performLogin());
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => this.performLogin());
+        }
         
         // Enter no formulário
         document.addEventListener('keypress', (e) => {
@@ -82,23 +131,34 @@ class OSTecManager {
         const loadDbBtn = document.getElementById('load-db-btn');
         const dbFileInput = document.getElementById('db-file-input');
         
-        loadDbBtn.addEventListener('click', () => dbFileInput.click());
-        dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
+        if (loadDbBtn && dbFileInput) {
+            loadDbBtn.addEventListener('click', () => this.promptLoadDatabase('db-file-input'));
+            dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
+        }
         
         // Menu iniciar - carregar BD
         const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
         const dbUploadInput = document.getElementById('db-upload-input');
         
-        loadDbMenuBtn.addEventListener('click', () => dbUploadInput.click());
-        dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
+        if (loadDbMenuBtn && dbUploadInput) {
+            loadDbMenuBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                this.promptLoadDatabase('db-upload-input');
+            });
+            dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
+        }
         
         // Menu iniciar - salvar BD
         const saveDbBtn = document.getElementById('save-db-btn');
-        saveDbBtn.addEventListener('click', () => this.saveDatabase());
+        if (saveDbBtn) {
+            saveDbBtn.addEventListener('click', () => this.saveDatabase());
+        }
         
         // Logout
         const logoutBtn = document.getElementById('logout-btn');
-        logoutBtn.addEventListener('click', () => this.logout());
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
+        }
     }
     
     updateNameLabels() {
@@ -174,23 +234,27 @@ class OSTecManager {
     
     setupEventListeners() {
         // Menu Iniciar
-        this.startButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleStartMenu();
-        });
+        if (this.startButton) {
+            this.startButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleStartMenu();
+            });
+        }
         
         // Fechar menu ao clicar fora
         document.addEventListener('click', () => {
             this.closeStartMenu();
         });
         
-        this.startMenuDropdown.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+        if (this.startMenuDropdown) {
+            this.startMenuDropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
         
         // Ícones da área de trabalho
         document.querySelectorAll('.desktop-icon').forEach(icon => {
-            icon.addEventListener('dblclick', () => {
+            icon.addEventListener('click', () => {
                 const module = icon.dataset.module;
                 const tool = icon.dataset.tool;
                 if (module) {
@@ -219,20 +283,34 @@ class OSTecManager {
                     this.openHelpWindow();
                 } else if (tool === 'about') {
                     this.openAboutWindow();
+                } else if (tool === 'games') {
+                    this.openGamesWindow();
                 }
                 
                 this.closeStartMenu();
             });
         });
+
+        // Atalhos da barra de tarefas
+        document.querySelectorAll('.taskbar-shortcut').forEach((shortcut) => {
+            shortcut.addEventListener('click', () => {
+                const tool = shortcut.dataset.tool;
+                if (tool) {
+                    this.openTool(tool);
+                }
+            });
+        });
         
         // Sistema de notificações
-        document.getElementById('notification-icon').addEventListener('click', () => {
-            this.toggleNotificationPanel();
-        });
+        const notificationIcon = document.getElementById('notification-icon');
+        if (notificationIcon) {
+            notificationIcon.addEventListener('click', () => this.toggleNotificationPanel());
+        }
         
-        document.querySelector('.close-panel').addEventListener('click', () => {
-            this.closeNotificationPanel();
-        });
+        const closePanel = document.querySelector('.close-panel');
+        if (closePanel) {
+            closePanel.addEventListener('click', () => this.closeNotificationPanel());
+        }
         
         // Fechar painel ao clicar fora
         document.addEventListener('click', (e) => {
@@ -254,6 +332,16 @@ class OSTecManager {
             if (e.ctrlKey && e.key === 'Escape') {
                 this.closeAllWindows();
             }
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                this.openGamesWindow();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
+            this.ensureWindowsInViewport();
+            this.ensureIconsInViewport();
         });
     }
     
@@ -266,17 +354,21 @@ class OSTecManager {
             const header = e.target.closest('.window-header');
             
             if (closeBtn) {
-                const window = closeBtn.closest('.os-window');
-                this.closeWindow(window);
+                const windowElement = closeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.closeWindow(windowData);
             } else if (minimizeBtn) {
-                const window = minimizeBtn.closest('.os-window');
-                this.minimizeWindow(window);
+                const windowElement = minimizeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.minimizeWindow(windowData);
             } else if (maximizeBtn) {
-                const window = maximizeBtn.closest('.os-window');
-                this.maximizeWindow(window);
+                const windowElement = maximizeBtn.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.maximizeWindow(windowData);
             } else if (header) {
-                const window = header.closest('.os-window');
-                this.focusWindow(window);
+                const windowElement = header.closest('.os-window');
+                const windowData = this.getWindowData(windowElement);
+                if (windowData) this.focusWindow(windowData);
             }
         });
     }
@@ -302,8 +394,8 @@ class OSTecManager {
         const moduleInfo = this.getModuleInfo(moduleId);
         const window = this.createWindow(moduleInfo);
         
-        // Carregar conteúdo do módulo
-        this.loadModuleContent(window, moduleId);
+        // Carregar pasta do módulo
+        this.loadModuleFolder(window, moduleId);
         
         this.windows.push(window);
         this.focusWindow(window);
@@ -345,15 +437,17 @@ class OSTecManager {
     
     createWindow(moduleInfo) {
         const windowId = 'window-' + Date.now();
-        const window = document.createElement('div');
-        window.className = 'os-window';
-        window.id = windowId;
-        window.style.width = '800px';
-        window.style.height = '600px';
-        window.style.top = Math.random() * 100 + 50 + 'px';
-        window.style.left = Math.random() * 200 + 100 + 'px';
-        
-        window.innerHTML = `
+        const windowElement = document.createElement('div');
+        windowElement.className = 'os-window';
+        windowElement.id = windowId;
+        const safeWidth = Math.min(820, Math.max(380, globalThis.innerWidth - 120));
+        const safeHeight = Math.min(620, Math.max(280, globalThis.innerHeight - 170));
+        windowElement.style.width = safeWidth + 'px';
+        windowElement.style.height = safeHeight + 'px';
+        windowElement.style.top = Math.max(20, Math.random() * 80 + 30) + 'px';
+        windowElement.style.left = Math.max(20, Math.random() * 120 + 50) + 'px';
+
+        windowElement.innerHTML = `
             <div class="window-header">
                 <div class="window-title">
                     <i class="${moduleInfo.icon}"></i>
@@ -373,13 +467,13 @@ class OSTecManager {
             </div>
         `;
         
-        this.windowContainer.appendChild(window);
+        this.windowContainer.appendChild(windowElement);
         
         // Adicionar à barra de tarefas
-        this.addWindowTab(moduleInfo.title, window);
-        
+        this.addWindowTab(moduleInfo.title, windowElement);
+
         return {
-            element: window,
+            element: windowElement,
             id: windowId,
             title: moduleInfo.title,
             module: moduleInfo.title.toLowerCase().replace('módulo ', ''),
@@ -388,111 +482,80 @@ class OSTecManager {
         };
     }
     
-    loadModuleContent(window, moduleId) {
+    loadModuleFolder(window, moduleId) {
         const content = window.element.querySelector('.window-content');
-        
-        // Mapeamento de módulos para páginas
-        const modulePages = {
-            administrativo: 'course-view.html',
-            empreendedorismo: 'empreendedorismo-view.html',
-            marketing: 'marketing-view.html',
-            programacao: 'programacao-view.html'
-        };
-        
-        const page = modulePages[moduleId];
-        
-        if (page === 'course-view.html') {
-            // Carregar o módulo administrativo existente
-            fetch(page)
-                .then(response => response.text())
-                .then(html => {
-                    content.innerHTML = html;
-                    
-                    // Adicionar scripts necessários
-                    const script = document.createElement('script');
-                    script.src = 'js/course-manager.js';
-                    content.appendChild(script);
-                    
-                    // Adicionar CSS
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = 'css/course.css';
-                    document.head.appendChild(link);
-                })
-                .catch(error => {
-                    content.innerHTML = this.getModulePlaceholder(moduleId);
-                });
-        } else {
-            // Para outros módulos, mostrar placeholder
-            content.innerHTML = this.getModulePlaceholder(moduleId);
-        }
-    }
-    
-    getModulePlaceholder(moduleId) {
-        const placeholders = {
-            administrativo: `
-                <div class="module-placeholder">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>Módulo Administrativo</h3>
-                    <p>Gestão, organização e eficiência empresarial</p>
-                    <div class="module-stats">
-                        <div class="stat">
-                            <span class="stat-number">12</span>
-                            <span class="stat-label">Capítulos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">1.410</span>
-                            <span class="stat-label">XP Total</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">${this.userData.progress.modules.administrativo.progress}%</span>
-                            <span class="stat-label">Progresso</span>
-                        </div>
-                    </div>
-                    <button class="btn-primary" onclick="window.location.href='course-view.html'">
-                        <i class="fas fa-play"></i> Iniciar Módulo
+        const moduleInfo = this.getModuleInfo(moduleId);
+        const topics = this.moduleTopics[moduleId] || [];
+
+        content.innerHTML = `
+            <div class="module-folder">
+                <div class="folder-toolbar">
+                    <button class="folder-action" data-folder-action="toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Recolher</span>
                     </button>
-                </div>
-            `,
-            empreendedorismo: `
-                <div class="module-placeholder">
-                    <i class="fas fa-rocket"></i>
-                    <h3>Módulo Empreendedorismo</h3>
-                    <p>Transforme ideias em negócios de sucesso</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
+                    <div class="folder-path">
+                        <i class="fas fa-folder-open"></i>
+                        <span>ADRA-TEC OS / ${moduleInfo.title}</span>
                     </div>
                 </div>
-            `,
-            marketing: `
-                <div class="module-placeholder">
-                    <i class="fas fa-bullhorn"></i>
-                    <h3>Módulo Marketing</h3>
-                    <p>Estratégias, comunicação e crescimento</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
+                <div class="folder-tree expanded">
+                    <div class="folder-group">
+                        <div class="folder-group-title">
+                            <i class="fas fa-folder"></i>
+                            <strong>Tópicos do módulo</strong>
+                        </div>
+                        <ul class="folder-items">
+                            ${topics.map(topic => `
+                                <li class="folder-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>${topic}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
                 </div>
-            `,
-            programacao: `
-                <div class="module-placeholder">
-                    <i class="fas fa-code"></i>
-                    <h3>Módulo Programação</h3>
-                    <p>Desenvolvimento de software e tecnologia</p>
-                    <div class="coming-soon">
-                        <i class="fas fa-tools"></i>
-                        <p>Em desenvolvimento...</p>
-                        <small>Conteúdo disponível em breve!</small>
-                    </div>
-                </div>
-            `
-        };
-        
-        return placeholders[moduleId] || placeholders.administrativo;
+                <p class="folder-footer">Estrutura pronta para você adicionar conteúdos específicos em cada tópico.</p>
+            </div>
+        `;
+
+        const toggleBtn = content.querySelector('[data-folder-action="toggle"]');
+        const folderTree = content.querySelector('.folder-tree');
+        const toggleIcon = toggleBtn.querySelector('i');
+        const toggleText = toggleBtn.querySelector('span');
+
+        toggleBtn.addEventListener('click', () => {
+            const expanded = folderTree.classList.toggle('expanded');
+            folderTree.classList.toggle('collapsed', !expanded);
+            toggleIcon.className = expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
+            toggleText.textContent = expanded ? 'Recolher' : 'Expandir';
+        });
+
+        const folderTitle = content.querySelector('.folder-group-title');
+        const folderGroup = content.querySelector('.folder-group');
+        if (folderTitle && folderGroup) {
+            folderTitle.addEventListener('mousedown', (event) => {
+                const startX = event.clientX;
+                const startY = event.clientY;
+                const currentTransform = folderGroup.style.transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
+                const baseX = currentTransform ? parseFloat(currentTransform[1]) : 0;
+                const baseY = currentTransform ? parseFloat(currentTransform[2]) : 0;
+                folderGroup.classList.add('dragging');
+
+                const onMove = (moveEvent) => {
+                    const dx = moveEvent.clientX - startX;
+                    const dy = moveEvent.clientY - startY;
+                    folderGroup.style.transform = `translate(${baseX + dx}px, ${baseY + dy}px)`;
+                };
+                const onEnd = () => {
+                    folderGroup.classList.remove('dragging');
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onEnd);
+                };
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onEnd);
+            });
+        }
     }
     
     openTool(tool) {
@@ -508,6 +571,9 @@ class OSTecManager {
                 break;
             case 'about':
                 this.openAboutWindow();
+                break;
+            case 'games':
+                this.openGamesWindow();
                 break;
         }
     }
@@ -712,7 +778,7 @@ class OSTecManager {
                     <div class="help-section">
                         <h4><i class="fas fa-book"></i> Guia Rápido</h4>
                         <ul>
-                            <li>Duplo clique nos ícones para abrir módulos</li>
+                            <li>Clique nos ícones para abrir módulos e pastas</li>
                             <li>Use o Menu Iniciar para acessar todas as ferramentas</li>
                             <li>Arraste as janelas para reorganizar</li>
                             <li>Use os controles − □ × para minimizar, maximizar e fechar</li>
@@ -751,6 +817,103 @@ class OSTecManager {
         this.focusWindow(window);
     }
     
+    openGamesWindow() {
+        const window = this.createWindow({
+            title: 'Passatempos',
+            icon: 'fas fa-gamepad',
+            color: '#70d7a1'
+        });
+
+        window.element.querySelector('.window-content').innerHTML = `
+            <div class="games-dashboard">
+                <h3>🎮 Ambiente de Joguinhos de Passatempo</h3>
+                <p class="games-intro">Escolha um jogo rápido para treinar o raciocínio e relaxar entre os estudos.</p>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <h4>Pedra, Papel e Tesoura</h4>
+                        <p>Faça sua jogada e veja se vence o computador.</p>
+                        <div class="rps-buttons">
+                            <button class="btn-secondary" data-rps="pedra">✊ Pedra</button>
+                            <button class="btn-secondary" data-rps="papel">✋ Papel</button>
+                            <button class="btn-secondary" data-rps="tesoura">✌️ Tesoura</button>
+                        </div>
+                        <p class="game-result" id="rps-result">Faça uma jogada!</p>
+                    </div>
+                    <div class="game-card">
+                        <h4>Adivinhe o Número</h4>
+                        <p>Tente descobrir o número secreto entre 1 e 20.</p>
+                        <div class="guess-controls">
+                            <input type="number" min="1" max="20" id="guess-input" placeholder="1-20">
+                            <button class="btn-primary" id="guess-btn">Tentar</button>
+                            <button class="btn-secondary" id="reset-guess-btn">Novo jogo</button>
+                        </div>
+                        <p class="game-result" id="guess-result">Você tem 6 tentativas.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        let targetNumber = Math.floor(Math.random() * 20) + 1;
+        let attempts = 6;
+        const choices = ['pedra', 'papel', 'tesoura'];
+        const rpsResult = window.element.querySelector('#rps-result');
+        const guessResult = window.element.querySelector('#guess-result');
+        const guessInput = window.element.querySelector('#guess-input');
+
+        window.element.querySelectorAll('[data-rps]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const userPick = btn.dataset.rps;
+                const cpuPick = choices[Math.floor(Math.random() * choices.length)];
+                if (userPick === cpuPick) {
+                    rpsResult.textContent = `Empate! Ambos escolheram ${cpuPick}.`;
+                    return;
+                }
+                const victory =
+                    (userPick === 'pedra' && cpuPick === 'tesoura') ||
+                    (userPick === 'papel' && cpuPick === 'pedra') ||
+                    (userPick === 'tesoura' && cpuPick === 'papel');
+                rpsResult.textContent = victory
+                    ? `Você ganhou! O computador escolheu ${cpuPick}.`
+                    : `Você perdeu! O computador escolheu ${cpuPick}.`;
+            });
+        });
+
+        const playGuess = () => {
+            const value = Number(guessInput.value);
+            if (!Number.isInteger(value) || value < 1 || value > 20) {
+                guessResult.textContent = 'Digite um número inteiro entre 1 e 20.';
+                return;
+            }
+            attempts -= 1;
+            if (value === targetNumber) {
+                guessResult.textContent = `🎉 Acertou! Número secreto: ${targetNumber}.`;
+                return;
+            }
+            if (attempts <= 0) {
+                guessResult.textContent = `Fim de jogo! O número era ${targetNumber}.`;
+                return;
+            }
+            guessResult.textContent = value > targetNumber
+                ? `Quase! O número secreto é menor. Tentativas restantes: ${attempts}.`
+                : `Quase! O número secreto é maior. Tentativas restantes: ${attempts}.`;
+        };
+
+        window.element.querySelector('#guess-btn').addEventListener('click', playGuess);
+        guessInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') playGuess();
+        });
+
+        window.element.querySelector('#reset-guess-btn').addEventListener('click', () => {
+            targetNumber = Math.floor(Math.random() * 20) + 1;
+            attempts = 6;
+            guessInput.value = '';
+            guessResult.textContent = 'Você tem 6 tentativas.';
+        });
+
+        this.windows.push(window);
+        this.focusWindow(window);
+    }
+
     openAboutWindow() {
         const window = this.createWindow({
             title: 'Sobre ADRA-TEC OS',
@@ -870,6 +1033,10 @@ class OSTecManager {
         });
         return highest;
     }
+
+    getWindowData(windowElement) {
+        return this.windows.find(window => window.element === windowElement);
+    }
     
     focusWindow(window) {
         // Remover foco de outras janelas
@@ -887,34 +1054,35 @@ class OSTecManager {
     }
     
     closeWindow(window) {
-        const index = this.windows.findIndex(w => w.element === window || w.id === window.id);
+        const index = this.windows.findIndex(w => w.element === window.element || w.id === window.id);
         if (index > -1) {
             this.windows.splice(index, 1);
-            window.remove();
+            window.element.remove();
             this.updateWindowTabs();
         }
     }
     
     minimizeWindow(window) {
         window.minimized = true;
-        window.style.display = 'none';
+        window.element.style.display = 'none';
         this.updateWindowTabs();
     }
     
     maximizeWindow(window) {
         if (window.maximized) {
             // Restaurar tamanho original
-            window.style.width = '800px';
-            window.style.height = '600px';
+            window.element.style.width = '800px';
+            window.element.style.height = '600px';
             window.maximized = false;
         } else {
             // Maximizar
-            window.style.width = '100%';
-            window.style.height = 'calc(100% - 60px)';
-            window.style.top = '0';
-            window.style.left = '0';
+            window.element.style.width = '100%';
+            window.element.style.height = 'calc(100% - 60px)';
+            window.element.style.top = '0';
+            window.element.style.left = '0';
             window.maximized = true;
         }
+        this.ensureWindowInViewport(window.element);
     }
     
     closeAllWindows() {
@@ -929,6 +1097,9 @@ class OSTecManager {
         const tabsContainer = document.querySelector('.window-tabs');
         const tab = document.createElement('div');
         tab.className = 'window-tab';
+        if (window.minimized) {
+            tab.classList.add('minimized');
+        }
         tab.innerHTML = `
             <i class="fas fa-window-maximize"></i>
             <span>${title}</span>
@@ -937,7 +1108,7 @@ class OSTecManager {
         tab.addEventListener('click', () => {
             if (window.minimized) {
                 window.minimized = false;
-                window.style.display = 'flex';
+                window.element.style.display = 'flex';
                 this.focusWindow(window);
             } else {
                 this.focusWindow(window);
@@ -952,9 +1123,7 @@ class OSTecManager {
         tabsContainer.innerHTML = '';
         
         this.windows.forEach(window => {
-            if (!window.minimized) {
-                this.addWindowTab(window.title, window);
-            }
+            this.addWindowTab(window.title, window);
         });
     }
     
@@ -973,6 +1142,16 @@ class OSTecManager {
         this.clock.textContent = `${hours}:${minutes}`;
     }
     
+    promptLoadDatabase(inputId = 'db-upload-input') {
+        const input = document.getElementById(inputId) || document.getElementById('db-upload-input') || document.getElementById('db-file-input');
+        if (!input) {
+            this.showNotification('Não foi possível abrir o seletor de arquivo agora.', 'error');
+            return;
+        }
+        input.value = '';
+        input.click();
+    }
+
     // Sistema de Banco de Dados
     saveDatabase() {
         const dbData = {
@@ -993,37 +1172,67 @@ class OSTecManager {
     }
     
     loadDatabase(event) {
-        const file = event.target.files[0];
+        const file = event?.target?.files?.[0];
         if (!file) return;
-        
+
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const dbData = JSON.parse(e.target.result);
-                
-                // Validar dados
-                if (!dbData.userData) {
-                    throw new Error('Formato de banco de dados inválido');
-                }
-                
-                // Confirmar importação
-                if (confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
-                    this.userData = dbData.userData;
+                const importedData = this.normalizeImportedData(e.target.result);
+
+                if (window.confirm('Deseja importar este banco de dados? Seus dados atuais serão substituídos.')) {
+                    this.userData = importedData;
                     this.saveUserData();
                     this.showNotification('Banco de dados carregado com sucesso!', 'success');
-                    
-                    // Atualizar interface
                     this.updateInterface();
                 }
             } catch (error) {
                 this.showNotification('Erro ao carregar banco de dados: ' + error.message, 'error');
             }
         };
-        
+
         reader.readAsText(file);
-        
-        // Limpar input
         event.target.value = '';
+    }
+
+    normalizeImportedData(rawContent) {
+        const parsed = JSON.parse(rawContent);
+        const source = parsed?.userData || parsed;
+
+        if (!source || typeof source !== 'object' || !source.progress) {
+            throw new Error('Formato de banco de dados inválido.');
+        }
+
+        const defaults = {
+            name: '',
+            name2: '',
+            accessType: 'individual',
+            progress: {
+                modules: {
+                    administrativo: { completed: [], xp: 0, progress: 0 },
+                    empreendedorismo: { completed: [], xp: 0, progress: 0 },
+                    marketing: { completed: [], xp: 0, progress: 0 },
+                    programacao: { completed: [], xp: 0, progress: 0 }
+                },
+                totalXP: 0,
+                achievements: [],
+                studyTime: 0,
+                lastAccess: null
+            }
+        };
+
+        return {
+            ...defaults,
+            ...source,
+            progress: {
+                ...defaults.progress,
+                ...source.progress,
+                modules: {
+                    ...defaults.progress.modules,
+                    ...(source.progress?.modules || {})
+                }
+            }
+        };
     }
     
     saveUserData() {
@@ -1165,7 +1374,7 @@ class OSTecManager {
     }
     
     logout() {
-        if (confirm('Deseja realmente sair do ADRA-TEC OS? Seu progresso será salvo automaticamente.')) {
+        if (window.confirm('Deseja realmente sair do ADRA-TEC OS? Seu progresso será salvo automaticamente.')) {
             // Salvar dados
             this.saveUserData();
             
@@ -1202,6 +1411,105 @@ class OSTecManager {
                 this.updateNameLabels();
             }, 3000);
         }
+    }
+
+    setupDesktopIcons() {
+        const icons = [...document.querySelectorAll('.desktop-icon')];
+        if (!icons.length) return;
+
+        icons.forEach((icon) => {
+            icon.addEventListener('mousedown', (event) => {
+                if (event.button !== 0 || event.target.closest('.icon-label')) return;
+                this.iconDragState.active = true;
+                this.iconDragState.icon = icon;
+                const rect = icon.getBoundingClientRect();
+                this.iconDragState.offsetX = event.clientX - rect.left;
+                this.iconDragState.offsetY = event.clientY - rect.top;
+                icon.classList.add('active');
+                event.preventDefault();
+            });
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!this.iconDragState.active || !this.iconDragState.icon) return;
+            const icon = this.iconDragState.icon;
+            const maxX = window.innerWidth - icon.offsetWidth - 12;
+            const maxY = window.innerHeight - icon.offsetHeight - 80;
+            const nextX = Math.max(8, Math.min(event.clientX - this.iconDragState.offsetX, maxX));
+            const nextY = Math.max(8, Math.min(event.clientY - this.iconDragState.offsetY, maxY));
+            icon.style.left = `${nextX}px`;
+            icon.style.top = `${nextY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (this.iconDragState.icon) {
+                this.iconDragState.icon.classList.remove('active');
+                this.snapIconToGrid(this.iconDragState.icon);
+            }
+            this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
+        });
+
+        this.alignDesktopIcons();
+    }
+
+    alignDesktopIcons() {
+        const icons = [...document.querySelectorAll('.desktop-icon')];
+        if (!icons.length) return;
+
+        const marginLeft = 20;
+        const marginTop = 20;
+        const gridX = 120;
+        const gridY = 120;
+        const usableHeight = Math.max(120, window.innerHeight - 120);
+        const rowsPerColumn = Math.max(1, Math.floor((usableHeight - marginTop) / gridY));
+
+        icons.forEach((icon, index) => {
+            const column = Math.floor(index / rowsPerColumn);
+            const row = index % rowsPerColumn;
+            icon.style.left = `${marginLeft + column * gridX}px`;
+            icon.style.top = `${marginTop + row * gridY}px`;
+        });
+    }
+
+    snapIconToGrid(icon) {
+        if (!icon) return;
+        const gridX = 120;
+        const gridY = 120;
+        const left = parseFloat(icon.style.left || '20');
+        const top = parseFloat(icon.style.top || '20');
+        const snappedLeft = Math.max(20, Math.round((left - 20) / gridX) * gridX + 20);
+        const snappedTop = Math.max(20, Math.round((top - 20) / gridY) * gridY + 20);
+        icon.style.left = `${snappedLeft}px`;
+        icon.style.top = `${snappedTop}px`;
+    }
+
+    ensureWindowsInViewport() {
+        this.windows.forEach((windowData) => this.ensureWindowInViewport(windowData.element));
+    }
+
+    ensureWindowInViewport(windowEl) {
+        if (!windowEl) return;
+        const rect = windowEl.getBoundingClientRect();
+        const maxLeft = Math.max(0, window.innerWidth - rect.width);
+        const maxTop = Math.max(0, window.innerHeight - rect.height - 60);
+        const left = Math.max(0, Math.min(rect.left, maxLeft));
+        const top = Math.max(0, Math.min(rect.top, maxTop));
+        windowEl.style.left = `${left}px`;
+        windowEl.style.top = `${top}px`;
+    }
+
+    ensureIconsInViewport() {
+        document.querySelectorAll('.desktop-icon').forEach((icon) => {
+            const rect = icon.getBoundingClientRect();
+            const maxLeft = Math.max(8, window.innerWidth - rect.width - 8);
+            const maxTop = Math.max(8, window.innerHeight - rect.height - 72);
+            if (rect.left > maxLeft) {
+                icon.style.left = `${maxLeft}px`;
+            }
+            if (rect.top > maxTop) {
+                icon.style.top = `${maxTop}px`;
+            }
+        });
     }
 }
 

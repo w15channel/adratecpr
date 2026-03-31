@@ -1,0 +1,1141 @@
+/* ADRA-TEC OS - Sistema Operacional Educacional */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Tela de Boot */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.boot-content {
+    text-align: center;
+    color: #fff;
+    max-width: 500px;
+}
+
+.logo {
+    margin-bottom: 40px;
+}
+
+.logo i {
+    font-size: 4rem;
+    color: #00d4ff;
+    margin-bottom: 20px;
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #00d4ff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.boot-messages {
+    margin-bottom: 30px;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 0.5s forwards;
+}
+
+.boot-message {
+    margin: 8px 0;
+    color: #00ff88;
+    opacity: 0;
+    animation: slideIn 0.3s ease forwards;
+}
+
+.boot-message:nth-child(1) { animation-delay: 0.5s; }
+.boot-message:nth-child(2) { animation-delay: 1s; }
+.boot-message:nth-child(3) { animation-delay: 1.5s; }
+.boot-message:nth-child(4) { animation-delay: 2s; }
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #00ff88);
+    animation: progress 2.5s ease forwards;
+}
+
+/* Área de Trabalho */
+.desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.wallpaper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 20%, rgba(76, 175, 80, 0.35), transparent 40%),
+                radial-gradient(circle at 80% 10%, rgba(22, 140, 48, 0.28), transparent 45%),
+                linear-gradient(160deg, #020402 0%, #0d1f0d 50%, #173b17 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+.wallpaper-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.5), rgba(12, 64, 24, 0.45));
+}
+
+.wallpaper-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.wallpaper-content h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.wallpaper-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    text-transform: lowercase;
+}
+
+.wallpaper-globe {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 35px rgba(255, 255, 255, 0.22), 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.wallpaper-globe i {
+    font-size: 4rem;
+    color: #f4fff4;
+}
+
+/* Ícones da Área de Trabalho */
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    z-index: 10;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+    min-height: 120px;
+    justify-content: center;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+.desktop-icon:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.desktop-icon.active {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+}
+
+.icon-wrapper {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3), 0 10px 16px rgba(0, 0, 0, 0.26);
+}
+
+.desktop-icon:hover .icon-wrapper {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-icon[data-module="administrativo"] .icon-wrapper {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+}
+
+.desktop-icon.system-tool .icon-wrapper {
+    background: linear-gradient(135deg, #30cfd0, #330867);
+    box-shadow: 0 4px 15px rgba(48, 207, 208, 0.4);
+}
+
+.icon-wrapper i {
+    font-size: 2.2rem;
+    color: white;
+.desktop-icon[data-module="administrativo"] .icon-wrapper {
+    background: linear-gradient(145deg, #67d46f, #11892e);
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
+    background: linear-gradient(145deg, #a8f3b0, #2fa14d);
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper {
+    background: linear-gradient(145deg, #9ce4ab, #1f7f36);
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper {
+    background: linear-gradient(145deg, #0f2f10, #40c557);
+}
+
+.desktop-icon.system-tool .icon-wrapper {
+    background: linear-gradient(145deg, #ecf6ee, #3b9f50);
+}
+
+.desktop-icon[data-tool="games"] .icon-wrapper {
+    background: linear-gradient(145deg, #b0f3cb, #2d9d54);
+}
+
+.icon-wrapper i {
+    font-size: 2rem;
+    color: #fff;
+>>>>>>> 9ccb9089ed91f9333920f5e8f2bf33019f3853cc
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.desktop-icon:hover .icon-wrapper i {
+    transform: scale(1.1);
+}
+
+.icon-label {
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    max-width: 90px;
+    word-wrap: break-word;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+/* Efeito de brilho nos ícones */
+.icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.desktop-icon:hover .icon-wrapper::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* Animação de pulse suave */
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.desktop-icon[data-module="administrativo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 0.75s;
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 1.5s;
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 2.25s;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 1200px) {
+    .desktop-icons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .desktop-icon {
+        min-width: 90px;
+        min-height: 110px;
+        padding: 15px 10px;
+    }
+    
+    .icon-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 2rem;
+    }
+    
+    .icon-label {
+        font-size: 0.85rem;
+        max-width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 80px;
+        min-height: 100px;
+        padding: 12px 8px;
+    }
+    
+    .icon-wrapper {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.8rem;
+    }
+    
+    .icon-label {
+        font-size: 0.8rem;
+        max-width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 70px;
+        min-height: 90px;
+        padding: 10px 6px;
+    }
+    
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.6rem;
+    }
+    
+    .icon-label {
+        font-size: 0.75rem;
+        max-width: 60px;
+    }
+}
+
+/* Barra de Tarefas */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(16, 32, 16, 0.76));
+    backdrop-filter: blur(16px) saturate(160%);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu Iniciar */
+.start-menu {
+    position: relative;
+    margin-right: 20px;
+}
+
+.start-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.start-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.start-button.active {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+.start-menu-dropdown {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 450px;
+    max-height: 600px;
+    background: rgba(40, 40, 40, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+    overflow: hidden;
+}
+
+.start-menu-dropdown.active {
+    display: block;
+    animation: slideUp 0.3s ease;
+}
+
+.menu-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info i {
+    font-size: 2.5rem;
+    color: #00d4ff;
+}
+
+.username {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.user-status {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-top: 3px;
+}
+
+.menu-sections {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.menu-section {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.menu-section h3 {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item i {
+    font-size: 1.2rem;
+    color: #00d4ff;
+    width: 20px;
+}
+
+.item-title {
+    color: white;
+    font-weight: 500;
+    display: block;
+}
+
+.item-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* Janelas Abertas */
+.open-windows {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.taskbar-shortcuts {
+    display: flex;
+    align-items: center;
+}
+
+.taskbar-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.14);
+    transition: all 0.2s ease;
+}
+
+.taskbar-shortcut:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+.taskbar-shortcut i {
+    font-size: 1rem;
+}
+
+.taskbar-shortcut span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.window-tabs {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.window-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.window-tab:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.window-tab.active {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+.window-tab.minimized {
+    opacity: 0.75;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* Área de Notificação */
+.notification-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.system-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.system-icon {
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.system-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+}
+
+#clock {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: white;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* Painel de Notificações */
+.notification-panel {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 350px;
+    max-height: 500px;
+    background: rgba(40, 40, 40, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1001;
+}
+
+.notification-panel.active {
+    display: block;
+    animation: slideInRight 0.3s ease;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-header h3 {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.close-panel {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.close-panel:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.notifications-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.3s ease;
+}
+
+.notification-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.notification-item i {
+    color: #00d4ff;
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.notification-item strong {
+    color: white;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.notification-item p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.notification-time {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+/* Janelas Flutuantes */
+.window-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.os-window {
+    position: absolute;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(0, 0, 0, 0.52));
+    backdrop-filter: blur(18px) saturate(150%);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 12px 34px rgba(0, 0, 0, 0.45);
+    min-width: 400px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    pointer-events: all;
+    animation: windowOpen 0.3s ease;
+}
+
+.window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(43, 85, 47, 0.38));
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: move;
+}
+
+.window-title {
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.window-control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.window-control:hover {
+    opacity: 0.8;
+}
+
+.window-control.close {
+    background: #ff5f56;
+}
+
+.window-control.minimize {
+    background: #ffbd2e;
+}
+
+.window-control.maximize {
+    background: #27c93f;
+}
+
+.window-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    color: white;
+}
+
+.folder-group {
+    position: relative;
+}
+
+.folder-group-title {
+    cursor: grab;
+}
+
+.folder-group.dragging {
+    opacity: 0.65;
+}
+
+/* Pastas dos módulos */
+.module-folder {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.folder-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.folder-action {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.folder-path {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.folder-tree {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 14px;
+}
+
+.folder-tree.collapsed {
+    display: none;
+}
+
+.folder-group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #f8fafc;
+}
+
+.folder-items {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.folder-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.folder-item i {
+    color: #60a5fa;
+}
+
+.folder-footer {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .desktop-icons {
+        width: calc(100% - 20px);
+        left: 10px;
+    }
+    
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.5rem;
+    }
+    
+    .start-menu-dropdown {
+        width: 90vw;
+        max-width: 350px;
+    }
+    
+    .notification-panel {
+        width: 90vw;
+        max-width: 300px;
+        right: 5vw;
+    }
+
+    .taskbar-shortcut span {
+        display: none;
+    }
+    
+    .wallpaper-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .os-window {
+        min-width: min(92vw, 400px);
+        min-height: 260px;
+    }
+}
+
+/* Animações */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from { 
+        opacity: 0;
+        transform: translate(20px, -50%);
+    }
+    to { 
+        opacity: 1;
+        transform: translate(0, -50%);
+    }
+}
+
+@keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes windowOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scrollbar Custom */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+.games-dashboard {
+    color: #132116;
+    padding: 18px;
+}
+
+.games-intro {
+    margin: 6px 0 18px;
+    color: #3a4d3f;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.game-card {
+    background: #f5fff7;
+    border: 1px solid #d0eed5;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 6px 18px rgba(26, 75, 34, 0.08);
+}
+
+.rps-buttons,
+.guess-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.guess-controls input {
+    flex: 1;
+    min-width: 90px;
+    border: 1px solid #aacdb0;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.game-result {
+    color: #22552b;
+    font-weight: 600;
+    min-height: 24px;
+}
