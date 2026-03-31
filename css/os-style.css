@@ -152,77 +152,243 @@ body {
     top: 20px;
     left: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 100px);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
     z-index: 10;
+    max-width: 90%;
+    padding: 20px;
 }
 
 .desktop-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 20px 15px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+    min-height: 120px;
+    justify-content: center;
 }
 
 .desktop-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+.desktop-icon:active {
+    transform: translateY(-2px) scale(0.98);
 }
 
 .desktop-icon.active {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
 }
 
 .icon-wrapper {
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    transition: all 0.3s ease;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-icon:hover .icon-wrapper {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .desktop-icon[data-module="administrativo"] .icon-wrapper {
     background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
     background: linear-gradient(135deg, #f093fb, #f5576c);
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
 }
 
 .desktop-icon[data-module="marketing"] .icon-wrapper {
     background: linear-gradient(135deg, #4facfe, #00f2fe);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
 .desktop-icon[data-module="programacao"] .icon-wrapper {
     background: linear-gradient(135deg, #43e97b, #38f9d7);
+    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
 }
 
 .desktop-icon.system-tool .icon-wrapper {
     background: linear-gradient(135deg, #30cfd0, #330867);
+    box-shadow: 0 4px 15px rgba(48, 207, 208, 0.4);
 }
 
 .icon-wrapper i {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: white;
     z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.desktop-icon:hover .icon-wrapper i {
+    transform: scale(1.1);
 }
 
 .icon-label {
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    max-width: 80px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    max-width: 90px;
     word-wrap: break-word;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+/* Efeito de brilho nos ícones */
+.icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.desktop-icon:hover .icon-wrapper::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* Animação de pulse suave */
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.desktop-icon[data-module="administrativo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 0.75s;
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 1.5s;
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 2.25s;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 1200px) {
+    .desktop-icons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .desktop-icon {
+        min-width: 90px;
+        min-height: 110px;
+        padding: 15px 10px;
+    }
+    
+    .icon-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 2rem;
+    }
+    
+    .icon-label {
+        font-size: 0.85rem;
+        max-width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 80px;
+        min-height: 100px;
+        padding: 12px 8px;
+    }
+    
+    .icon-wrapper {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.8rem;
+    }
+    
+    .icon-label {
+        font-size: 0.8rem;
+        max-width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 70px;
+        min-height: 90px;
+        padding: 10px 6px;
+    }
+    
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.6rem;
+    }
+    
+    .icon-label {
+        font-size: 0.75rem;
+        max-width: 60px;
+    }
 }
 
 /* Barra de Tarefas */
