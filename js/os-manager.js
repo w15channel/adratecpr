@@ -93,8 +93,12 @@ class OSTecManager {
             return;
         }
         
-        // Se houver nome de usuário salvo, fazer login automático
-        if (this.userData.name && this.userData.name.trim() !== '') {
+        // Se houver nome de usuário salvo E não houver dados nos campos, fazer login automático
+        const nameInput = document.getElementById('student-name');
+        const name2Input = document.getElementById('student-name-2');
+        
+        if (this.userData.name && this.userData.name.trim() !== '' && 
+            !nameInput.value && !name2Input.value) {
             console.log('Detectados dados salvos, fazendo login automático...');
             
             // Esperar um pouco para garantir que o DOM está pronto
@@ -105,24 +109,6 @@ class OSTecManager {
     }
     
     setupLoginSystem() {
-        if (!this.loginScreen) {
-            const dbInput = document.getElementById('db-upload-input');
-            const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
-            if (loadDbMenuBtn && dbInput) {
-                loadDbMenuBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    dbInput.click();
-                });
-                dbInput.addEventListener('change', (e) => this.loadDatabase(e));
-            }
-
-            const saveDbBtn = document.getElementById('save-db-btn');
-            if (saveDbBtn) {
-                saveDbBtn.addEventListener('click', () => this.saveDatabase());
-            }
-            return;
-        }
-
         // Tipo de acesso
         const accessTypeBtns = document.querySelectorAll('.access-type-btn');
         accessTypeBtns.forEach(btn => {
@@ -147,7 +133,7 @@ class OSTecManager {
             }
         });
         
-        // Carregar banco de dados - CORRIGIDO
+        // Carregar banco de dados
         const loadDbBtn = document.getElementById('load-db-btn');
         const dbFileInput = document.getElementById('db-file-input');
         
@@ -156,24 +142,6 @@ class OSTecManager {
                 dbFileInput.click();
             });
             dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
-        }
-        
-        // Menu iniciar - carregar BD
-        const loadDbMenuBtn = document.getElementById('load-db-menu-btn');
-        const dbUploadInput = document.getElementById('db-upload-input');
-        
-        if (loadDbMenuBtn && dbUploadInput) {
-            loadDbMenuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dbUploadInput.click();
-            });
-            dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
-        }
-        
-        // Menu iniciar - salvar BD
-        const saveDbBtn = document.getElementById('save-db-btn');
-        if (saveDbBtn) {
-            saveDbBtn.addEventListener('click', () => this.saveDatabase());
         }
         
         // Logout
@@ -676,6 +644,9 @@ class OSTecManager {
                 break;
             case 'games':
                 this.openGamesWindow();
+                break;
+            case 'admin':
+                this.openAdminPanel();
                 break;
         }
     }
@@ -1309,17 +1280,8 @@ class OSTecManager {
         
         // Se estiver na tela de login, fazer login automático
         if (this.loginScreen && !this.loginScreen.classList.contains('hidden')) {
-            // Preencher campos automaticamente
-            const nameInput = document.getElementById('student-name');
-            const name2Input = document.getElementById('student-name-2');
-            
-            if (nameInput) {
-                nameInput.value = this.userData.name || '';
-            }
-            
-            if (name2Input) {
-                name2Input.value = this.userData.name2 || '';
-            }
+            // NÃO preencher campos para permitir login manual
+            // Apenas iniciar boot sequence diretamente
             
             // Configurar tipo de acesso
             const accessTypeBtns = document.querySelectorAll('.access-type-btn');
@@ -1658,6 +1620,11 @@ class OSTecManager {
                 icon.style.top = `${maxTop}px`;
             }
         });
+    }
+    
+    openAdminPanel() {
+        // Abrir painel administrativo em nova janela/aba
+        window.open('admin-panel.html', '_blank', 'width=1200,height=800');
     }
 }
 

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADRA-TEC - Painel Administrativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .admin-sidebar {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+        .admin-card {
+            transition: all 0.3s ease;
+        }
+        .admin-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .config-section {
+            background: #f8fafc;
+            border-left: 4px solid #00ff41;
+        }
+        .status-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="admin-sidebar fixed left-0 top-0 h-full w-64 text-white z-50">
+        <div class="p-6 border-b border-gray-700">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-cog text-white"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">ADRA-TEC</h2>
+                    <p class="text-xs text-gray-400">Painel Administrativo</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#dashboard" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="dashboard">
+                        <i class="fas fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#chapters" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="chapters">
+                        <i class="fas fa-book"></i>
+                        <span>Capítulos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#simulations" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="simulations">
+                        <i class="fas fa-desktop"></i>
+                        <span>Simulações</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Usuários</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#config" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="config">
+                        <i class="fas fa-wrench"></i>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#backup" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="backup">
+                        <i class="fas fa-database"></i>
+                        <span>Backup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#system" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors menu-item" data-section="system">
+                        <i class="fas fa-cogs"></i>
+                        <span>Sistema</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700">
+            <button onclick="logout()" class="w-full flex items-center gap-3 p-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="px-6 py-4 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Painel Administrativo</h1>
+                    <p class="text-sm text-gray-600">Gerencie o conteúdo e configurações do ADRA-TEC</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">Administrador</p>
+                        <p class="text-xs text-green-600 font-medium">Online</p>
+                    </div>
+                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="p-6">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="admin-card bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-book text-blue-600 text-xl"></i>
+                            </div>
+                            <span class="status-badge bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativo</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">12</h3>
+                        <p class="text-sm text-gray-600">Capítulos Totais</p>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-desktop text-green-600 text-xl"></i>
+                            </div>
+                            <span class="status-badge bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">5 Apps</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">5</h3>
+                        <p class="text-sm text-gray-600">Simulações</p>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-purple-600 text-xl"></i>
+                            </div>
+                            <span class="status-badge bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Online</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800" id="total-users">--</h3>
+                        <p class="text-sm text-gray-600">Usuários Ativos</p>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-chart-line text-orange-600 text-xl"></i>
+                            </div>
+                            <span class="status-badge bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Bom</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800" id="completion-rate">--%</h3>
+                        <p class="text-sm text-gray-600">Taxa de Conclusão</p>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Status do Sistema</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Servidor Web</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Online</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Banco de Dados</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Conectado</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">API de Validação</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativa</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Sistema de Cache</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Otimizado</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Recursos</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Uso de CPU</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-500" style="width: 35%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">35%</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Memória RAM</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500" style="width: 60%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">60%</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Armazenamento</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-orange-500" style="width: 80%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">80%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Atividade Recente</h2>
+                    <div class="space-y-4" id="recent-activity">
+                        <div class="flex items-center gap-4 p-3 bg-gray-50 rounded">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800">Sistema inicializado</p>
+                                <p class="text-xs text-gray-600">Configurações carregadas com sucesso</p>
+                            </div>
+                            <span class="text-xs text-gray-500">Agora</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapters Section -->
+            <section id="chapters" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-gray-800">Gerenciar Capítulos</h2>
+                            <div class="flex gap-2">
+                                <button onclick="loadChapters()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-sync mr-2"></i>Recarregar
+                                </button>
+                                <button onclick="addChapter()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-plus mr-2"></i>Novo Capítulo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="chapters-grid">
+                            <!-- Capítulos serão carregados aqui -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Simulations Section -->
+            <section id="simulations" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-gray-800">Configurar Simulações</h2>
+                            <button onclick="loadSimulations()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-sync mr-2"></i>Recarregar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="simulations-grid">
+                            <!-- Simulações serão carregadas aqui -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-gray-800">Gerenciar Usuários</h2>
+                            <div class="flex gap-2">
+                                <button onclick="loadUsers()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-sync mr-2"></i>Atualizar
+                                </button>
+                                <button onclick="exportUsers()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-download mr-2"></i>Exportar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left p-3 font-semibold text-gray-700">Nome</th>
+                                        <th class="text-left p-3 font-semibold text-gray-700">Tipo de Acesso</th>
+                                        <th class="text-left p-3 font-semibold text-gray-700">XP Total</th>
+                                        <th class="text-left p-3 font-semibold text-gray-700">Progresso</th>
+                                        <th class="text-left p-3 font-semibold text-gray-700">Último Acesso</th>
+                                        <th class="text-left p-3 font-semibold text-gray-700">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table">
+                                    <!-- Usuários serão carregados aqui -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Config Section -->
+            <section id="config" class="content-section hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- System Config -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b">
+                            <h3 class="text-lg font-bold text-gray-800">Configurações do Sistema</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Ambiente Atual</label>
+                                    <select id="env-current" class="w-full p-2 border rounded-lg">
+                                        <option value="development">Development</option>
+                                        <option value="production">Production</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">URL Base</label>
+                                    <input type="text" id="env-base-url" class="w-full p-2 border rounded-lg" placeholder="https://...">
+                                </div>
+                                <div>
+                                    <label class="flex items-center gap-2">
+                                        <input type="checkbox" id="env-debug" class="rounded">
+                                        <span class="text-sm text-gray-700">Modo Debug</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="flex items-center gap-2">
+                                        <input type="checkbox" id="env-cache" class="rounded" checked>
+                                        <span class="text-sm text-gray-700">Cache Habilitado</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="saveSystemConfig()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Salvar Configurações
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- UI Config -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b">
+                            <h3 class="text-lg font-bold text-gray-800">Interface Visual</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cor Primária</label>
+                                    <input type="color" id="ui-primary-color" class="w-full h-10 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Colunas do Desktop</label>
+                                    <select id="ui-desktop-columns" class="w-full p-2 border rounded-lg">
+                                        <option value="2">2 Colunas</option>
+                                        <option value="3">3 Colunas</option>
+                                        <option value="4">4 Colunas</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="flex items-center gap-2">
+                                        <input type="checkbox" id="ui-animations" class="rounded" checked>
+                                        <span class="text-sm text-gray-700">Animações</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="flex items-center gap-2">
+                                        <input type="checkbox" id="ui-sounds" class="rounded" checked>
+                                        <span class="text-sm text-gray-700">Efeitos Sonoros</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="saveUIConfig()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Salvar Configurações
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backup Section -->
+            <section id="backup" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-bold text-gray-800">Backup e Restauração</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i class="fas fa-download text-4xl text-gray-400 mb-4"></i>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">Criar Backup</h3>
+                                <p class="text-sm text-gray-600 mb-4">Exporte todas as configurações e conteúdo</p>
+                                <button onclick="createBackup()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-download mr-2"></i>Baixar Backup
+                                </button>
+                            </div>
+                            
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i class="fas fa-upload text-4xl text-gray-400 mb-4"></i>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2">Restaurar Backup</h3>
+                                <p class="text-sm text-gray-600 mb-4">Importe configurações de um arquivo</p>
+                                <input type="file" id="backup-file" accept=".json" class="hidden">
+                                <button onclick="document.getElementById('backup-file').click()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-upload mr-2"></i>Importar Backup
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Section -->
+            <section id="system" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-bold text-gray-800">Informações do Sistema</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Versão e Build</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Versão:</span>
+                                        <span class="text-sm font-medium">2.0.0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Build:</span>
+                                        <span class="text-sm font-medium">2024.03.31</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Ambiente:</span>
+                                        <span class="text-sm font-medium">Production</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 mb-4">Licenças e API</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Licença:</span>
+                                        <span class="text-sm font-medium text-green-600">Ativa</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">API Key:</span>
+                                        <span class="text-sm font-medium">Configurada</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">SSL:</span>
+                                        <span class="text-sm font-medium text-green-600">Habilitado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Ações de Sistema</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <button onclick="clearCache()" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                                    <i class="fas fa-trash mr-2"></i>Limpar Cache
+                                </button>
+                                <button onclick="restartSystem()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-redo mr-2"></i>Reiniciar Sistema
+                                </button>
+                                <button onclick="generateLogs()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                    <i class="fas fa-file-alt mr-2"></i>Gerar Logs
+                                </button>
+                                <button onclick="testAPI()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                                    <i class="fas fa-plug mr-2"></i>Testar APIs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Estado da aplicação
+        let currentSection = 'dashboard';
+        let systemData = {
+            chapters: [],
+            simulations: [],
+            users: [],
+            config: {}
+        };
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+            loadDashboardData();
+            loadSystemInfo();
+        });
+
+        // Configurar navegação
+        function setupNavigation() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = item.dataset.section;
+                    showSection(section);
+                });
+            });
+        }
+
+        // Mostrar seção
+        function showSection(sectionName) {
+            // Esconder todas as seções
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar seção selecionada
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                currentSection = sectionName;
+                
+                // Atualizar navegação
+                document.querySelectorAll('.menu-item').forEach(item => {
+                    item.classList.remove('bg-gray-700');
+                });
+                document.querySelector(`[data-section="${sectionName}"]`).classList.add('bg-gray-700');
+                
+                // Carregar dados específicos da seção
+                loadSectionData(sectionName);
+            }
+        }
+
+        // Carregar dados da seção
+        function loadSectionData(section) {
+            switch(section) {
+                case 'dashboard':
+                    loadDashboardData();
+                    break;
+                case 'chapters':
+                    loadChapters();
+                    break;
+                case 'simulations':
+                    loadSimulations();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'config':
+                    loadConfig();
+                    break;
+                case 'backup':
+                    // Não precisa carregar dados
+                    break;
+                case 'system':
+                    loadSystemInfo();
+                    break;
+            }
+        }
+
+        // Carregar dados do dashboard
+        function loadDashboardData() {
+            // Simular dados de usuários
+            const totalUsers = Math.floor(Math.random() * 50) + 10;
+            const completionRate = Math.floor(Math.random() * 30) + 60;
+            
+            document.getElementById('total-users').textContent = totalUsers;
+            document.getElementById('completion-rate').textContent = completionRate + '%';
+            
+            // Adicionar atividade recente
+            addActivity('Sistema verificado', 'Todos os módulos operacionais', 'success');
+            addActivity('Backup automático', 'Backup diário criado com sucesso', 'success');
+            addActivity('Novo usuário', 'João Silva cadastrado no sistema', 'info');
+        }
+
+        // Carregar informações do sistema
+        function loadSystemInfo() {
+            // Já está no HTML
+        }
+
+        // Carregar capítulos
+        function loadChapters() {
+            const grid = document.getElementById('chapters-grid');
+            grid.innerHTML = '';
+            
+            // Simular dados dos capítulos
+            const chapters = [
+                { id: 1, title: 'Introdução à Administração', icon: 'fas fa-globe', status: 'active' },
+                { id: 2, title: 'As 4 Funções (P.O.D.C)', icon: 'fas fa-cogs', status: 'active' },
+                { id: 3, title: 'Tipos de Empresas', icon: 'fas fa-store', status: 'active' },
+                { id: 4, title: 'Estrutura Organizacional', icon: 'fas fa-sitemap', status: 'active' },
+                { id: 5, title: 'Programa 5S e Cultura', icon: 'fas fa-sparkles', status: 'active' },
+                { id: 6, title: 'Funções do Auxiliar', icon: 'fas fa-file-signature', status: 'active' }
+            ];
+            
+            chapters.forEach(chapter => {
+                const card = document.createElement('div');
+                card.className = 'admin-card bg-white p-6 rounded-lg shadow';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas ${chapter.icon} text-blue-600 text-xl"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativo</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Capítulo ${chapter.id}</h3>
+                    <p class="text-sm text-gray-600 mb-4">${chapter.title}</p>
+                    <div class="flex gap-2">
+                        <button onclick="editChapter(${chapter.id})" class="flex-1 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors text-sm">
+                            <i class="fas fa-edit mr-1"></i>Editar
+                        </button>
+                        <button onclick="viewChapter(${chapter.id})" class="flex-1 bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700 transition-colors text-sm">
+                            <i class="fas fa-eye mr-1"></i>Ver
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Carregar simulações
+        function loadSimulations() {
+            const grid = document.getElementById('simulations-grid');
+            grid.innerHTML = '';
+            
+            const simulations = [
+                { id: 'outlook', name: 'Microsoft Outlook', icon: 'fas fa-envelope', color: '#0f6cbd' },
+                { id: 'excel', name: 'Microsoft Excel', icon: 'fas fa-file-excel', color: '#107c41' },
+                { id: 'word', name: 'Microsoft Word', icon: 'fas fa-file-word', color: '#185abd' },
+                { id: 'trello', name: 'Trello Board', icon: 'fas fa-trello', color: '#0079bf' },
+                { id: 'erp', name: 'ERP Adra-TEC', icon: 'fas fa-server', color: '#0f172a' }
+            ];
+            
+            simulations.forEach(sim => {
+                const card = document.createElement('div');
+                card.className = 'admin-card bg-white p-6 rounded-lg shadow';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: ${sim.color}">
+                            <i class="fas ${sim.icon} text-white text-xl"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativo</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">${sim.name}</h3>
+                    <p class="text-sm text-gray-600 mb-4">ID: ${sim.id}</p>
+                    <div class="flex gap-2">
+                        <button onclick="editSimulation('${sim.id}')" class="flex-1 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors text-sm">
+                            <i class="fas fa-edit mr-1"></i>Configurar
+                        </button>
+                        <button onclick="testSimulation('${sim.id}')" class="flex-1 bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition-colors text-sm">
+                            <i class="fas fa-play mr-1"></i>Testar
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Carregar usuários
+        function loadUsers() {
+            const table = document.getElementById('users-table');
+            table.innerHTML = '';
+            
+            // Simular dados de usuários
+            const users = [
+                { name: 'João Silva', type: 'Individual', xp: 850, progress: 65, lastAccess: '2024-03-31 14:30' },
+                { name: 'Maria Santos & Pedro Costa', type: 'Dupla', xp: 1200, progress: 80, lastAccess: '2024-03-31 13:15' },
+                { name: 'Ana Oliveira', type: 'Individual', xp: 450, progress: 35, lastAccess: '2024-03-31 10:45' }
+            ];
+            
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.className = 'border-b hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="p-3">${user.name}</td>
+                    <td class="p-3">${user.type}</td>
+                    <td class="p-3">${user.xp}</td>
+                    <td class="p-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500" style="width: ${user.progress}%"></div>
+                            </div>
+                            <span class="text-xs text-gray-500">${user.progress}%</span>
+                        </div>
+                    </td>
+                    <td class="p-3 text-sm text-gray-600">${user.lastAccess}</td>
+                    <td class="p-3">
+                        <div class="flex gap-2">
+                            <button onclick="viewUser('${user.name}')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="editUser('${user.name}')" class="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-700">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Carregar configurações
+        function loadConfig() {
+            // Carregar configurações salvas ou usar padrões
+            document.getElementById('env-current').value = 'production';
+            document.getElementById('env-base-url').value = 'https://w15channel.github.io/adratecpr';
+            document.getElementById('env-debug').checked = false;
+            document.getElementById('env-cache').checked = true;
+            
+            document.getElementById('ui-primary-color').value = '#00ff41';
+            document.getElementById('ui-desktop-columns').value = '2';
+            document.getElementById('ui-animations').checked = true;
+            document.getElementById('ui-sounds').checked = true;
+        }
+
+        // Adicionar atividade
+        function addActivity(title, description, type) {
+            const activityContainer = document.getElementById('recent-activity');
+            const activity = document.createElement('div');
+            activity.className = 'flex items-center gap-4 p-3 bg-gray-50 rounded';
+            
+            const iconClass = type === 'success' ? 'fa-check text-green-600' : 
+                             type === 'error' ? 'fa-times text-red-600' : 
+                             'fa-info text-blue-600';
+            
+            activity.innerHTML = `
+                <div class="w-8 h-8 bg-${type === 'success' ? 'green' : type === 'error' ? 'red' : 'blue'}-100 rounded-full flex items-center justify-center">
+                    <i class="fas ${iconClass} text-sm"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-gray-800">${title}</p>
+                    <p class="text-xs text-gray-600">${description}</p>
+                </div>
+                <span class="text-xs text-gray-500">Agora</span>
+            `;
+            
+            activityContainer.insertBefore(activity, activityContainer.firstChild);
+        }
+
+        // Funções de configuração
+        function saveSystemConfig() {
+            const config = {
+                environment: document.getElementById('env-current').value,
+                baseUrl: document.getElementById('env-base-url').value,
+                debug: document.getElementById('env-debug').checked,
+                cache: document.getElementById('env-cache').checked
+            };
+            
+            localStorage.setItem('adra-system-config', JSON.stringify(config));
+            showNotification('Configurações do sistema salvas com sucesso!', 'success');
+        }
+
+        function saveUIConfig() {
+            const config = {
+                primaryColor: document.getElementById('ui-primary-color').value,
+                desktopColumns: document.getElementById('ui-desktop-columns').value,
+                animations: document.getElementById('ui-animations').checked,
+                sounds: document.getElementById('ui-sounds').checked
+            };
+            
+            localStorage.setItem('adra-ui-config', JSON.stringify(config));
+            showNotification('Configurações de interface salvas com sucesso!', 'success');
+        }
+
+        // Funções de backup
+        function createBackup() {
+            const backup = {
+                timestamp: new Date().toISOString(),
+                version: '2.0.0',
+                chapters: systemData.chapters,
+                simulations: systemData.simulations,
+                users: systemData.users,
+                config: systemData.config
+            };
+            
+            const dataStr = JSON.stringify(backup, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `adra-tec-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showNotification('Backup criado com sucesso!', 'success');
+        }
+
+        // Funções do sistema
+        function clearCache() {
+            if (confirm('Tem certeza que deseja limpar todo o cache?')) {
+                localStorage.clear();
+                showNotification('Cache limpo com sucesso!', 'success');
+            }
+        }
+
+        function restartSystem() {
+            if (confirm('Tem certeza que deseja reiniciar o sistema?')) {
+                showNotification('Sistema reiniciando...', 'info');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        }
+
+        function generateLogs() {
+            const logs = {
+                timestamp: new Date().toISOString(),
+                system: 'ADRA-TEC OS',
+                version: '2.0.0',
+                logs: [
+                    'System initialized successfully',
+                    'Database connection established',
+                    'Cache system optimized',
+                    'All modules loaded'
+                ]
+            };
+            
+            const dataStr = JSON.stringify(logs, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `adra-tec-logs-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showNotification('Logs gerados com sucesso!', 'success');
+        }
+
+        function testAPI() {
+            showNotification('Testando APIs...', 'info');
+            
+            setTimeout(() => {
+                showNotification('APIs testadas com sucesso!', 'success');
+            }, 2000);
+        }
+
+        // Funções de edição (placeholders)
+        function editChapter(id) {
+            showNotification(`Editando capítulo ${id}...`, 'info');
+        }
+
+        function viewChapter(id) {
+            showNotification(`Visualizando capítulo ${id}...`, 'info');
+        }
+
+        function addChapter() {
+            showNotification('Adicionando novo capítulo...', 'info');
+        }
+
+        function editSimulation(id) {
+            showNotification(`Configurando simulação ${id}...`, 'info');
+        }
+
+        function testSimulation(id) {
+            showNotification(`Testando simulação ${id}...`, 'info');
+        }
+
+        function viewUser(name) {
+            showNotification(`Visualizando usuário: ${name}...`, 'info');
+        }
+
+        function editUser(name) {
+            showNotification(`Editando usuário: ${name}...`, 'info');
+        }
+
+        function exportUsers() {
+            showNotification('Exportando dados dos usuários...', 'info');
+        }
+
+        function loadChapters() {
+            loadChapters();
+            showNotification('Capítulos recarregados!', 'success');
+        }
+
+        function loadSimulations() {
+            loadSimulations();
+            showNotification('Simulações recarregadas!', 'success');
+        }
+
+        function loadUsers() {
+            loadUsers();
+            showNotification('Usuários atualizados!', 'success');
+        }
+
+        // Sistema de notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
+                'bg-blue-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <i class="fas ${
+                        type === 'success' ? 'fa-check-circle' :
+                        type === 'error' ? 'fa-exclamation-circle' :
+                        'fa-info-circle'
+                    }"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animar entrada
+            setTimeout(() => {
+                notification.classList.add('translate-x-0');
+            }, 100);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notification.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Deseja realmente sair do painel administrativo?')) {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
