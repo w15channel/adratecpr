@@ -19,6 +19,7 @@ class OSTecManager {
         this.offset = { x: 0, y: 0 };
         this.iconDragState = { active: false, icon: null, offsetX: 0, offsetY: 0 };
         this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
+        this.loginProfiles = [];
         this.moduleTopics = {
             administrativo: [
                 'Introdução à Administração',
@@ -32,7 +33,8 @@ class OSTecManager {
                 'Departamento Pessoal (Admissão, Folha, TRCT)',
                 'Técnicas de Arquivamento e 3 Idades',
                 'Noções de Contabilidade (Ativo, Passivo e PL)',
-                'Consolidação Final e Visão Sistêmica'
+                'Consolidação Final e Visão Sistêmica',
+                'Controle de Acesso: Login individual, login em dupla e troca de conta'
             ],
             empreendedorismo: [
                 'Mentalidade Empreendedora',
@@ -79,6 +81,7 @@ class OSTecManager {
     init() {
         // Inicializar sistema de login/banco de dados
         this.setupLoginSystem();
+        this.loadLoginProfiles();
         
         // Verificar se há dados salvos
         this.loadSavedData();
@@ -93,6 +96,7 @@ class OSTecManager {
         
         // Preencher formulário com dados salvos, sem login automático
         this.populateLoginFormFromSavedData();
+        this.renderSavedAccounts();
     }
     
     populateLoginFormFromSavedData() {
@@ -115,11 +119,7 @@ class OSTecManager {
 
         this.updateNameLabels();
 
-        // Preencher campos, mas manter confirmação manual por botão
-        nameInput.value = this.userData.name || '';
-        name2Input.value = this.userData.name2 || '';
-
-        this.showNotification('Dados salvos carregados. Confirme e clique em "Acessar Sistema".', 'info');
+        this.showNotification('Dados anteriores encontrados. Escolha uma conta salva ou preencha manualmente.', 'info');
     }
     
     setupLoginSystem() {
@@ -144,6 +144,11 @@ class OSTecManager {
         if (loginBtn) {
             loginBtn.addEventListener('click', () => this.performLogin());
         }
+
+        const clearLoginFormBtn = document.getElementById('clear-login-form-btn');
+        if (clearLoginFormBtn) {
+            clearLoginFormBtn.addEventListener('click', () => this.clearLoginForm(true));
+        }
         
         // Enter no formulário
         document.addEventListener('keypress', (e) => {
@@ -167,6 +172,93 @@ class OSTecManager {
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', () => this.logout());
+        }
+    }
+
+    loadLoginProfiles() {
+        try {
+            const rawProfiles = localStorage.getItem('adra-tec-login-profiles');
+            this.loginProfiles = rawProfiles ? JSON.parse(rawProfiles) : [];
+            if (!Array.isArray(this.loginProfiles)) {
+                this.loginProfiles = [];
+            }
+        } catch (error) {
+            console.error('Erro ao carregar perfis de login:', error);
+            this.loginProfiles = [];
+        }
+    }
+
+    saveLoginProfiles() {
+        localStorage.setItem('adra-tec-login-profiles', JSON.stringify(this.loginProfiles));
+    }
+
+    renderSavedAccounts() {
+        const container = document.getElementById('saved-accounts');
+        if (!container) return;
+
+        if (!this.loginProfiles.length) {
+            container.innerHTML = '<small>Nenhuma conta salva ainda. Faça o primeiro login manual para criar uma conta rápida.</small>';
+            return;
+        }
+
+        const accountsHtml = this.loginProfiles
+            .slice()
+            .sort((a, b) => new Date(b.lastAccess || 0) - new Date(a.lastAccess || 0))
+            .map((profile, idx) => {
+                const displayName = profile.accessType === 'dupla'
+                    ? `${profile.name} e ${profile.name2 || ''}`.trim()
+                    : profile.name;
+                const typeLabel = profile.accessType === 'dupla' ? 'Dupla' : 'Individual';
+                return `
+                    <button type="button" class="db-btn" style="margin-bottom: 6px; width: 100%; justify-content: space-between;" onclick="window.osManager?.applySavedAccount(${idx})">
+                        <span><i class="fas ${profile.accessType === 'dupla' ? 'fa-users' : 'fa-user'}"></i> ${displayName}</span>
+                        <small>${typeLabel}</small>
+                    </button>
+                `;
+            }).join('');
+
+        container.innerHTML = accountsHtml;
+    }
+
+    applySavedAccount(sortedIndex) {
+        const sortedProfiles = this.loginProfiles
+            .slice()
+            .sort((a, b) => new Date(b.lastAccess || 0) - new Date(a.lastAccess || 0));
+        const profile = sortedProfiles[sortedIndex];
+        if (!profile) return;
+
+        const nameInput = document.getElementById('student-name');
+        const name2Input = document.getElementById('student-name-2');
+        const accessTypeBtns = document.querySelectorAll('.access-type-btn');
+
+        accessTypeBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.type === profile.accessType);
+        });
+
+        this.userData.accessType = profile.accessType || 'individual';
+        this.updateNameLabels();
+
+        if (nameInput) nameInput.value = profile.name || '';
+        if (name2Input) name2Input.value = profile.name2 || '';
+
+        this.showNotification('Conta carregada. Confirme os dados e clique em "Acessar Sistema".', 'info');
+    }
+
+    clearLoginForm(showMessage = false) {
+        const nameInput = document.getElementById('student-name');
+        const name2Input = document.getElementById('student-name-2');
+        if (nameInput) nameInput.value = '';
+        if (name2Input) name2Input.value = '';
+
+        document.querySelectorAll('.access-type-btn').forEach(btn => btn.classList.remove('active'));
+        const individualBtn = document.querySelector('.access-type-btn[data-type="individual"]');
+        if (individualBtn) individualBtn.classList.add('active');
+
+        this.userData.accessType = 'individual';
+        this.updateNameLabels();
+
+        if (showMessage) {
+            this.showNotification('Formulário limpo. Você pode entrar com outra conta manualmente.', 'success');
         }
     }
     
@@ -211,12 +303,37 @@ class OSTecManager {
         this.userData.name = name;
         this.userData.name2 = name2;
         this.userData.progress.lastAccess = new Date().toISOString();
+        this.upsertLoginProfile();
         
         // Salvar em cookies
         this.saveUserData();
         
         // Iniciar boot sequence
         this.startBootSequence();
+    }
+
+    upsertLoginProfile() {
+        const profileKey = `${this.userData.accessType}:${(this.userData.name || '').toLowerCase()}:${(this.userData.name2 || '').toLowerCase()}`;
+        const existingIndex = this.loginProfiles.findIndex(profile => {
+            const compareKey = `${profile.accessType}:${(profile.name || '').toLowerCase()}:${(profile.name2 || '').toLowerCase()}`;
+            return compareKey === profileKey;
+        });
+
+        const profileData = {
+            name: this.userData.name,
+            name2: this.userData.accessType === 'dupla' ? this.userData.name2 : '',
+            accessType: this.userData.accessType,
+            lastAccess: new Date().toISOString()
+        };
+
+        if (existingIndex >= 0) {
+            this.loginProfiles[existingIndex] = profileData;
+        } else {
+            this.loginProfiles.push(profileData);
+        }
+
+        this.saveLoginProfiles();
+        this.renderSavedAccounts();
     }
     
     startBootSequence() {
@@ -1493,17 +1610,8 @@ class OSTecManager {
                 this.osSystem.classList.add('hidden');
                 this.loginScreen.classList.remove('hidden');
                 
-                // Limpar campos
-                document.getElementById('student-name').value = '';
-                document.getElementById('student-name-2').value = '';
-                
-                // Resetar tipo de acesso
-                document.querySelectorAll('.access-type-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                document.querySelector('.access-type-btn[data-type="individual"]').classList.add('active');
-                this.userData.accessType = 'individual';
-                this.updateNameLabels();
+                this.clearLoginForm();
+                this.renderSavedAccounts();
             }, 3000);
         }
     }
