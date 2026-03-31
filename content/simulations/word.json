@@ -1,0 +1,34 @@
+{
+  "app_id": "word",
+  "name": "Microsoft Word",
+  "icon": "fas fa-file-word",
+  "color": "#185abd",
+  "ui_template": "word",
+  "features": {
+    "text_editing": true,
+    "formatting": true,
+    "spell_check": false,
+    "tables": false
+  },
+  "validation_rules": {
+    "content_validation": true,
+    "min_content_length": 20,
+    "required_keywords": true,
+    "case_sensitive": false,
+    "allow_partial_match": true
+  },
+  "ui_config": {
+    "ribbon_height": 100,
+    "page_width": "210mm",
+    "page_height": "297mm",
+    "page_margins": "25mm",
+    "font_family": "Calibri",
+    "font_size": "11pt"
+  },
+  "document_config": {
+    "editable": true,
+    "content_editable": true,
+    "auto_save": false,
+    "word_wrap": true
+  }
+}

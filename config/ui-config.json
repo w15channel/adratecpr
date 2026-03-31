@@ -1,0 +1,48 @@
+{
+  "theme": {
+    "primary_color": "#00ff41",
+    "secondary_color": "#ffffff",
+    "accent_color": "#000000",
+    "background_color": "#000000",
+    "text_color": "#ffffff"
+  },
+  "desktop": {
+    "grid_columns": 2,
+    "grid_rows": 4,
+    "icon_size": 64,
+    "icon_spacing": 25,
+    "wallpaper": {
+      "type": "globe",
+      "animation": true,
+      "gradient_colors": ["#00ff41", "#ffffff", "#000000"]
+    }
+  },
+  "windows": {
+    "default_width": 800,
+    "default_height": 600,
+    "min_width": 400,
+    "min_height": 300,
+    "glass_effect": true,
+    "backdrop_blur": 20
+  },
+  "animations": {
+    "boot_sequence": true,
+    "boot_duration": 3000,
+    "window_transitions": true,
+    "hover_effects": true,
+    "icon_animations": true
+  },
+  "notifications": {
+    "enabled": true,
+    "position": "top-right",
+    "auto_hide": true,
+    "duration": 5000,
+    "max_visible": 5
+  },
+  "localization": {
+    "language": "pt-BR",
+    "date_format": "DD/MM/YYYY",
+    "time_format": "HH:mm",
+    "currency": "BRL"
+  }
+}

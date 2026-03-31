@@ -1,0 +1,125 @@
+{
+  "id": 1,
+  "label": "Capítulo 1",
+  "icon": "fas fa-globe",
+  "title": "Introdução à Administração",
+  "order": 1,
+  "theory": {
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "A <strong>Administração</strong> existe para evitar o caos! A tarefa básica da Administração é fazer as coisas acontecerem de maneira <strong>eficiente</strong> (usando os recursos da melhor forma, sem desperdício) e <strong>eficaz</strong> (atingindo o objetivo final)."
+      },
+      {
+        "type": "didactic_box",
+        "title": "A Origem de Tudo",
+        "content": "A palavra vem do latim <em>Administratione</em>. No fundo, administrar é um <strong>processo de tomada de decisões</strong>."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "A Regra de Ouro"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aqui está o segredo: <strong>Administrar significa obter resultados POR MEIO de outras pessoas.</strong> O administrador orquestra a ação, não faz tudo sozinho."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "O Processo Administrativo em 5 Passos"
+      },
+      {
+        "type": "paragraph",
+        "text": "Segundo Maximiano, as funções são: <strong>Planejamento</strong>, <strong>Organização</strong>, <strong>Liderança</strong>, <strong>Execução</strong> e <strong>Controle</strong>."
+      }
+    ]
+  },
+  "simulations": [
+    {
+      "app": "outlook",
+      "title": "Email à Diretoria",
+      "brief": "Envie um e-mail para \"diretoria@empresa.com\" com o assunto \"Objetivos\". Escreva que nossa meta é focar em \"eficiencia\" e \"eficacia\".",
+      "validation": {
+        "to": "diretoria@empresa.com",
+        "subject": "objetivos",
+        "body_keywords": ["eficiencia", "eficacia"]
+      }
+    },
+    {
+      "app": "excel",
+      "title": "Planilha de Recursos",
+      "brief": "Na célula B2, classifique R$50.000 como recurso \"Financeiro\". Na B3, classifique Time de 5 pessoas como \"Humano\".",
+      "initial_data": [["Recurso", "Classificação"], ["R$ 50.000 (Caixa)", ""], ["Time de 5 Pessoas", ""]],
+      "validation": {
+        "B2": "Financeiro",
+        "B3": "Humano"
+      }
+    },
+    {
+      "app": "word",
+      "title": "Ata de Reunião",
+      "brief": "Redija o conceito chave da aula: \"obter resultados por meio de outras pessoas\".",
+      "validation": {
+        "body_keywords": ["obter resultados por meio de outras pessoas"]
+      }
+    },
+    {
+      "app": "trello",
+      "title": "Quadro de Funções",
+      "brief": "Mova \"Planejamento\" para \"Doing\" e \"Controle\" para \"Done\".",
+      "columns": ["To Do", "Doing", "Done"],
+      "cards": [
+        {"id": 1, "text": "Planejamento", "column": 0},
+        {"id": 2, "text": "Liderança", "column": 0},
+        {"id": 3, "text": "Controle", "column": 1}
+      ],
+      "validation": {
+        "1": 1,
+        "3": 2
+      }
+    },
+    {
+      "app": "erp",
+      "title": "Definição Estratégica",
+      "brief": "Preencha a Definição de Eficácia como \"atingir o objetivo\". Status: \"Ativo\".",
+      "fields": [
+        {"id": "obj", "label": "Definição de Eficácia", "type": "text"},
+        {"id": "st", "label": "Status do Sistema", "type": "select", "options": ["", "Pendente", "Ativo"]}
+      ],
+      "validation": {
+        "obj": "atingir o objetivo",
+        "st": "ativo"
+      }
+    }
+  ],
+  "assessment": {
+    "quiz": [
+      {
+        "question": "Qual a diferença entre um administrador e um executor puro?",
+        "options": ["Nenhuma", "O administrador orquestra a ação via outras pessoas; o executor realiza", "O administrador ganha menos"],
+        "correct_answer": 1
+      },
+      {
+        "question": "Eficiência e Eficácia significam:",
+        "options": ["Gastar tudo rápido", "Usar recursos sem desperdício (eficiência) e atingir o objetivo (eficácia)", "Dar ordens"],
+        "correct_answer": 1
+      },
+      {
+        "question": "Segundo Maximiano, a função que define onde queremos chegar é:",
+        "options": ["Planejamento", "Controle", "Execução"],
+        "correct_answer": 0
+      },
+      {
+        "question": "A Administração foca em:",
+        "options": ["Tomada de decisões sobre recursos", "Evitar tecnologia", "Ajudar só o dono"],
+        "correct_answer": 0
+      },
+      {
+        "question": "Dinheiro em caixa é recurso:",
+        "options": ["Humano", "Material", "Financeiro"],
+        "correct_answer": 2
+      }
+    ]
+  }
+}

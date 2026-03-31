@@ -1,0 +1,37 @@
+{
+  "app_id": "trello",
+  "name": "Trello Board",
+  "icon": "fas fa-trello",
+  "color": "#0079bf",
+  "ui_template": "trello",
+  "features": {
+    "drag_drop": true,
+    "card_management": true,
+    "column_management": false,
+    "labels": false
+  },
+  "validation_rules": {
+    "card_position_validation": true,
+    "exact_column_match": true,
+    "all_cards_must_move": false,
+    "required_moves": true
+  },
+  "ui_config": {
+    "board_background": "#0079bf",
+    "card_width": 272,
+    "header_height": 40,
+    "font_family": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
+  },
+  "board_config": {
+    "default_columns": ["To Do", "Doing", "Done"],
+    "max_columns": 10,
+    "card_min_height": 40,
+    "card_spacing": 8,
+    "column_spacing": 12
+  },
+  "interaction": {
+    "drag_enabled": true,
+    "click_to_move": true,
+    "animation_duration": 200
+  }
+}

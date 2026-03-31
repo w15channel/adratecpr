@@ -1,0 +1,54 @@
+{
+  "simulations": {
+    "outlook": {
+      "required_fields": ["to", "subject", "body"],
+      "validation_rules": {
+        "email_format": "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$",
+        "min_body_length": 10,
+        "required_keywords": true
+      }
+    },
+    "excel": {
+      "required_cells": [],
+      "validation_rules": {
+        "numeric_values": true,
+        "case_sensitive": false,
+        "allow_partial_match": true
+      }
+    },
+    "word": {
+      "required_content": [],
+      "validation_rules": {
+        "min_content_length": 20,
+        "required_keywords": true,
+        "case_sensitive": false
+      }
+    },
+    "trello": {
+      "required_moves": {},
+      "validation_rules": {
+        "exact_column_match": true,
+        "all_cards_must_move": false
+      }
+    },
+    "erp": {
+      "required_fields": [],
+      "validation_rules": {
+        "select_required": true,
+        "text_validation": "alphanumeric",
+        "case_sensitive": false
+      }
+    }
+  },
+  "quiz": {
+    "passing_score": 0.8,
+    "max_attempts": 3,
+    "show_feedback": true
+  },
+  "progress": {
+    "xp_per_task": 20,
+    "xp_per_quiz": 25,
+    "xp_per_theory": 50,
+    "total_required_xp": 3300
+  }
+}

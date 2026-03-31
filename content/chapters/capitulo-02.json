@@ -1,0 +1,135 @@
+{
+  "id": 2,
+  "label": "Capítulo 2",
+  "icon": "fas fa-cogs",
+  "title": "As 4 Funções (P.O.D.C)",
+  "order": 2,
+  "theory": {
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "O <strong>P.O.D.C.</strong> representa as 4 funções básicas: <strong>Planejamento, Organização, Direção e Controle</strong>."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "1. Planejamento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Define <strong>objetivos</strong> e planos (Programas, Procedimentos, Normas)."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Organização"
+      },
+      {
+        "type": "paragraph",
+        "text": "Serve para <strong>agrupar e dividir o trabalho</strong> (cria o Organograma)."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Direção"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ato de <strong>comunicar, liderar e motivar</strong> pessoas."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Controle"
+      },
+      {
+        "type": "paragraph",
+        "text": "Serve para <strong>medir e avaliar o desempenho</strong> comparando com os padrões estabelecidos."
+      }
+    ]
+  },
+  "simulations": [
+    {
+      "app": "outlook",
+      "title": "Cobrança HR",
+      "brief": "Envie para \"rh@empresa.com\", assunto \"Equipe\". Avise que falta \"direcao\" para \"motivar\" o time.",
+      "validation": {
+        "to": "rh@empresa.com",
+        "subject": "equipe",
+        "body_keywords": ["direcao", "motivar"]
+      }
+    },
+    {
+      "app": "excel",
+      "title": "Métricas",
+      "brief": "B2: Se a Meta é 10 e vendemos 8, a função que mede isso é o \"Controle\".",
+      "initial_data": [["Dado", "Qual função atua?"], ["Medir e comparar resultados com metas", ""]],
+      "validation": {
+        "B2": "Controle"
+      }
+    },
+    {
+      "app": "word",
+      "title": "Manual",
+      "brief": "Escreva um plano inquebrável (Norma): \"É proibido fumar\".",
+      "validation": {
+        "body_keywords": ["proibido fumar"]
+      }
+    },
+    {
+      "app": "trello",
+      "title": "Estruturação",
+      "brief": "A \"Organização\" divide tarefas. Mova \"Criar Organograma\" para Done.",
+      "columns": ["Backlog", "In Progress", "Done"],
+      "cards": [
+        {"id": 1, "text": "Definir Metas", "column": 1},
+        {"id": 2, "text": "Criar Organograma", "column": 0}
+      ],
+      "validation": {
+        "2": 2
+      }
+    },
+    {
+      "app": "erp",
+      "title": "Plano ERP",
+      "brief": "Setor: \"Planejamento\". Tipo de Plano (o passo a passo): \"procedimento\".",
+      "fields": [
+        {"id": "set", "label": "Setor", "type": "select", "options": ["", "Planejamento", "Controle"]},
+        {"id": "pln", "label": "Tipo (Passo a passo)", "type": "text"}
+      ],
+      "validation": {
+        "set": "planejamento",
+        "pln": "procedimento"
+      }
+    }
+  ],
+  "assessment": {
+    "quiz": [
+      {
+        "question": "Significado de P.O.D.C?",
+        "options": ["Pagar, Orçar...", "Planejamento, Organização, Direção, Controle", "Preço, Organização..."],
+        "correct_answer": 1
+      },
+      {
+        "question": "Dar instruções e motivar:",
+        "options": ["Direção", "Planejamento", "Controle"],
+        "correct_answer": 0
+      },
+      {
+        "question": "Por que a Organização é vital?",
+        "options": ["Prevê futuro", "Divide o trabalho e aloca recursos", "Controla horários"],
+        "correct_answer": 1
+      },
+      {
+        "question": "Um 'Procedimento' nasce no:",
+        "options": ["Controle", "Organização", "Planejamento"],
+        "correct_answer": 2
+      },
+      {
+        "question": "Medir, avaliar resultados é essência do:",
+        "options": ["Controle", "Direção", "Organização"],
+        "correct_answer": 0
+      }
+    ]
+  }
+}

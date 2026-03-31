@@ -1,0 +1,38 @@
+{
+  "app_id": "erp",
+  "name": "ERP Adra-TEC",
+  "icon": "fas fa-server",
+  "color": "#0f172a",
+  "ui_template": "erp",
+  "features": {
+    "form_submission": true,
+    "data_validation": true,
+    "report_generation": false
+  },
+  "validation_rules": {
+    "field_validation": true,
+    "required_fields": true,
+    "select_validation": true,
+    "text_validation": "alphanumeric",
+    "case_sensitive": false
+  },
+  "ui_config": {
+    "sidebar_width": 240,
+    "header_height": 60,
+    "font_family": "'Segoe UI', sans-serif",
+    "form_columns": 2
+  },
+  "form_config": {
+    "input_types": ["text", "select", "textarea", "number"],
+    "validation_on_change": true,
+    "required_field_indicator": "*",
+    "error_display": "inline"
+  },
+  "modules": {
+    "dashboard": { "icon": "fas fa-home", "label": "Dashboard" },
+    "lancamentos": { "icon": "fas fa-edit", "label": "Lançamentos" },
+    "rh": { "icon": "fas fa-users", "label": "RH & Pessoal" },
+    "relatorios": { "icon": "fas fa-chart-line", "label": "Relatórios" },
+    "configuracoes": { "icon": "fas fa-cog", "label": "Configurações" }
+  }
+}

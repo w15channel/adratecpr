@@ -1,0 +1,36 @@
+{
+  "app_id": "outlook",
+  "name": "Microsoft Outlook",
+  "icon": "fas fa-envelope",
+  "color": "#0f6cbd",
+  "ui_template": "outlook",
+  "features": {
+    "compose_email": true,
+    "inbox": true,
+    "sent_items": true,
+    "trash": true
+  },
+  "validation_rules": {
+    "required_fields": ["to", "subject", "body"],
+    "email_format": "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$",
+    "min_body_length": 10,
+    "case_sensitive": false,
+    "allow_partial_match": true
+  },
+  "ui_config": {
+    "sidebar_width": 220,
+    "list_width": 280,
+    "ribbon_height": 48,
+    "font_family": "Segoe UI",
+    "font_size": "0.95rem"
+  },
+  "default_templates": {
+    "compose": {
+      "subject": "",
+      "body": "",
+      "to": "",
+      "cc": "",
+      "bcc": ""
+    }
+  }
+}

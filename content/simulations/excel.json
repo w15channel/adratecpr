@@ -1,0 +1,35 @@
+{
+  "app_id": "excel",
+  "name": "Microsoft Excel",
+  "icon": "fas fa-file-excel",
+  "color": "#107c41",
+  "ui_template": "excel",
+  "features": {
+    "grid_editing": true,
+    "formulas": true,
+    "formatting": true,
+    "charts": false
+  },
+  "validation_rules": {
+    "cell_validation": true,
+    "numeric_values": true,
+    "text_values": true,
+    "case_sensitive": false,
+    "allow_partial_match": true
+  },
+  "ui_config": {
+    "ribbon_height": 100,
+    "grid_columns": 11,
+    "grid_rows": 100,
+    "cell_width": 150,
+    "cell_height": 25,
+    "header_font": "Calibri",
+    "content_font": "Calibri"
+  },
+  "grid_config": {
+    "default_columns": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+    "header_row": true,
+    "frozen_panes": false,
+    "grid_lines": true
+  }
+}

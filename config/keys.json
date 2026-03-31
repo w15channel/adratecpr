@@ -1,0 +1,20 @@
+{
+  "api": {
+    "external_apis": {
+      "enabled": false,
+      "services": {}
+    }
+  },
+  "authentication": {
+    "admin_token": "",
+    "session_timeout": 3600,
+    "encryption_key": ""
+  },
+  "security": {
+    "cors_enabled": true,
+    "rate_limiting": {
+      "enabled": false,
+      "max_requests": 100
+    }
+  }
+}

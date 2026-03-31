@@ -1,0 +1,21 @@
+{
+  "development": {
+    "base_url": "http://localhost:3000",
+    "api_endpoint": "/api",
+    "debug_mode": true,
+    "cache_enabled": false
+  },
+  "production": {
+    "base_url": "https://w15channel.github.io/adratecpr",
+    "api_endpoint": "/api",
+    "debug_mode": false,
+    "cache_enabled": true
+  },
+  "current": "development",
+  "system": {
+    "name": "ADRA-TEC OS",
+    "version": "2.0.0",
+    "max_file_size": "10MB",
+    "supported_languages": ["pt-BR"]
+  }
+}
