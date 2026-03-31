@@ -22,9 +22,17 @@ class OSTecManager {
         this.moduleTopics = {
             administrativo: [
                 'Introdução à Administração',
-                'Processos Internos e Rotinas',
-                'Organização de Documentos',
-                'Gestão de Pessoas'
+                'P.O.D.C. (Planejamento, Organização, Direção e Controle)',
+                'Tipos de Empresa (MEI, LTDA, EI e S/A)',
+                'Estrutura Organizacional e Organograma',
+                'Programa 5S e Cultura Organizacional',
+                'Funções do Auxiliar Administrativo',
+                'Mercado de Trabalho e Ética Profissional',
+                'Trabalho em Equipe e Sinergia',
+                'Departamento Pessoal (Admissão, Folha, TRCT)',
+                'Técnicas de Arquivamento e 3 Idades',
+                'Noções de Contabilidade (Ativo, Passivo e PL)',
+                'Consolidação Final e Visão Sistêmica'
             ],
             empreendedorismo: [
                 'Mentalidade Empreendedora',
@@ -83,29 +91,35 @@ class OSTecManager {
         this.updateClock();
         setInterval(() => this.updateClock(), 1000);
         
-        // VERIFICAR LOGIN AUTOMÁTICO APÓS CARREGAR DADOS
-        this.checkAutoLogin();
+        // Preencher formulário com dados salvos, sem login automático
+        this.populateLoginFormFromSavedData();
     }
     
-    checkAutoLogin() {
-        // Se já estiver no desktop, não fazer nada
-        if (this.desktop && !this.desktop.classList.contains('hidden')) {
-            return;
-        }
-        
-        // Se houver nome de usuário salvo E não houver dados nos campos, fazer login automático
+    populateLoginFormFromSavedData() {
+        if (!this.loginScreen || this.loginScreen.classList.contains('hidden')) return;
+
         const nameInput = document.getElementById('student-name');
         const name2Input = document.getElementById('student-name-2');
-        
-        if (this.userData.name && this.userData.name.trim() !== '' && 
-            !nameInput.value && !name2Input.value) {
-            console.log('Detectados dados salvos, fazendo login automático...');
-            
-            // Esperar um pouco para garantir que o DOM está pronto
-            setTimeout(() => {
-                this.autoLoginFromDatabase();
-            }, 1000);
-        }
+        if (!nameInput || !name2Input) return;
+
+        if (!this.userData.name || this.userData.name.trim() === '') return;
+
+        // Sincronizar botões de tipo de acesso
+        const accessTypeBtns = document.querySelectorAll('.access-type-btn');
+        accessTypeBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.type === this.userData.accessType) {
+                btn.classList.add('active');
+            }
+        });
+
+        this.updateNameLabels();
+
+        // Preencher campos, mas manter confirmação manual por botão
+        nameInput.value = this.userData.name || '';
+        name2Input.value = this.userData.name2 || '';
+
+        this.showNotification('Dados salvos carregados. Confirme e clique em "Acessar Sistema".', 'info');
     }
     
     setupLoginSystem() {
@@ -117,6 +131,11 @@ class OSTecManager {
                 btn.classList.add('active');
                 this.userData.accessType = btn.dataset.type;
                 this.updateNameLabels();
+
+                if (this.userData.accessType === 'individual') {
+                    const name2Input = document.getElementById('student-name-2');
+                    if (name2Input) name2Input.value = '';
+                }
             });
         });
         
@@ -172,9 +191,11 @@ class OSTecManager {
     performLogin() {
         const nameInput = document.getElementById('student-name');
         const name2Input = document.getElementById('student-name-2');
+        const selectedAccessBtn = document.querySelector('.access-type-btn.active');
         
         const name = nameInput.value.trim();
         const name2 = name2Input.value.trim();
+        this.userData.accessType = selectedAccessBtn?.dataset?.type || this.userData.accessType || 'individual';
         
         if (!name) {
             this.showNotification('Por favor, preencha seu nome!', 'error');
@@ -585,7 +606,7 @@ class OSTecManager {
                         </ul>
                     </div>
                 </div>
-                <p class="folder-footer">Estrutura pronta para você adicionar conteúdos específicos em cada tópico.</p>
+                <p class="folder-footer">${moduleId === 'administrativo' ? 'Conteúdo administrativo completo com 12 trilhas essenciais já disponível para estudo prático.' : 'Estrutura pronta para você adicionar conteúdos específicos em cada tópico.'}</p>
             </div>
         `;
 
@@ -1258,9 +1279,7 @@ class OSTecManager {
                     this.saveUserData();
                     this.showNotification('Banco de dados carregado com sucesso!', 'success');
                     this.updateInterface();
-                    
-                    // LOGIN AUTOMÁTICO APÓS CARREGAR BD
-                    this.autoLoginFromDatabase();
+                    this.populateLoginFormFromSavedData();
                 }
             } catch (error) {
                 this.showNotification('Erro ao carregar banco de dados: ' + error.message, 'error');
@@ -1271,41 +1290,6 @@ class OSTecManager {
         event.target.value = '';
     }
     
-    autoLoginFromDatabase() {
-        // Verificar se há dados de usuário suficientes para login automático
-        if (!this.userData.name || this.userData.name.trim() === '') {
-            this.showNotification('Banco de dados não contém nome de usuário. Favor fazer login manualmente.', 'error');
-            return;
-        }
-        
-        // Se estiver na tela de login, fazer login automático
-        if (this.loginScreen && !this.loginScreen.classList.contains('hidden')) {
-            // NÃO preencher campos para permitir login manual
-            // Apenas iniciar boot sequence diretamente
-            
-            // Configurar tipo de acesso
-            const accessTypeBtns = document.querySelectorAll('.access-type-btn');
-            accessTypeBtns.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.type === this.userData.accessType) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            this.updateNameLabels();
-            
-            // Iniciar boot sequence automaticamente
-            setTimeout(() => {
-                this.startBootSequence();
-            }, 500);
-        }
-        // Se já estiver no sistema, apenas atualizar interface
-        else if (this.desktop && !this.desktop.classList.contains('hidden')) {
-            this.showNotification('Dados atualizados com sucesso!', 'success');
-            this.updateInterface();
-        }
-    }
-
     normalizeImportedData(rawContent) {
         const parsed = JSON.parse(rawContent);
         const source = parsed?.userData || parsed;
