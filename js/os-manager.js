@@ -82,6 +82,26 @@ class OSTecManager {
         // Iniciar clock
         this.updateClock();
         setInterval(() => this.updateClock(), 1000);
+        
+        // VERIFICAR LOGIN AUTOMÁTICO APÓS CARREGAR DADOS
+        this.checkAutoLogin();
+    }
+    
+    checkAutoLogin() {
+        // Se já estiver no desktop, não fazer nada
+        if (this.desktop && !this.desktop.classList.contains('hidden')) {
+            return;
+        }
+        
+        // Se houver nome de usuário salvo, fazer login automático
+        if (this.userData.name && this.userData.name.trim() !== '') {
+            console.log('Detectados dados salvos, fazendo login automático...');
+            
+            // Esperar um pouco para garantir que o DOM está pronto
+            setTimeout(() => {
+                this.autoLoginFromDatabase();
+            }, 1000);
+        }
     }
     
     setupLoginSystem() {
@@ -1267,6 +1287,9 @@ class OSTecManager {
                     this.saveUserData();
                     this.showNotification('Banco de dados carregado com sucesso!', 'success');
                     this.updateInterface();
+                    
+                    // LOGIN AUTOMÁTICO APÓS CARREGAR BD
+                    this.autoLoginFromDatabase();
                 }
             } catch (error) {
                 this.showNotification('Erro ao carregar banco de dados: ' + error.message, 'error');
@@ -1275,6 +1298,50 @@ class OSTecManager {
 
         reader.readAsText(file);
         event.target.value = '';
+    }
+    
+    autoLoginFromDatabase() {
+        // Verificar se há dados de usuário suficientes para login automático
+        if (!this.userData.name || this.userData.name.trim() === '') {
+            this.showNotification('Banco de dados não contém nome de usuário. Favor fazer login manualmente.', 'error');
+            return;
+        }
+        
+        // Se estiver na tela de login, fazer login automático
+        if (this.loginScreen && !this.loginScreen.classList.contains('hidden')) {
+            // Preencher campos automaticamente
+            const nameInput = document.getElementById('student-name');
+            const name2Input = document.getElementById('student-name-2');
+            
+            if (nameInput) {
+                nameInput.value = this.userData.name || '';
+            }
+            
+            if (name2Input) {
+                name2Input.value = this.userData.name2 || '';
+            }
+            
+            // Configurar tipo de acesso
+            const accessTypeBtns = document.querySelectorAll('.access-type-btn');
+            accessTypeBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.type === this.userData.accessType) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            this.updateNameLabels();
+            
+            // Iniciar boot sequence automaticamente
+            setTimeout(() => {
+                this.startBootSequence();
+            }, 500);
+        }
+        // Se já estiver no sistema, apenas atualizar interface
+        else if (this.desktop && !this.desktop.classList.contains('hidden')) {
+            this.showNotification('Dados atualizados com sucesso!', 'success');
+            this.updateInterface();
+        }
     }
 
     normalizeImportedData(rawContent) {
