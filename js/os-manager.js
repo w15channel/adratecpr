@@ -91,7 +91,7 @@ class OSTecManager {
             if (loadDbMenuBtn && dbInput) {
                 loadDbMenuBtn.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    this.promptLoadDatabase('db-upload-input');
+                    dbInput.click();
                 });
                 dbInput.addEventListener('change', (e) => this.loadDatabase(e));
             }
@@ -127,12 +127,14 @@ class OSTecManager {
             }
         });
         
-        // Carregar banco de dados
+        // Carregar banco de dados - CORRIGIDO
         const loadDbBtn = document.getElementById('load-db-btn');
         const dbFileInput = document.getElementById('db-file-input');
         
         if (loadDbBtn && dbFileInput) {
-            loadDbBtn.addEventListener('click', () => this.promptLoadDatabase('db-file-input'));
+            loadDbBtn.addEventListener('click', () => {
+                dbFileInput.click();
+            });
             dbFileInput.addEventListener('change', (e) => this.loadDatabase(e));
         }
         
@@ -141,9 +143,9 @@ class OSTecManager {
         const dbUploadInput = document.getElementById('db-upload-input');
         
         if (loadDbMenuBtn && dbUploadInput) {
-            loadDbMenuBtn.addEventListener('click', (event) => {
-                event.stopPropagation();
-                this.promptLoadDatabase('db-upload-input');
+            loadDbMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dbUploadInput.click();
             });
             dbUploadInput.addEventListener('change', (e) => this.loadDatabase(e));
         }
@@ -159,6 +161,60 @@ class OSTecManager {
         if (logoutBtn) {
             logoutBtn.addEventListener('click', () => this.logout());
         }
+    }
+    
+    setupDesktopIcons() {
+        // Configurar ícones para serem arrastáveis
+        const desktopIcons = document.querySelectorAll('.desktop-icon');
+        desktopIcons.forEach(icon => {
+            // Tornar ícone arrastável
+            icon.draggable = true;
+            
+            // Eventos de drag and drop
+            icon.addEventListener('dragstart', (e) => {
+                icon.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', icon.innerHTML);
+                icon.style.opacity = '0.5';
+            });
+            
+            icon.addEventListener('dragend', (e) => {
+                icon.classList.remove('dragging');
+                icon.style.opacity = '';
+            });
+            
+            // Permitir soltar ícones na área de trabalho
+            const desktop = document.getElementById('desktop');
+            if (desktop) {
+                desktop.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+                
+                desktop.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const draggingIcon = document.querySelector('.dragging');
+                    if (draggingIcon) {
+                        // Posicionar ícone na nova localização
+                        const rect = desktop.getBoundingClientRect();
+                        const x = e.clientX - rect.left - 50; // Metade da largura do ícone
+                        const y = e.clientY - rect.top - 60; // Metade da altura do ícone
+                        
+                        // Limitar à área visível
+                        const maxX = rect.width - 100;
+                        const maxY = rect.height - 120;
+                        
+                        draggingIcon.style.position = 'absolute';
+                        draggingIcon.style.left = Math.max(20, Math.min(x, maxX)) + 'px';
+                        draggingIcon.style.top = Math.max(20, Math.min(y, maxY)) + 'px';
+                        
+                        // Remover do grid e adicionar como posicionado
+                        draggingIcon.style.gridColumn = '';
+                        draggingIcon.style.gridRow = '';
+                    }
+                });
+            }
+        });
     }
     
     updateNameLabels() {
@@ -345,6 +401,81 @@ class OSTecManager {
         });
     }
     
+    ensureWindowsInViewport() {
+        const windows = document.querySelectorAll('.os-window');
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const taskbarHeight = 48;
+        const margin = 20;
+        
+        windows.forEach(windowElement => {
+            const rect = windowElement.getBoundingClientRect();
+            let newLeft = parseInt(windowElement.style.left) || 0;
+            let newTop = parseInt(windowElement.style.top) || 0;
+            let newWidth = parseInt(windowElement.style.width) || 400;
+            let newHeight = parseInt(windowElement.style.height) || 300;
+            
+            // Ajustar posição horizontal
+            if (newLeft < margin) {
+                newLeft = margin;
+            } else if (newLeft + newWidth > viewportWidth - margin) {
+                newLeft = viewportWidth - newWidth - margin;
+            }
+            
+            // Ajustar posição vertical
+            if (newTop < margin) {
+                newTop = margin;
+            } else if (newTop + newHeight > viewportHeight - taskbarHeight - margin) {
+                newTop = viewportHeight - newHeight - taskbarHeight - margin;
+            }
+            
+            // Ajustar tamanho se necessário
+            if (newWidth > viewportWidth - 2 * margin) {
+                newWidth = viewportWidth - 2 * margin;
+                windowElement.style.width = newWidth + 'px';
+            }
+            
+            if (newHeight > viewportHeight - taskbarHeight - 2 * margin) {
+                newHeight = viewportHeight - taskbarHeight - 2 * margin;
+                windowElement.style.height = newHeight + 'px';
+            }
+            
+            // Aplicar novas posições
+            windowElement.style.left = newLeft + 'px';
+            windowElement.style.top = newTop + 'px';
+        });
+    }
+    
+    ensureIconsInViewport() {
+        const desktop = document.getElementById('desktop');
+        if (!desktop) return;
+        
+        const desktopRect = desktop.getBoundingClientRect();
+        const icons = document.querySelectorAll('.desktop-icon');
+        
+        icons.forEach(icon => {
+            const rect = icon.getBoundingClientRect();
+            let newLeft = parseInt(icon.style.left) || 0;
+            let newTop = parseInt(icon.style.top) || 0;
+            
+            // Garantir que ícones não saiam da área visível
+            if (newLeft < 20) {
+                newLeft = 20;
+            } else if (newLeft + 100 > desktopRect.width - 20) {
+                newLeft = desktopRect.width - 120;
+            }
+            
+            if (newTop < 20) {
+                newTop = 20;
+            } else if (newTop + 120 > desktopRect.height - 100) {
+                newTop = desktopRect.height - 220;
+            }
+            
+            icon.style.left = newLeft + 'px';
+            icon.style.top = newTop + 'px';
+        });
+    }
+    
     setupWindowControls() {
         // Delegação de eventos para controles de janela
         this.windowContainer.addEventListener('click', (e) => {
@@ -409,29 +540,29 @@ class OSTecManager {
             administrativo: {
                 title: 'Módulo Administrativo',
                 icon: 'fas fa-briefcase',
-                color: '#667eea'
+                color: '#00ff41'
             },
             empreendedorismo: {
                 title: 'Módulo Empreendedorismo',
                 icon: 'fas fa-rocket',
-                color: '#f093fb'
+                color: '#00ff88'
             },
             marketing: {
                 title: 'Módulo Marketing',
                 icon: 'fas fa-bullhorn',
-                color: '#4facfe'
+                color: '#00ffaa'
             },
             programacao: {
                 title: 'Módulo Programação',
                 icon: 'fas fa-code',
-                color: '#43e97b'
+                color: '#00ffcc'
             }
         };
         
         return modules[moduleId] || {
             title: 'Módulo Desconhecido',
             icon: 'fas fa-folder',
-            color: '#888'
+            color: '#00ff41'
         };
     }
     
@@ -440,12 +571,42 @@ class OSTecManager {
         const windowElement = document.createElement('div');
         windowElement.className = 'os-window';
         windowElement.id = windowId;
-        const safeWidth = Math.min(820, Math.max(380, globalThis.innerWidth - 120));
-        const safeHeight = Math.min(620, Math.max(280, globalThis.innerHeight - 170));
+        
+        // Calcular tamanhos seguros baseados no viewport
+        const viewportWidth = window.innerWidth || 1200;
+        const viewportHeight = window.innerHeight || 800;
+        const taskbarHeight = 48;
+        const margin = 20;
+        
+        const safeWidth = Math.min(900, Math.max(400, viewportWidth - 100));
+        const safeHeight = Math.min(600, Math.max(300, viewportHeight - taskbarHeight - 100));
+        
+        // Posicionar janela de forma segura
+        const existingWindows = document.querySelectorAll('.os-window');
+        let posX = margin;
+        let posY = margin + 60; // Espaço para não cobrir o wallpaper
+        
+        // Calcular posição para não sobrepor janelas existentes
+        existingWindows.forEach(existingWindow => {
+            const rect = existingWindow.getBoundingClientRect();
+            if (Math.abs(rect.left - posX) < 50 && Math.abs(rect.top - posY) < 50) {
+                posX += 30;
+                posY += 30;
+                if (posX + safeWidth > viewportWidth - margin) {
+                    posX = margin;
+                    posY += 30;
+                }
+            }
+        });
+        
+        // Garantir que a janela não saia da tela
+        posX = Math.max(margin, Math.min(posX, viewportWidth - safeWidth - margin));
+        posY = Math.max(margin + 60, Math.min(posY, viewportHeight - safeHeight - taskbarHeight - margin));
+        
         windowElement.style.width = safeWidth + 'px';
         windowElement.style.height = safeHeight + 'px';
-        windowElement.style.top = Math.max(20, Math.random() * 80 + 30) + 'px';
-        windowElement.style.left = Math.max(20, Math.random() * 120 + 50) + 'px';
+        windowElement.style.left = posX + 'px';
+        windowElement.style.top = posY + 'px';
 
         windowElement.innerHTML = `
             <div class="window-header">
@@ -478,7 +639,8 @@ class OSTecManager {
             title: moduleInfo.title,
             module: moduleInfo.title.toLowerCase().replace('módulo ', ''),
             minimized: false,
-            maximized: false
+            maximized: false,
+            originalSize: { width: safeWidth, height: safeHeight, left: posX, top: posY }
         };
     }
     

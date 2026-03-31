@@ -1,4 +1,4 @@
-/* ADRA-TEC OS - Sistema Operacional Educacional - Versão Limpa e Corrigida */
+/* ADRA-TEC OS - Sistema Operacional Educacional - Versão Verde/Branco/Preto */
 
 /* Reset e Base */
 * {
@@ -22,7 +22,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(135deg, #0a1f0a 0%, #1a3d1a 50%, #0d260d 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@ body {
 
 .logo i {
     font-size: 4rem;
-    color: #00d4ff;
+    color: #00ff41;
     margin-bottom: 20px;
     display: block;
     animation: pulse 2s infinite;
@@ -53,7 +53,7 @@ body {
     font-weight: 300;
     letter-spacing: 3px;
     text-transform: uppercase;
-    background: linear-gradient(45deg, #00d4ff, #00ff88);
+    background: linear-gradient(45deg, #00ff41, #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -70,7 +70,7 @@ body {
 
 .boot-message {
     margin: 8px 0;
-    color: #00ff88;
+    color: #00ff41;
     opacity: 0;
     animation: slideIn 0.3s ease forwards;
 }
@@ -90,7 +90,7 @@ body {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #00d4ff, #00ff88);
+    background: linear-gradient(90deg, #00ff41, #ffffff);
     animation: progress 2.5s ease forwards;
 }
 
@@ -102,15 +102,17 @@ body {
     overflow: hidden;
 }
 
+/* Wallpaper com Globo e ADRA-TEC */
 .wallpaper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, #0a1f0a 0%, #1a3d1a 50%, #0d260d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wallpaper-overlay {
@@ -132,21 +134,86 @@ body {
     z-index: 1;
 }
 
+/* Globo Animado */
+.wallpaper-globe {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.globe-container {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, rgba(0, 255, 65, 0.2), rgba(255, 255, 255, 0.1));
+    border: 2px solid rgba(0, 255, 65, 0.3);
+    position: relative;
+    animation: globeRotate 20s linear infinite;
+    box-shadow: 
+        inset 0 0 40px rgba(0, 255, 65, 0.2),
+        0 0 60px rgba(0, 255, 65, 0.1),
+        0 0 100px rgba(0, 255, 65, 0.05);
+}
+
+.globe-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.globe-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 255, 65, 0.3);
+    left: 0;
+    top: 50%;
+    transform-origin: center;
+}
+
+.globe-line:nth-child(1) { transform: rotate(0deg); }
+.globe-line:nth-child(2) { transform: rotate(30deg); }
+.globe-line:nth-child(3) { transform: rotate(60deg); }
+.globe-line:nth-child(4) { transform: rotate(90deg); }
+.globe-line:nth-child(5) { transform: rotate(120deg); }
+.globe-line:nth-child(6) { transform: rotate(150deg); }
+
+.globe-vertical {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: rgba(0, 255, 65, 0.3);
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
 .wallpaper-content h2 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     letter-spacing: 3px;
+    background: linear-gradient(45deg, #00ff41, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .wallpaper-content p {
     font-size: 1.2rem;
     opacity: 0.9;
     font-weight: 300;
+    color: #ffffff;
 }
 
-/* Ícones da Área de Trabalho - VERSÃO CORRIGIDA */
+/* Ícones da Área de Trabalho - Estilo iOS */
 .desktop-icons {
     position: absolute;
     top: 20px;
@@ -163,86 +230,97 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 15px;
-    border-radius: 12px;
+    padding: 15px 10px;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 100px;
-    min-height: 120px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    min-width: 90px;
+    min-height: 110px;
     justify-content: center;
 }
 
 .desktop-icon:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-    border-color: rgba(0, 212, 255, 0.5);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
+    border-color: rgba(0, 255, 65, 0.4);
 }
 
 .desktop-icon:active {
-    transform: translateY(-2px) scale(0.98);
+    transform: translateY(-1px) scale(0.98);
 }
 
 .desktop-icon.active {
-    background: rgba(0, 212, 255, 0.2);
-    border-color: rgba(0, 212, 255, 0.6);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+    background: rgba(0, 255, 65, 0.15);
+    border-color: rgba(0, 255, 65, 0.5);
+    box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
 }
 
+.desktop-icon.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+/* Ícones Estilo iOS */
 .icon-wrapper {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 16px;
-    margin-bottom: 12px;
+    border-radius: 18px;
+    margin-bottom: 8px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .desktop-icon:hover .icon-wrapper {
     transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Cores por módulo */
+/* Cores por módulo - Tema Verde/Branco/Preto */
 .desktop-icon[data-module="administrativo"] .icon-wrapper {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #00ff41, #00cc33);
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.4);
 }
 
 .desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
 }
 
 .desktop-icon[data-module="marketing"] .icon-wrapper {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    background: linear-gradient(135deg, #00ffaa, #00cc88);
+    box-shadow: 0 4px 15px rgba(0, 255, 170, 0.4);
 }
 
 .desktop-icon[data-module="programacao"] .icon-wrapper {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+    background: linear-gradient(135deg, #00ffcc, #00ccaa);
+    box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
 }
 
 .desktop-icon.system-tool .icon-wrapper {
-    background: linear-gradient(135deg, #30cfd0, #330867);
-    box-shadow: 0 4px 15px rgba(48, 207, 208, 0.4);
+    background: linear-gradient(135deg, #ffffff, #cccccc);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 .icon-wrapper i {
-    font-size: 2.2rem;
-    color: white;
+    font-size: 2rem;
+    color: #000;
     z-index: 1;
     transition: all 0.3s ease;
+}
+
+.desktop-icon.system-tool .icon-wrapper i {
+    color: #000;
 }
 
 .desktop-icon:hover .icon-wrapper i {
@@ -250,11 +328,11 @@ body {
 }
 
 .icon-label {
-    color: white;
-    font-size: 0.9rem;
+    color: #ffffff;
+    font-size: 0.85rem;
     text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    max-width: 90px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    max-width: 80px;
     word-wrap: break-word;
     font-weight: 500;
     letter-spacing: 0.3px;
@@ -269,7 +347,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transform: rotate(45deg);
     transition: all 0.6s ease;
     opacity: 0;
@@ -306,41 +384,387 @@ body {
     animation: iconPulse 3s ease-in-out infinite 2.25s;
 }
 
-/* Responsividade para diferentes tamanhos de tela */
+/* Barra de Tarefas - Estilo Glass Windows 7 */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Menu Iniciar - Estilo Glass */
+.start-menu {
+    position: relative;
+    margin-right: 10px;
+}
+
+.start-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.start-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(0, 255, 65, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
+}
+
+.start-button.active {
+    background: rgba(0, 255, 65, 0.2);
+    border-color: rgba(0, 255, 65, 0.6);
+}
+
+.start-menu-dropdown {
+    position: absolute;
+    bottom: 56px;
+    left: 0;
+    width: 400px;
+    max-height: 500px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    display: none;
+    overflow: hidden;
+}
+
+.start-menu-dropdown.active {
+    display: block;
+    animation: slideUp 0.3s ease;
+}
+
+/* Menu Sections */
+.menu-header {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info i {
+    font-size: 2rem;
+    color: #00ff41;
+}
+
+.username {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.user-status {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.menu-sections {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.menu-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.menu-section h3 {
+    color: #00ff41;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px 16px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item i {
+    font-size: 1.2rem;
+    color: #00ff41;
+    width: 24px;
+}
+
+.item-title {
+    font-weight: 500;
+    display: block;
+}
+
+.item-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Janelas - Estilo Glass */
+.window-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.os-window {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    min-height: 300px;
+}
+
+.os-window.focused {
+    border-color: rgba(0, 255, 65, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 255, 65, 0.2);
+}
+
+.window-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+}
+
+.window-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.window-title i {
+    color: #00ff41;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.window-control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.window-control.close {
+    background: #ff5f56;
+}
+
+.window-control.minimize {
+    background: #ffbd2e;
+}
+
+.window-control.maximize {
+    background: #27c93f;
+}
+
+.window-control:hover {
+    opacity: 0.8;
+}
+
+.window-content {
+    flex: 1;
+    padding: 16px;
+    overflow: auto;
+    color: #ffffff;
+}
+
+/* Área de Notificação */
+.notification-area {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.system-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.system-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    position: relative;
+}
+
+.system-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #00ff41;
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 8px;
+    min-width: 16px;
+    text-align: center;
+}
+
+.clock {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+
+/* Painel de Notificações - Estilo Glass */
+.notification-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 320px;
+    max-height: 400px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    display: none;
+}
+
+.notification-panel.active {
+    display: block;
+    animation: slideInRight 0.3s ease;
+}
+
+.panel-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-header h3 {
+    color: #00ff41;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.close-panel {
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+
+.notifications-list {
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.notification-item i {
+    color: #00ff41;
+    margin-top: 2px;
+}
+
+.notification-item strong {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.notification-item p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.notification-time {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Responsividade */
 @media (max-width: 1200px) {
     .desktop-icons {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-    }
-    
-    .desktop-icon {
-        min-width: 90px;
-        min-height: 110px;
-        padding: 15px 10px;
-    }
-    
-    .icon-wrapper {
-        width: 64px;
-        height: 64px;
-    }
-    
-    .icon-wrapper i {
-        font-size: 2rem;
-    }
-    
-    .icon-label {
-        font-size: 0.85rem;
-        max-width: 80px;
-    }
-}
-
-@media (max-width: 768px) {
-    .desktop-icons {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 15px;
-        top: 10px;
-        left: 10px;
     }
     
     .desktop-icon {
@@ -364,11 +788,13 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .desktop-icons {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding: 10px;
+        gap: 15px;
+        padding: 15px;
+        top: 10px;
+        left: 10px;
     }
     
     .desktop-icon {
@@ -390,70 +816,57 @@ body {
         font-size: 0.75rem;
         max-width: 60px;
     }
+    
+    .wallpaper-globe {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .globe-container {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .wallpaper-content h2 {
+        font-size: 2rem;
+    }
 }
 
-/* Barra de Tarefas */
-.taskbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    z-index: 1000;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Menu Iniciar */
-.start-menu {
-    position: relative;
-    margin-right: 20px;
-}
-
-.start-button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.start-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.start-button.active {
-    background: rgba(0, 212, 255, 0.3);
-}
-
-.start-menu-dropdown {
-    position: absolute;
-    bottom: 70px;
-    left: 0;
-    width: 450px;
-    max-height: 600px;
-    background: rgba(40, 40, 40, 0.98);
-    backdrop-filter: blur(20px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    display: none;
-    overflow: hidden;
-}
-
-.start-menu-dropdown.active {
-    display: block;
-    animation: slideUp 0.3s ease;
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 60px;
+        min-height: 80px;
+        padding: 8px 4px;
+    }
+    
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.4rem;
+    }
+    
+    .icon-label {
+        font-size: 0.7rem;
+        max-width: 50px;
+    }
+    
+    .taskbar {
+        height: 40px;
+    }
+    
+    .start-button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
 }
 
 /* Animações */
@@ -495,12 +908,61 @@ body {
     }
 }
 
+@keyframes slideInRight {
+    from { 
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 @keyframes progress {
     from { width: 0%; }
     to { width: 100%; }
 }
 
+@keyframes globeRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 /* Classes auxiliares */
 .hidden {
     display: none !important;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.loading-content i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #00ff41;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 65, 0.7);
 }

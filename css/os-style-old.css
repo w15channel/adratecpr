@@ -1,0 +1,506 @@
+/* ADRA-TEC OS - Sistema Operacional Educacional - Versão Limpa e Corrigida */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Tela de Boot */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.boot-content {
+    text-align: center;
+    color: #fff;
+    max-width: 500px;
+}
+
+.logo {
+    margin-bottom: 40px;
+}
+
+.logo i {
+    font-size: 4rem;
+    color: #00d4ff;
+    margin-bottom: 20px;
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #00d4ff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.boot-messages {
+    margin-bottom: 30px;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 0.5s forwards;
+}
+
+.boot-message {
+    margin: 8px 0;
+    color: #00ff88;
+    opacity: 0;
+    animation: slideIn 0.3s ease forwards;
+}
+
+.boot-message:nth-child(1) { animation-delay: 0.5s; }
+.boot-message:nth-child(2) { animation-delay: 1s; }
+.boot-message:nth-child(3) { animation-delay: 1.5s; }
+.boot-message:nth-child(4) { animation-delay: 2s; }
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #00ff88);
+    animation: progress 2.5s ease forwards;
+}
+
+/* Área de Trabalho */
+.desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.wallpaper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+.wallpaper-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.wallpaper-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.wallpaper-content h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: 3px;
+}
+
+.wallpaper-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Ícones da Área de Trabalho - VERSÃO CORRIGIDA */
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    z-index: 10;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+    min-height: 120px;
+    justify-content: center;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+.desktop-icon:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.desktop-icon.active {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+}
+
+.icon-wrapper {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-icon:hover .icon-wrapper {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Cores por módulo */
+.desktop-icon[data-module="administrativo"] .icon-wrapper {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+}
+
+.desktop-icon.system-tool .icon-wrapper {
+    background: linear-gradient(135deg, #30cfd0, #330867);
+    box-shadow: 0 4px 15px rgba(48, 207, 208, 0.4);
+}
+
+.icon-wrapper i {
+    font-size: 2.2rem;
+    color: white;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.desktop-icon:hover .icon-wrapper i {
+    transform: scale(1.1);
+}
+
+.icon-label {
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    max-width: 90px;
+    word-wrap: break-word;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+/* Efeito de brilho nos ícones */
+.icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.desktop-icon:hover .icon-wrapper::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* Animação de pulse suave */
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.desktop-icon[data-module="administrativo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+.desktop-icon[data-module="empreendedorismo"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 0.75s;
+}
+
+.desktop-icon[data-module="marketing"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 1.5s;
+}
+
+.desktop-icon[data-module="programacao"] .icon-wrapper i {
+    animation: iconPulse 3s ease-in-out infinite 2.25s;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 1200px) {
+    .desktop-icons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .desktop-icon {
+        min-width: 90px;
+        min-height: 110px;
+        padding: 15px 10px;
+    }
+    
+    .icon-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 2rem;
+    }
+    
+    .icon-label {
+        font-size: 0.85rem;
+        max-width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 80px;
+        min-height: 100px;
+        padding: 12px 8px;
+    }
+    
+    .icon-wrapper {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.8rem;
+    }
+    
+    .icon-label {
+        font-size: 0.8rem;
+        max-width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .desktop-icon {
+        min-width: 70px;
+        min-height: 90px;
+        padding: 10px 6px;
+    }
+    
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.6rem;
+    }
+    
+    .icon-label {
+        font-size: 0.75rem;
+        max-width: 60px;
+    }
+}
+
+/* Barra de Tarefas */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu Iniciar */
+.start-menu {
+    position: relative;
+    margin-right: 20px;
+}
+
+.start-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.start-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.start-button.active {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+.start-menu-dropdown {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 450px;
+    max-height: 600px;
+    background: rgba(40, 40, 40, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+    overflow: hidden;
+}
+
+.start-menu-dropdown.active {
+    display: block;
+    animation: slideUp 0.3s ease;
+}
+
+/* Animações */
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* Classes auxiliares */
+.hidden {
+    display: none !important;
+}
