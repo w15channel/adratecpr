@@ -164,7 +164,7 @@ class OSTecManager {
     }
     
     setupDesktopIcons() {
-        // Configurar ícones para serem arrastáveis
+        // Configurar ícones para serem arrastáveis (sem interferir no grid inicial)
         const desktopIcons = document.querySelectorAll('.desktop-icon');
         desktopIcons.forEach(icon => {
             // Tornar ícone arrastável
@@ -204,6 +204,7 @@ class OSTecManager {
                         const maxX = rect.width - 100;
                         const maxY = rect.height - 120;
                         
+                        // Aplicar posicionamento absoluto apenas quando arrastado
                         draggingIcon.style.position = 'absolute';
                         draggingIcon.style.left = Math.max(20, Math.min(x, maxX)) + 'px';
                         draggingIcon.style.top = Math.max(20, Math.min(y, maxY)) + 'px';
