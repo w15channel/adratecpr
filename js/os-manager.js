@@ -981,9 +981,9 @@ class OSTecManager {
     
     openGamesWindow() {
         const window = this.createWindow({
-            title: 'Passatempos',
+            title: 'Jogos de Passatempo',
             icon: 'fas fa-gamepad',
-            color: '#70d7a1'
+            color: '#ff6b6b'
         });
 
         window.element.querySelector('.window-content').innerHTML = `

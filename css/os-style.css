@@ -220,16 +220,19 @@ body {
     left: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    gap: 30px;
     z-index: 10;
     max-width: 90%;
     padding: 20px;
+    justify-items: center;
+    align-items: start;
 }
 
 .desktop-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 15px 10px;
     border-radius: 20px;
     cursor: pointer;
@@ -240,7 +243,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     min-width: 90px;
     min-height: 110px;
-    justify-content: center;
+    text-align: center;
 }
 
 .desktop-icon:hover {
@@ -312,6 +315,11 @@ body {
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
+.desktop-icon[data-tool="games"] .icon-wrapper {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
 .icon-wrapper i {
     font-size: 2rem;
     color: #000;
@@ -321,6 +329,10 @@ body {
 
 .desktop-icon.system-tool .icon-wrapper i {
     color: #000;
+}
+
+.desktop-icon[data-tool="games"] .icon-wrapper i {
+    color: #ffffff;
 }
 
 .desktop-icon:hover .icon-wrapper i {
@@ -947,6 +959,145 @@ body {
     font-size: 2rem;
     margin-bottom: 15px;
     color: #00ff41;
+}
+
+/* Estilos para Jogos */
+.games-dashboard {
+    padding: 20px;
+    color: #ffffff;
+}
+
+.games-dashboard h3 {
+    color: #00ff41;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.games-intro {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-card h4 {
+    color: #00ff41;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.game-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.rps-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.rps-buttons button {
+    background: rgba(0, 255, 65, 0.2);
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    color: #00ff41;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.rps-buttons button:hover {
+    background: rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+}
+
+.game-result {
+    font-weight: bold;
+    color: #00ff41;
+    min-height: 20px;
+}
+
+.guess-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.guess-controls input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: 80px;
+    text-align: center;
+}
+
+.guess-controls button {
+    background: rgba(0, 255, 65, 0.2);
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    color: #00ff41;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.guess-controls button:hover {
+    background: rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: rgba(0, 255, 65, 0.3);
+    border: 1px solid rgba(0, 255, 65, 0.5);
+    color: #00ff41;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: rgba(0, 255, 65, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 /* Scrollbar personalizada */
