@@ -164,58 +164,8 @@ class OSTecManager {
     }
     
     setupDesktopIcons() {
-        // Configurar ícones para serem arrastáveis (sem interferir no grid inicial)
-        const desktopIcons = document.querySelectorAll('.desktop-icon');
-        desktopIcons.forEach(icon => {
-            // Tornar ícone arrastável
-            icon.draggable = true;
-            
-            // Eventos de drag and drop
-            icon.addEventListener('dragstart', (e) => {
-                icon.classList.add('dragging');
-                e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setData('text/html', icon.innerHTML);
-                icon.style.opacity = '0.5';
-            });
-            
-            icon.addEventListener('dragend', (e) => {
-                icon.classList.remove('dragging');
-                icon.style.opacity = '';
-            });
-            
-            // Permitir soltar ícones na área de trabalho
-            const desktop = document.getElementById('desktop');
-            if (desktop) {
-                desktop.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'move';
-                });
-                
-                desktop.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    const draggingIcon = document.querySelector('.dragging');
-                    if (draggingIcon) {
-                        // Posicionar ícone na nova localização
-                        const rect = desktop.getBoundingClientRect();
-                        const x = e.clientX - rect.left - 50; // Metade da largura do ícone
-                        const y = e.clientY - rect.top - 60; // Metade da altura do ícone
-                        
-                        // Limitar à área visível
-                        const maxX = rect.width - 100;
-                        const maxY = rect.height - 120;
-                        
-                        // Aplicar posicionamento absoluto apenas quando arrastado
-                        draggingIcon.style.position = 'absolute';
-                        draggingIcon.style.left = Math.max(20, Math.min(x, maxX)) + 'px';
-                        draggingIcon.style.top = Math.max(20, Math.min(y, maxY)) + 'px';
-                        
-                        // Remover do grid e adicionar como posicionado
-                        draggingIcon.style.gridColumn = '';
-                        draggingIcon.style.gridRow = '';
-                    }
-                });
-            }
-        });
+        // Ícones fixos no grid - sem arrastar para evitar problemas de alinhamento
+        console.log('Ícones configurados com grid fixo 2x4');
     }
     
     updateNameLabels() {
@@ -398,7 +348,6 @@ class OSTecManager {
         window.addEventListener('resize', () => {
             this.desktopBounds = { width: window.innerWidth, height: window.innerHeight };
             this.ensureWindowsInViewport();
-            this.ensureIconsInViewport();
         });
     }
     
@@ -444,36 +393,6 @@ class OSTecManager {
             // Aplicar novas posições
             windowElement.style.left = newLeft + 'px';
             windowElement.style.top = newTop + 'px';
-        });
-    }
-    
-    ensureIconsInViewport() {
-        const desktop = document.getElementById('desktop');
-        if (!desktop) return;
-        
-        const desktopRect = desktop.getBoundingClientRect();
-        const icons = document.querySelectorAll('.desktop-icon');
-        
-        icons.forEach(icon => {
-            const rect = icon.getBoundingClientRect();
-            let newLeft = parseInt(icon.style.left) || 0;
-            let newTop = parseInt(icon.style.top) || 0;
-            
-            // Garantir que ícones não saiam da área visível
-            if (newLeft < 20) {
-                newLeft = 20;
-            } else if (newLeft + 100 > desktopRect.width - 20) {
-                newLeft = desktopRect.width - 120;
-            }
-            
-            if (newTop < 20) {
-                newTop = 20;
-            } else if (newTop + 120 > desktopRect.height - 100) {
-                newTop = desktopRect.height - 220;
-            }
-            
-            icon.style.left = newLeft + 'px';
-            icon.style.top = newTop + 'px';
         });
     }
     

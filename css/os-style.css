@@ -213,20 +213,21 @@ body {
     color: #ffffff;
 }
 
-/* Ícones da Área de Trabalho - Estilo iOS */
+/* Ícones da Área de Trabalho - Grid Fixo 2x4 */
 .desktop-icons {
     position: absolute;
     top: 20px;
     left: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(4, 1fr);
     gap: 25px;
     z-index: 10;
-    max-width: 400px;
-    padding: 20px;
+    width: 280px;
+    height: 680px;
+    padding: 0;
     justify-items: center;
-    align-items: start;
+    align-items: center;
 }
 
 .desktop-icon {
@@ -238,7 +239,6 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -246,17 +246,20 @@ body {
     height: 140px;
     text-align: center;
     box-sizing: border-box;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
 }
 
 .desktop-icon:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
     border-color: rgba(0, 255, 65, 0.4);
 }
 
 .desktop-icon:active {
-    transform: translateY(-1px) scale(0.98);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .desktop-icon.active {
@@ -267,7 +270,6 @@ body {
 
 .desktop-icon.dragging {
     opacity: 0.5;
-    transform: scale(0.95);
 }
 
 /* Ícones Estilo iOS */
